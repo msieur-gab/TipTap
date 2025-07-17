@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Quick Messages</title>
+    <link rel="stylesheet" href="./css/variables.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
+    
+<style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-family-base);
+            background-color: var(--background-color);
+            color: var(--text-color);
+            -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
+            overscroll-behavior-y: contain;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Structure matching working example */
+        .app-container {
+            max-width: 600px;
+            margin: auto;
+            height: 100vh;
+            background-color: var(--container-color);
+            box-shadow: 0 4px 12px var(--shadow-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .app-header { 
+            flex-shrink: 0; 
+            border-bottom: 1px solid var(--phrase-border); 
+            padding:1rem;
+        }
+
+        .app-main { 
+            flex-grow: 1; 
+            display: flex; 
+            flex-direction: column; 
+            overflow: hidden; 
+            background-color: rgb(235, 235, 235);
+        }
+
+        /* Tabs styling */
+        .tabs-container {
+            flex-shrink: 0;
+            padding: 1rem 1rem 0.5rem 1rem;
+            border-bottom: 1px solid var(--phrase-border);
+            /* Ensure no overlap with header */
+            position: relative;
+            z-index: 1;
+        }
+
+        .tabs-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #6b7280;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+        }
+
+        .tabs-scroller {
+            display: flex;
+            overflow-x: auto;
+            gap: 0.75rem;
+            padding-bottom: 0.5rem; /* Add some space for scrollbar or shadow */
+        }
+
+        .tab-button {
+            white-space: nowrap;
+            padding: 0.6rem 1.1rem; /* Adjusted padding for pill shape */
+            font-size: 0.875rem;
+            font-weight: 500;
+            border: none;
+            border-radius: 20px; /* Rounded corners for pill shape */
+            background-color: var(--color-tab-bg-inactive);
+            cursor: pointer;
+            color: var(--color-tab-text-inactive);
+            transition: all 0.2s ease-in-out;
+            flex-shrink: 0;
+        }
+
+        .tab-button.is-active {
+            background-color: var(--color-tab-bg-active);
+            color: var(--color-tab-text-active);
+            font-weight: 600;
+        }
+
+        /* Phrases viewport */
+        .phrases-viewport {
+            flex-grow: 1;
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+        }
+
+        /* Hide scrollbars globally for clean look */
+        .no-scrollbar::-webkit-scrollbar { 
+            display: none; 
+        }
+        
+        .no-scrollbar { 
+            -ms-overflow-style: none; 
+            scrollbar-width: none; 
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <app-header></app-header>
+        </header>
+        
+        <main class="app-main">
+            <div class="tabs-container">
+                <h2 class="tabs-title">CATEGORIES</h2>
+                <div id="category-tabs" class="tabs-scroller no-scrollbar"></div>
+            </div>
+            <div id="phrases-viewport" class="phrases-viewport no-scrollbar"></div>
+        </main>
+        
+        <phrase-carousel style="display: none;"></phrase-carousel>
+        
+        <feedback-message></feedback-message>
+        <settings-panel></settings-panel>
+
+        <bottom-profile-selector></bottom-profile-selector>
+        <!-- <bottom-nav></bottom-nav> -->
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dexie/3.2.4/dexie.min.js"></script>
+    
+  
+
+    <script type="module" src="./js/utils/events.js"></script>
+    <script type="module" src="./js/utils/helpers.js"></script>
+    <script type="module" src="./js/utils/clipboard.js"></script>
+    <script type="module" src="./js/utils/time.js"></script>
+    <script type="module" src="./js/config/defaults.js"></script>
+    <script type="module" src="./js/services/database.js"></script>
+    <script type="module" src="./js/services/profiles.js"></script>
+    <script type="module" src="./js/services/messages.js"></script>
+    <script type="module" src="./js/components/messages-tab.js"></script>
+    <script type="module" src="./js/components/profiles-tab.js"></script>
+    <script type="module" src="./js/components/app-header.js"></script>
+    <script type="module" src="./js/components/phrase-carousel.js"></script>
+    <script type="module" src="./js/components/feedback-message.js"></script>
+    <script type="module" src="./js/components/bottom-profile-selector.js"></script>
+
+    <script type="module" src="./js/components/settings-panel.js"></script>
+    <!-- <script type="module" src="./js/components/bottom-nav.js"></script> -->
+    <script type="module" src="./js/app.js"></script>
+</body>
+</html>

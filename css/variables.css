@@ -1,0 +1,31 @@
+:root {
+    --background-color: #f0f2f5;
+    --container-color: #ffffff;
+    --text-color: #333333;
+    --primary-color: #2563eb;
+    --primary-text-color: #ffffff;
+    --phrase-bg: #ffffff;
+    --phrase-border: #e5e7eb;
+    --shadow-color: rgba(0, 0, 0, 0.08);
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --panel-bg: #ffffff;
+    --overlay-bg: rgba(0, 0, 0, 0.3);
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+    
+    /* Variables for the new design */
+    --color-primary-light: #eff6ff;
+    --color-text-dark: #1f2937;
+    --color-text-light: #6b7280;
+    --color-surface: #ffffff;
+    --color-border: #e5e7eb;
+    --border-radius: 0.75rem; /* Slightly larger radius for cards */
+    --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    /* New variables for tab styling */
+    --color-tab-bg-active: #1f2937;
+    --color-tab-text-active: #ffffff;
+    --color-tab-bg-inactive: #eef2f6;
+    --color-tab-text-inactive: #374151;
+}

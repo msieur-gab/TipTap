@@ -1,0 +1,190 @@
+{
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "ok": "OK",
+    "cancel": "Annuler",
+    "next": "Suivant",
+    "back": "Retour",
+    "skip": "Passer pour l'instant",
+    "finish": "Terminer",
+    "save": "Enregistrer",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "add": "Ajouter",
+    "close": "Fermer",
+    "confirm": "Confirmer",
+    "yes": "Oui",
+    "no": "Non"
+  },
+  "onboarding": {
+    "step1": {
+      "title": "Restez Connecté, Toujours",
+      "description": "Envoyez des messages affectueux à vos enfants dans leur langue, même quand vous êtes séparés. La distance ne diminue pas l'amour."
+    },
+    "step2": {
+      "title": "Des Messages qui Comptent",
+      "description": "Messages affectueux pré-écrits, personnalisés avec des noms, et traduits automatiquement avec soin. Prêts à partager instantanément."
+    },
+    "step3": {
+      "title": "Privé et Sécurisé",
+      "description": "Aucun suivi, aucun service externe par défaut. Les messages de votre famille restent sur votre appareil, pour vos yeux seulement."
+    },
+    "step4": {
+      "title": "Votre Langue",
+      "description": "La langue que vous utiliserez pour écrire les messages."
+    },
+    "step5": {
+      "title": "Ajouter Votre Premier Enfant",
+      "description": "Créons un profil pour lui/elle. Vous pourrez ajouter d'autres enfants plus tard.",
+      "placeholders": {
+        "childName": "Nom de l'enfant (ex: Emma)",
+        "whereTheyLive": "Où ils vivent (optionnel)"
+      },
+      "kidsSummary": "Enfants ajoutés jusqu'à présent :"
+    },
+    "step6": {
+      "title": "Leur Langue",
+      "description": "La langue que votre enfant parle et comprend."
+    },
+    "step7": {
+      "title": "Service de Traduction",
+      "description": "Optionnel : Activez la traduction automatique entre vos langues avec votre propre clé API DeepL.",
+      "toggleTitle": "Activer la Traduction",
+      "toggleDescription": "Obtenez des traductions automatiques avec DeepL",
+      "apiKeyPlaceholder": "Clé API DeepL",
+      "apiKeyHelp": "Obtenez votre clé API gratuite de DeepL (500 000 caractères/mois gratuits)"
+    },
+    "step8": {
+      "title": "Tout est Prêt !",
+      "description": "Votre application de messagerie familiale est prête. Vous pouvez ajouter d'autres enfants et personnaliser les messages à tout moment."
+    },
+    "panelTitles": {
+      "appLanguage": "Langue de l'App",
+      "yourLanguage": "Votre Langue",
+      "childLanguage": "Langue de l'Enfant"
+    },
+    "placeholders": {
+      "chooseLanguage": "Choisir une langue...",
+      "childBirthdate": "Date de naissance de l'enfant"
+    }
+  },
+  "app": {
+    "title": "Messages Rapides",
+    "messagesFor": "Messages pour",
+    "noProfile": "Aucun Profil",
+    "general": "Général",
+    "categories": "CATÉGORIES",
+    "copySuccess": "Message copié !",
+    "copyFailed": "Échec de la copie."
+  },
+  "categories": {
+    "greetings": "Salutations",
+    "questions": "Questions",
+    "affection": "Affection",
+    "school": "École",
+    "sports": "Sports",
+    "holidays": "Vacances",
+    "birthday": "Anniversaire",
+    "christmas": "Noël",
+    "special-events": "Événements Spéciaux"
+  },
+  "phrases": {
+    "greetings": [
+      { "id": "greet1", "text": "Bonjour {name}, comment vas-tu aujourd'hui ?" },
+      { "id": "greet2", "text": "Bonne nuit {name}, fais de beaux rêves." },
+      { "id": "greet3", "text": "Passe une merveilleuse journée, {name} !" }
+    ],
+    "questions": [
+      { "id": "quest1", "text": "As-tu bien mangé, {name} ?" },
+      { "id": "quest2", "text": "Quand rentres-tu à la maison, {name} ?" },
+      { "id": "quest3", "text": "Comment s'est passée ta journée, {name} ?" },
+      { "id": "quest4", "text": "Est-ce que tu te sens bien, {name} ?" }
+    ],
+    "affection": [
+      { "id": "aff1", "text": "Je pense à toi, {name}." },
+      { "id": "aff2", "text": "Je t'aime, {name}." },
+      { "id": "aff3", "text": "Tu me manques tellement, {name}." },
+      { "id": "aff4", "text": "Je suis si fier/fière de toi, {name}." }
+    ],
+    "school": [
+      { "id": "school1", "text": "As-tu fini tes devoirs, {name} ?" },
+      { "id": "school2", "text": "Bonne chance pour ton examen aujourd'hui, {name} !" },
+      { "id": "school3", "text": "Comment était l'école aujourd'hui, {name} ?" },
+      { "id": "school4", "text": "N'oublie pas de préparer ton sac à dos, {name}." },
+      { "id": "school5", "text": "Étudie bien, {name}. Je crois en toi !" }
+    ],
+    "sports": [
+      { "id": "sport1", "text": "Bon courage pour l'entraînement aujourd'hui, {name} !" },
+      { "id": "sport2", "text": "Comment s'est passé ton match, {name} ?" },
+      { "id": "sport3", "text": "Tu as joué incroyablement bien, {name} !" },
+      { "id": "sport4", "text": "N'oublie pas ton équipement de sport, {name}." },
+      { "id": "sport5", "text": "Continue comme ça, {name} !" }
+    ],
+    "holidays": [
+      { "id": "holiday1", "text": "Profite bien de tes vacances, {name} !" },
+      { "id": "holiday2", "text": "Est-ce que tu t'amuses bien en voyage, {name} ?" },
+      { "id": "holiday3", "text": "Prends beaucoup de photos, {name} !" },
+      { "id": "holiday4", "text": "Repose-toi bien pendant les vacances, {name}." },
+      { "id": "holiday5", "text": "Joyeuses fêtes, {name} !" }
+    ],
+    "birthday": [
+      { "id": "birthday1", "text": "Joyeux anniversaire, {name} ! J'espère que tous tes vœux se réaliseront !" },
+      { "id": "birthday2", "text": "Je te souhaite le plus heureux des anniversaires, {name} !" },
+      { "id": "birthday3", "text": "Un an de plus, un an de sagesse, {name} !" },
+      { "id": "birthday4", "text": "J'ai hâte de fêter ça avec toi, {name} !" },
+      { "id": "birthday5", "text": "Tu grandis si vite, {name} !" }
+    ],
+    "christmas": [
+      { "id": "christmas1", "text": "Joyeux Noël, {name} !" },
+      { "id": "christmas2", "text": "Le Père Noël arrive bientôt, {name} !" },
+      { "id": "christmas3", "text": "As-tu été sage cette année, {name} ?" },
+      { "id": "christmas4", "text": "J'ai hâte d'ouvrir les cadeaux avec toi, {name} !" },
+      { "id": "christmas5", "text": "Le sapin de Noël est magnifique, {name}." }
+    ],
+    "special-events": [
+      { "id": "special1", "text": "Bonne année, {name} ! Cette année sera incroyable !" },
+      { "id": "special2", "text": "Félicitations pour ta réussite, {name} !" },
+      { "id": "special3", "text": "Aujourd'hui est un jour spécial, {name} !" },
+      { "id": "special4", "text": "Tu as fait quelque chose d'incroyable aujourd'hui, {name} !" },
+      { "id": "special5", "text": "Célébrons ça ensemble, {name} !" },
+      { "id": "special6", "text": "Ce moment est si précieux, {name}." }
+    ]
+  },
+  "settings": {
+    "title": "Paramètres",
+    "profiles": "Profils",
+    "messages": "Messages",
+    "addProfile": "Ajouter un Profil",
+    "addCategory": "Ajouter une Catégorie",
+    "addMessage": "Ajouter un Message",
+    "addNickname": "Ajouter un Surnom",
+    "nicknames": "Surnoms",
+    "profileName": "Nom",
+    "profileTranslation": "Traduction",
+    "profileCountry": "Pays",
+    "profileTimezone": "Fuseau horaire",
+    "profileBirthday": "Anniversaire",
+    "nickname": "Surnom",
+    "categoryName": "Nom de la catégorie",
+    "messageInYourLanguage": "Message dans votre langue",
+    "messageInTargetLanguage": "Message dans la langue cible",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer {item} ?",
+    "selectCountry": "-- Sélectionner un Pays --"
+  },
+  "time": {
+    "profileTime": "Heure de {name}",
+    "birthday": "L'anniversaire de {name} est",
+    "today": "Aujourd'hui ! 🎉",
+    "tomorrow": "Demain",
+    "inXDays": "dans {days} jours"
+  },
+  "errors": {
+    "failedToInitialize": "Échec de l'initialisation de l'application. Veuillez actualiser la page.",
+    "unexpectedError": "Une erreur inattendue s'est produite.",
+    "profileNotFound": "Profil non trouvé",
+    "categoryNotFound": "Catégorie non trouvée",
+    "translationFailed": "Échec de la traduction",
+    "networkError": "Erreur réseau. Veuillez vérifier votre connexion."
+  }
+}

@@ -1,0 +1,1887 @@
+[
+    {
+      "country": "Afghanistan",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Kabul"
+      ]
+    },
+    {
+      "country": "Albania",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Tirane"
+      ]
+    },
+    {
+      "country": "Algeria",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Algiers"
+      ]
+    },
+    {
+      "country": "American Samoa",
+      "continent": "Oceania",
+      "timezones": [
+        "Pacific/Pago_Pago"
+      ]
+    },
+    {
+      "country": "Andorra",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Andorra"
+      ]
+    },
+    {
+      "country": "Angola",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Luanda"
+      ]
+    },
+    {
+      "country": "Anguilla",
+      "continent": "North America",
+      "timezones": [
+        "America/Anguilla"
+      ]
+    },
+    {
+      "country": "Antarctica",
+      "continent": "Antarctica",
+      "timezones": [
+        "Antarctica/Casey",
+        "Antarctica/Davis",
+        "Antarctica/DumontDUrville",
+        "Antarctica/Mawson",
+        "Antarctica/McMurdo",
+        "Antarctica/Palmer",
+        "Antarctica/Rothera",
+        "Antarctica/Syowa",
+        "Antarctica/Troll",
+        "Antarctica/Vostok"
+      ]
+    },
+    {
+      "country": "Antigua and Barbuda",
+      "continent": "North America",
+      "timezones": [
+        "America/Antigua"
+      ]
+    },
+    {
+      "country": "Argentina",
+      "continent": "South America",
+      "timezones": [
+        "America/Argentina/Buenos_Aires",
+        "America/Argentina/Cordoba",
+        "America/Argentina/Salta",
+        "America/Argentina/Jujuy",
+        "America/Argentina/Tucuman",
+        "America/Argentina/Catamarca",
+        "America/Argentina/La_Rioja",
+        "America/Argentina/San_Juan",
+        "America/Argentina/Mendoza",
+        "America/Argentina/San_Luis",
+        "America/Argentina/Rio_Gallegos",
+        "America/Argentina/Ushuaia"
+      ]
+    },
+    {
+      "country": "Armenia",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Yerevan"
+      ]
+    },
+    {
+      "country": "Aruba",
+      "continent": "North America",
+      "timezones": [
+        "America/Aruba"
+      ]
+    },
+    {
+      "country": "Australia",
+      "continent": "Oceania",
+      "timezones": [
+        "Australia/Lord_Howe",
+        "Antarctica/Macquarie",
+        "Australia/Hobart",
+        "Australia/Currie",
+        "Australia/Melbourne",
+        "Australia/Sydney",
+        "Australia/Broken_Hill",
+        "Australia/Brisbane",
+        "Australia/Lindeman",
+        "Australia/Adelaide",
+        "Australia/Darwin",
+        "Australia/Perth",
+        "Australia/Eucla"
+      ]
+    },
+    {
+      "country": "Austria",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Vienna"
+      ]
+    },
+    {
+      "country": "Azerbaijan",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Baku"
+      ]
+    },
+    {
+      "country": "Bahamas",
+      "continent": "North America",
+      "timezones": [
+        "America/Nassau"
+      ]
+    },
+    {
+      "country": "Bahrain",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Bahrain"
+      ]
+    },
+    {
+      "country": "Bangladesh",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Dhaka"
+      ]
+    },
+    {
+      "country": "Barbados",
+      "continent": "North America",
+      "timezones": [
+        "America/Barbados"
+      ]
+    },
+    {
+      "country": "Belarus",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Minsk"
+      ]
+    },
+    {
+      "country": "Belgium",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Brussels"
+      ]
+    },
+    {
+      "country": "Belize",
+      "continent": "North America",
+      "timezones": [
+        "America/Belize"
+      ]
+    },
+    {
+      "country": "Benin",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Porto-Novo"
+      ]
+    },
+    {
+      "country": "Bermuda",
+      "continent": "North America",
+      "timezones": [
+        "Atlantic/Bermuda"
+      ]
+    },
+    {
+      "country": "Bhutan",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Thimphu"
+      ]
+    },
+    {
+      "country": "Bolivia",
+      "continent": "South America",
+      "timezones": [
+        "America/La_Paz"
+      ]
+    },
+    {
+      "country": "Bosnia and Herzegovina",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Sarajevo"
+      ]
+    },
+    {
+      "country": "Botswana",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Gaborone"
+      ]
+    },
+    {
+      "country": "Bouvet Island",
+      "continent": "Antarctica",
+      "timezones": []
+    },
+    {
+      "country": "Brazil",
+      "continent": "South America",
+      "timezones": [
+        "America/Noronha",
+        "America/Belem",
+        "America/Fortaleza",
+        "America/Recife",
+        "America/Araguaina",
+        "America/Maceio",
+        "America/Bahia",
+        "America/Sao_Paulo",
+        "America/Campo_Grande",
+        "America/Cuiaba",
+        "America/Santarem",
+        "America/Porto_Velho",
+        "America/Boa_Vista",
+        "America/Manaus",
+        "America/Eirunepe",
+        "America/Rio_Branco"
+      ]
+    },
+    {
+      "country": "British Indian Ocean Territory",
+      "continent": "Africa",
+      "timezones": [
+        "Indian/Chagos"
+      ]
+    },
+    {
+      "country": "Brunei",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Brunei"
+      ]
+    },
+    {
+      "country": "Bulgaria",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Sofia"
+      ]
+    },
+    {
+      "country": "Burkina Faso",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Ouagadougou"
+      ]
+    },
+    {
+      "country": "Burundi",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Bujumbura"
+      ]
+    },
+    {
+      "country": "Cambodia",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Phnom_Penh"
+      ]
+    },
+    {
+      "country": "Cameroon",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Douala"
+      ]
+    },
+    {
+      "country": "Canada",
+      "continent": "North America",
+      "timezones": [
+        "America/St_Johns",
+        "America/Halifax",
+        "America/Glace_Bay",
+        "America/Moncton",
+        "America/Goose_Bay",
+        "America/Blanc-Sablon",
+        "America/Toronto",
+        "America/Nipigon",
+        "America/Thunder_Bay",
+        "America/Iqaluit",
+        "America/Pangnirtung",
+        "America/Atikokan",
+        "America/Winnipeg",
+        "America/Rainy_River",
+        "America/Resolute",
+        "America/Rankin_Inlet",
+        "America/Regina",
+        "America/Swift_Current",
+        "America/Edmonton",
+        "America/Cambridge_Bay",
+        "America/Yellowknife",
+        "America/Inuvik",
+        "America/Creston",
+        "America/Dawson_Creek",
+        "America/Fort_Nelson",
+        "America/Vancouver",
+        "America/Whitehorse",
+        "America/Dawson"
+      ]
+    },
+    {
+      "country": "Cape Verde",
+      "continent": "Africa",
+      "timezones": [
+        "Atlantic/Cape_Verde"
+      ]
+    },
+    {
+      "country": "Cayman Islands",
+      "continent": "North America",
+      "timezones": [
+        "America/Cayman"
+      ]
+    },
+    {
+      "country": "Central African Republic",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Bangui"
+      ]
+    },
+    {
+      "country": "Chad",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Ndjamena"
+      ]
+    },
+    {
+      "country": "Chile",
+      "continent": "South America",
+      "timezones": [
+        "America/Santiago",
+        "America/Punta_Arenas",
+        "Pacific/Easter"
+      ]
+    },
+    {
+      "country": "China",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Shanghai",
+        "Asia/Urumqi"
+      ]
+    },
+    {
+      "country": "Christmas Island",
+      "continent": "Oceania",
+      "timezones": [
+        "Indian/Christmas"
+      ]
+    },
+    {
+      "country": "Cocos (Keeling) Islands",
+      "continent": "Oceania",
+      "timezones": [
+        "Indian/Cocos"
+      ]
+    },
+    {
+      "country": "Colombia",
+      "continent": "South America",
+      "timezones": [
+        "America/Bogota"
+      ]
+    },
+    {
+      "country": "Comoros",
+      "continent": "Africa",
+      "timezones": [
+        "Indian/Comoro"
+      ]
+    },
+    {
+      "country": "Congo",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Brazzaville"
+      ]
+    },
+    {
+      "country": "Cook Islands",
+      "continent": "Oceania",
+      "timezones": [
+        "Pacific/Rarotonga"
+      ]
+    },
+    {
+      "country": "Costa Rica",
+      "continent": "North America",
+      "timezones": [
+        "America/Costa_Rica"
+      ]
+    },
+    {
+      "country": "Croatia",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Zagreb"
+      ]
+    },
+    {
+      "country": "Cuba",
+      "continent": "North America",
+      "timezones": [
+        "America/Havana"
+      ]
+    },
+    {
+      "country": "Cyprus",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Nicosia",
+        "Asia/Famagusta"
+      ]
+    },
+    {
+      "country": "Czech Republic",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Prague"
+      ]
+    },
+    {
+      "country": "Denmark",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Copenhagen"
+      ]
+    },
+    {
+      "country": "Djibouti",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Djibouti"
+      ]
+    },
+    {
+      "country": "Dominica",
+      "continent": "North America",
+      "timezones": [
+        "America/Dominica"
+      ]
+    },
+    {
+      "country": "Dominican Republic",
+      "continent": "North America",
+      "timezones": [
+        "America/Santo_Domingo"
+      ]
+    },
+    {
+      "country": "East Timor",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Dili"
+      ]
+    },
+    {
+      "country": "Ecuador",
+      "continent": "South America",
+      "timezones": [
+        "America/Guayaquil",
+        "Pacific/Galapagos"
+      ]
+    },
+    {
+      "country": "Egypt",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Cairo"
+      ]
+    },
+    {
+      "country": "El Salvador",
+      "continent": "North America",
+      "timezones": [
+        "America/El_Salvador"
+      ]
+    },
+    {
+      "country": "England",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/London"
+      ]
+    },
+    {
+      "country": "Equatorial Guinea",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Malabo"
+      ]
+    },
+    {
+      "country": "Eritrea",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Asmara"
+      ]
+    },
+    {
+      "country": "Estonia",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Tallinn"
+      ]
+    },
+    {
+      "country": "Eswatini",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Mbabane"
+      ]
+    },
+    {
+      "country": "Ethiopia",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Addis_Ababa"
+      ]
+    },
+    {
+      "country": "Falkland Islands",
+      "continent": "South America",
+      "timezones": [
+        "Atlantic/Stanley"
+      ]
+    },
+    {
+      "country": "Faroe Islands",
+      "continent": "Europe",
+      "timezones": [
+        "Atlantic/Faroe"
+      ]
+    },
+    {
+      "country": "Fiji Islands",
+      "continent": "Oceania",
+      "timezones": [
+        "Pacific/Fiji"
+      ]
+    },
+    {
+      "country": "Finland",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Helsinki"
+      ]
+    },
+    {
+      "country": "France",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Paris"
+      ]
+    },
+    {
+      "country": "French Guiana",
+      "continent": "South America",
+      "timezones": [
+        "America/Cayenne"
+      ]
+    },
+    {
+      "country": "French Polynesia",
+      "continent": "Oceania",
+      "timezones": [
+        "Pacific/Tahiti",
+        "Pacific/Marquesas",
+        "Pacific/Gambier"
+      ]
+    },
+    {
+      "country": "French Southern territories",
+      "continent": "Antarctica",
+      "timezones": [
+        "Indian/Kerguelen"
+      ]
+    },
+    {
+      "country": "Gabon",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Libreville"
+      ]
+    },
+    {
+      "country": "Gambia",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Banjul"
+      ]
+    },
+    {
+      "country": "Georgia",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Tbilisi"
+      ]
+    },
+    {
+      "country": "Germany",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Berlin",
+        "Europe/Busingen"
+      ]
+    },
+    {
+      "country": "Ghana",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Accra"
+      ]
+    },
+    {
+      "country": "Gibraltar",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Gibraltar"
+      ]
+    },
+    {
+      "country": "Greece",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Athens"
+      ]
+    },
+    {
+      "country": "Greenland",
+      "continent": "North America",
+      "timezones": [
+        "America/Godthab",
+        "America/Danmarkshavn",
+        "America/Scoresbysund",
+        "America/Thule"
+      ]
+    },
+    {
+      "country": "Grenada",
+      "continent": "North America",
+      "timezones": [
+        "America/Grenada"
+      ]
+    },
+    {
+      "country": "Guadeloupe",
+      "continent": "North America",
+      "timezones": [
+        "America/Guadeloupe"
+      ]
+    },
+    {
+      "country": "Guam",
+      "continent": "Oceania",
+      "timezones": [
+        "Pacific/Guam"
+      ]
+    },
+    {
+      "country": "Guatemala",
+      "continent": "North America",
+      "timezones": [
+        "America/Guatemala"
+      ]
+    },
+    {
+      "country": "Guinea",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Conakry"
+      ]
+    },
+    {
+      "country": "Guinea-Bissau",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Bissau"
+      ]
+    },
+    {
+      "country": "Guyana",
+      "continent": "South America",
+      "timezones": [
+        "America/Guyana"
+      ]
+    },
+    {
+      "country": "Haiti",
+      "continent": "North America",
+      "timezones": [
+        "America/Port-au-Prince"
+      ]
+    },
+    {
+      "country": "Heard Island and McDonald Islands",
+      "continent": "Antarctica",
+      "timezones": [
+        "Indian/Kerguelen"
+      ]
+    },
+    {
+      "country": "Holy See (Vatican City State)",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Vatican"
+      ]
+    },
+    {
+      "country": "Honduras",
+      "continent": "North America",
+      "timezones": [
+        "America/Tegucigalpa"
+      ]
+    },
+    {
+      "country": "Hong Kong",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Hong_Kong"
+      ]
+    },
+    {
+      "country": "Hungary",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Budapest"
+      ]
+    },
+    {
+      "country": "Iceland",
+      "continent": "Europe",
+      "timezones": [
+        "Atlantic/Reykjavik"
+      ]
+    },
+    {
+      "country": "India",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Kolkata"
+      ]
+    },
+    {
+      "country": "Indonesia",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Jakarta",
+        "Asia/Pontianak",
+        "Asia/Makassar",
+        "Asia/Jayapura"
+      ]
+    },
+    {
+      "country": "Iran",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Tehran"
+      ]
+    },
+    {
+      "country": "Iraq",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Baghdad"
+      ]
+    },
+    {
+      "country": "Ireland",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Dublin"
+      ]
+    },
+    {
+      "country": "Israel",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Jerusalem"
+      ]
+    },
+    {
+      "country": "Italy",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Rome"
+      ]
+    },
+    {
+      "country": "Ivory Coast",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Abidjan"
+      ]
+    },
+    {
+      "country": "Jamaica",
+      "continent": "North America",
+      "timezones": [
+        "America/Jamaica"
+      ]
+    },
+    {
+      "country": "Japan",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Tokyo"
+      ]
+    },
+    {
+      "country": "Jordan",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Amman"
+      ]
+    },
+    {
+      "country": "Kazakhstan",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Almaty",
+        "Asia/Qyzylorda",
+        "Asia/Qostanay",
+        "Asia/Aqtobe",
+        "Asia/Aqtau",
+        "Asia/Atyrau",
+        "Asia/Oral"
+      ]
+    },
+    {
+      "country": "Kenya",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Nairobi"
+      ]
+    },
+    {
+      "country": "Kiribati",
+      "continent": "Oceania",
+      "timezones": [
+        "Pacific/Tarawa",
+        "Pacific/Enderbury",
+        "Pacific/Kiritimati"
+      ]
+    },
+    {
+      "country": "Kuwait",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Kuwait"
+      ]
+    },
+    {
+      "country": "Kyrgyzstan",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Bishkek"
+      ]
+    },
+    {
+      "country": "Laos",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Vientiane"
+      ]
+    },
+    {
+      "country": "Latvia",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Riga"
+      ]
+    },
+    {
+      "country": "Lebanon",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Beirut"
+      ]
+    },
+    {
+      "country": "Lesotho",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Maseru"
+      ]
+    },
+    {
+      "country": "Liberia",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Monrovia"
+      ]
+    },
+    {
+      "country": "Libya",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Tripoli"
+      ]
+    },
+    {
+      "country": "Liechtenstein",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Vaduz"
+      ]
+    },
+    {
+      "country": "Lithuania",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Vilnius"
+      ]
+    },
+    {
+      "country": "Luxembourg",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Luxembourg"
+      ]
+    },
+    {
+      "country": "Macao",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Macau"
+      ]
+    },
+    {
+      "country": "North Macedonia",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Skopje"
+      ]
+    },
+    {
+      "country": "Madagascar",
+      "continent": "Africa",
+      "timezones": [
+        "Indian/Antananarivo"
+      ]
+    },
+    {
+      "country": "Malawi",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Blantyre"
+      ]
+    },
+    {
+      "country": "Malaysia",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Kuala_Lumpur",
+        "Asia/Kuching"
+      ]
+    },
+    {
+      "country": "Maldives",
+      "continent": "Asia",
+      "timezones": [
+        "Indian/Maldives"
+      ]
+    },
+    {
+      "country": "Mali",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Bamako"
+      ]
+    },
+    {
+      "country": "Malta",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Malta"
+      ]
+    },
+    {
+      "country": "Marshall Islands",
+      "continent": "Oceania",
+      "timezones": [
+        "Pacific/Majuro",
+        "Pacific/Kwajalein"
+      ]
+    },
+    {
+      "country": "Martinique",
+      "continent": "North America",
+      "timezones": [
+        "America/Martinique"
+      ]
+    },
+    {
+      "country": "Mauritania",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Nouakchott"
+      ]
+    },
+    {
+      "country": "Mauritius",
+      "continent": "Africa",
+      "timezones": [
+        "Indian/Mauritius"
+      ]
+    },
+    {
+      "country": "Mayotte",
+      "continent": "Africa",
+      "timezones": [
+        "Indian/Mayotte"
+      ]
+    },
+    {
+      "country": "Mexico",
+      "continent": "North America",
+      "timezones": [
+        "America/Mexico_City",
+        "America/Cancun",
+        "America/Merida",
+        "America/Monterrey",
+        "America/Matamoros",
+        "America/Mazatlan",
+        "America/Chihuahua",
+        "America/Ojinaga",
+        "America/Hermosillo",
+        "America/Tijuana",
+        "America/Bahia_Banderas"
+      ]
+    },
+    {
+      "country": "Micronesia, Federated States of",
+      "continent": "Oceania",
+      "timezones": [
+        "Pacific/Chuuk",
+        "Pacific/Pohnpei",
+        "Pacific/Kosrae"
+      ]
+    },
+    {
+      "country": "Moldova",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Chisinau"
+      ]
+    },
+    {
+      "country": "Monaco",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Monaco"
+      ]
+    },
+    {
+      "country": "Mongolia",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Ulaanbaatar",
+        "Asia/Hovd",
+        "Asia/Choibalsan"
+      ]
+    },
+    {
+      "country": "Montenegro",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Podgorica"
+      ]
+    },
+    {
+      "country": "Montserrat",
+      "continent": "North America",
+      "timezones": [
+        "America/Montserrat"
+      ]
+    },
+    {
+      "country": "Morocco",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Casablanca"
+      ]
+    },
+    {
+      "country": "Mozambique",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Maputo"
+      ]
+    },
+    {
+      "country": "Myanmar",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Yangon"
+      ]
+    },
+    {
+      "country": "Namibia",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Windhoek"
+      ]
+    },
+    {
+      "country": "Nauru",
+      "continent": "Oceania",
+      "timezones": [
+        "Pacific/Nauru"
+      ]
+    },
+    {
+      "country": "Nepal",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Kathmandu"
+      ]
+    },
+    {
+      "country": "Netherlands",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Amsterdam"
+      ]
+    },
+    {
+      "country": "Netherlands Antilles",
+      "continent": "North America",
+      "timezones": [
+        "America/Curacao"
+      ]
+    },
+    {
+      "country": "New Caledonia",
+      "continent": "Oceania",
+      "timezones": [
+        "Pacific/Noumea"
+      ]
+    },
+    {
+      "country": "New Zealand",
+      "continent": "Oceania",
+      "timezones": [
+        "Pacific/Auckland",
+        "Pacific/Chatham"
+      ]
+    },
+    {
+      "country": "Nicaragua",
+      "continent": "North America",
+      "timezones": [
+        "America/Managua"
+      ]
+    },
+    {
+      "country": "Niger",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Niamey"
+      ]
+    },
+    {
+      "country": "Nigeria",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Lagos"
+      ]
+    },
+    {
+      "country": "Niue",
+      "continent": "Oceania",
+      "timezones": [
+        "Pacific/Niue"
+      ]
+    },
+    {
+      "country": "Norfolk Island",
+      "continent": "Oceania",
+      "timezones": [
+        "Pacific/Norfolk"
+      ]
+    },
+    {
+      "country": "North Korea",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Pyongyang"
+      ]
+    },
+    {
+      "country": "Northern Ireland",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/London"
+      ]
+    },
+    {
+      "country": "Northern Mariana Islands",
+      "continent": "Oceania",
+      "timezones": [
+        "Pacific/Saipan"
+      ]
+    },
+    {
+      "country": "Norway",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Oslo"
+      ]
+    },
+    {
+      "country": "Oman",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Muscat"
+      ]
+    },
+    {
+      "country": "Pakistan",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Karachi"
+      ]
+    },
+    {
+      "country": "Palau",
+      "continent": "Oceania",
+      "timezones": [
+        "Pacific/Palau"
+      ]
+    },
+    {
+      "country": "Palestine",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Gaza",
+        "Asia/Hebron"
+      ]
+    },
+    {
+      "country": "Panama",
+      "continent": "North America",
+      "timezones": [
+        "America/Panama"
+      ]
+    },
+    {
+      "country": "Papua New Guinea",
+      "continent": "Oceania",
+      "timezones": [
+        "Pacific/Port_Moresby",
+        "Pacific/Bougainville"
+      ]
+    },
+    {
+      "country": "Paraguay",
+      "continent": "South America",
+      "timezones": [
+        "America/Asuncion"
+      ]
+    },
+    {
+      "country": "Peru",
+      "continent": "South America",
+      "timezones": [
+        "America/Lima"
+      ]
+    },
+    {
+      "country": "Philippines",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Manila"
+      ]
+    },
+    {
+      "country": "Pitcairn",
+      "continent": "Oceania",
+      "timezones": [
+        "Pacific/Pitcairn"
+      ]
+    },
+    {
+      "country": "Poland",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Warsaw"
+      ]
+    },
+    {
+      "country": "Portugal",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Lisbon",
+        "Atlantic/Madeira",
+        "Atlantic/Azores"
+      ]
+    },
+    {
+      "country": "Puerto Rico",
+      "continent": "North America",
+      "timezones": [
+        "America/Puerto_Rico"
+      ]
+    },
+    {
+      "country": "Qatar",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Qatar"
+      ]
+    },
+    {
+      "country": "Reunion",
+      "continent": "Africa",
+      "timezones": [
+        "Indian/Reunion"
+      ]
+    },
+    {
+      "country": "Romania",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Bucharest"
+      ]
+    },
+    {
+      "country": "Russia",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Kaliningrad",
+        "Europe/Moscow",
+        "Europe/Kirov",
+        "Europe/Volgograd",
+        "Europe/Astrakhan",
+        "Europe/Saratov",
+        "Europe/Ulyanovsk",
+        "Europe/Samara",
+        "Asia/Yekaterinburg",
+        "Asia/Omsk",
+        "Asia/Novosibirsk",
+        "Asia/Barnaul",
+        "Asia/Tomsk",
+        "Asia/Novokuznetsk",
+        "Asia/Krasnoyarsk",
+        "Asia/Irkutsk",
+        "Asia/Chita",
+        "Asia/Yakutsk",
+        "Asia/Khandyga",
+        "Asia/Vladivostok",
+        "Asia/Ust-Nera",
+        "Asia/Magadan",
+        "Asia/Sakhalin",
+        "Asia/Srednekolymsk",
+        "Asia/Kamchatka",
+        "Asia/Anadyr"
+      ]
+    },
+    {
+      "country": "Rwanda",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Kigali"
+      ]
+    },
+    {
+      "country": "Saint Helena",
+      "continent": "Africa",
+      "timezones": [
+        "Atlantic/St_Helena"
+      ]
+    },
+    {
+      "country": "Saint Kitts and Nevis",
+      "continent": "North America",
+      "timezones": [
+        "America/St_Kitts"
+      ]
+    },
+    {
+      "country": "Saint Lucia",
+      "continent": "North America",
+      "timezones": [
+        "America/St_Lucia"
+      ]
+    },
+    {
+      "country": "Saint Pierre and Miquelon",
+      "continent": "North America",
+      "timezones": [
+        "America/Miquelon"
+      ]
+    },
+    {
+      "country": "Saint Vincent and the Grenadines",
+      "continent": "North America",
+      "timezones": [
+        "America/St_Vincent"
+      ]
+    },
+    {
+      "country": "Samoa",
+      "continent": "Oceania",
+      "timezones": [
+        "Pacific/Apia"
+      ]
+    },
+    {
+      "country": "San Marino",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/San_Marino"
+      ]
+    },
+    {
+      "country": "Sao Tome and Principe",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Sao_Tome"
+      ]
+    },
+    {
+      "country": "Saudi Arabia",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Riyadh"
+      ]
+    },
+    {
+      "country": "Scotland",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/London"
+      ]
+    },
+    {
+      "country": "Senegal",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Dakar"
+      ]
+    },
+    {
+      "country": "Serbia",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Belgrade"
+      ]
+    },
+    {
+      "country": "Seychelles",
+      "continent": "Africa",
+      "timezones": [
+        "Indian/Mahe"
+      ]
+    },
+    {
+      "country": "Sierra Leone",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Freetown"
+      ]
+    },
+    {
+      "country": "Singapore",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Singapore"
+      ]
+    },
+    {
+      "country": "Slovakia",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Bratislava"
+      ]
+    },
+    {
+      "country": "Slovenia",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Ljubljana"
+      ]
+    },
+    {
+      "country": "Solomon Islands",
+      "continent": "Oceania",
+      "timezones": [
+        "Pacific/Guadalcanal"
+      ]
+    },
+    {
+      "country": "Somalia",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Mogadishu"
+      ]
+    },
+    {
+      "country": "South Africa",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Johannesburg"
+      ]
+    },
+    {
+      "country": "South Georgia and the South Sandwich Islands",
+      "continent": "Antarctica",
+      "timezones": [
+        "Atlantic/South_Georgia"
+      ]
+    },
+    {
+      "country": "South Korea",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Seoul"
+      ]
+    },
+    {
+      "country": "South Sudan",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Juba"
+      ]
+    },
+    {
+      "country": "Spain",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Madrid",
+        "Africa/Ceuta",
+        "Atlantic/Canary"
+      ]
+    },
+    {
+      "country": "Sri Lanka",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Colombo"
+      ]
+    },
+    {
+      "country": "Sudan",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Khartoum"
+      ]
+    },
+    {
+      "country": "Suriname",
+      "continent": "South America",
+      "timezones": [
+        "America/Paramaribo"
+      ]
+    },
+    {
+      "country": "Svalbard and Jan Mayen",
+      "continent": "Europe",
+      "timezones": [
+        "Arctic/Longyearbyen"
+      ]
+    },
+    {
+      "country": "Sweden",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Stockholm"
+      ]
+    },
+    {
+      "country": "Switzerland",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Zurich"
+      ]
+    },
+    {
+      "country": "Syria",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Damascus"
+      ]
+    },
+    {
+      "country": "Tajikistan",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Dushanbe"
+      ]
+    },
+    {
+      "country": "Tanzania",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Dar_es_Salaam"
+      ]
+    },
+    {
+      "country": "Thailand",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Bangkok"
+      ]
+    },
+    {
+      "country": "The Democratic Republic of Congo",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Kinshasa",
+        "Africa/Lubumbashi"
+      ]
+    },
+    {
+      "country": "Togo",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Lome"
+      ]
+    },
+    {
+      "country": "Tokelau",
+      "continent": "Oceania",
+      "timezones": [
+        "Pacific/Fakaofo"
+      ]
+    },
+    {
+      "country": "Tonga",
+      "continent": "Oceania",
+      "timezones": [
+        "Pacific/Tongatapu"
+      ]
+    },
+    {
+      "country": "Trinidad and Tobago",
+      "continent": "North America",
+      "timezones": [
+        "America/Port_of_Spain"
+      ]
+    },
+    {
+      "country": "Tunisia",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Tunis"
+      ]
+    },
+    {
+      "country": "Turkey",
+      "continent": "Asia",
+      "timezones": [
+        "Europe/Istanbul"
+      ]
+    },
+    {
+      "country": "Turkmenistan",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Ashgabat"
+      ]
+    },
+    {
+      "country": "Turks and Caicos Islands",
+      "continent": "North America",
+      "timezones": [
+        "America/Grand_Turk"
+      ]
+    },
+    {
+      "country": "Tuvalu",
+      "continent": "Oceania",
+      "timezones": [
+        "Pacific/Funafuti"
+      ]
+    },
+    {
+      "country": "Uganda",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Kampala"
+      ]
+    },
+    {
+      "country": "Ukraine",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/Simferopol",
+        "Europe/Kiev",
+        "Europe/Uzhgorod",
+        "Europe/Zaporozhye"
+      ]
+    },
+    {
+      "country": "United Arab Emirates",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Dubai"
+      ]
+    },
+    {
+      "country": "United Kingdom",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/London"
+      ]
+    },
+    {
+      "country": "United States",
+      "continent": "North America",
+      "timezones": [
+        "America/New_York",
+        "America/Detroit",
+        "America/Kentucky/Louisville",
+        "America/Kentucky/Monticello",
+        "America/Indiana/Indianapolis",
+        "America/Indiana/Vincennes",
+        "America/Indiana/Winamac",
+        "America/Indiana/Marengo",
+        "America/Indiana/Petersburg",
+        "America/Indiana/Vevay",
+        "America/Chicago",
+        "America/Indiana/Tell_City",
+        "America/Indiana/Knox",
+        "America/Menominee",
+        "America/North_Dakota/Center",
+        "America/North_Dakota/New_Salem",
+        "America/North_Dakota/Beulah",
+        "America/Denver",
+        "America/Boise",
+        "America/Phoenix",
+        "America/Los_Angeles",
+        "America/Anchorage",
+        "America/Juneau",
+        "America/Sitka",
+        "America/Metlakatla",
+        "America/Yakutat",
+        "America/Nome",
+        "America/Adak",
+        "Pacific/Honolulu"
+      ]
+    },
+    {
+      "country": "United States Minor Outlying Islands",
+      "continent": "Oceania",
+      "timezones": [
+        "Pacific/Wake",
+        "Pacific/Pago_Pago",
+        "Pacific/Honolulu"
+      ]
+    },
+    {
+      "country": "Uruguay",
+      "continent": "South America",
+      "timezones": [
+        "America/Montevideo"
+      ]
+    },
+    {
+      "country": "Uzbekistan",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Samarkand",
+        "Asia/Tashkent"
+      ]
+    },
+    {
+      "country": "Vanuatu",
+      "continent": "Oceania",
+      "timezones": [
+        "Pacific/Efate"
+      ]
+    },
+    {
+      "country": "Venezuela",
+      "continent": "South America",
+      "timezones": [
+        "America/Caracas"
+      ]
+    },
+    {
+      "country": "Vietnam",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Ho_Chi_Minh"
+      ]
+    },
+    {
+      "country": "Virgin Islands, British",
+      "continent": "North America",
+      "timezones": [
+        "America/Tortola"
+      ]
+    },
+    {
+      "country": "Virgin Islands, U.S.",
+      "continent": "North America",
+      "timezones": [
+        "America/St_Thomas"
+      ]
+    },
+    {
+      "country": "Wales",
+      "continent": "Europe",
+      "timezones": [
+        "Europe/London"
+      ]
+    },
+    {
+      "country": "Wallis and Futuna",
+      "continent": "Oceania",
+      "timezones": [
+        "Pacific/Wallis"
+      ]
+    },
+    {
+      "country": "Western Sahara",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/El_Aaiun"
+      ]
+    },
+    {
+      "country": "Yemen",
+      "continent": "Asia",
+      "timezones": [
+        "Asia/Aden"
+      ]
+    },
+    {
+      "country": "Zambia",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Lusaka"
+      ]
+    },
+    {
+      "country": "Zimbabwe",
+      "continent": "Africa",
+      "timezones": [
+        "Africa/Harare"
+      ]
+    }
+  ]
