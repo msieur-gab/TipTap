@@ -55,6 +55,7 @@ class QuickMessagesApp {
             await DatabaseService.updateUserSettings({
                 appLanguage: settings.appLanguage,
                 parentLanguage: settings.parentLanguage,
+                targetLanguage: settings.targetLanguage,
                 deeplApiKey: settings.apiKey,
                 onboardingCompleted: true
             });

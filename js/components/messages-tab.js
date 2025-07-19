@@ -62,28 +62,40 @@ class MessagesTab extends HTMLElement {
             const baseLangTextarea = form.querySelector('textarea[name="baseLang"]');
             const targetLangTextarea = form.querySelector('textarea[name="targetLang"]');
             const textToTranslate = baseLangTextarea.value;
-            
-            // Get the source language from user settings
-            const sourceLang = this.userSettings?.parentLanguage;
-            // Get the target language from the currently selected profile
-            const targetLang = this.activeProfile?.language;
 
-            if (!sourceLang || !targetLang) {
-                alert('Please select a profile and ensure languages are set correctly.');
+            if (!textToTranslate) {
+                alert('Please enter text to translate.');
                 return;
             }
 
-            if (textToTranslate && deepL.isAvailable()) {
+            if (!deepL.isAvailable()) {
+                alert('Translation service is not available. Please check your API key and internet connection.');
+                return;
+            }
+
+            try {
+                // 1. Fetch the latest user settings.
+                const settings = await DatabaseService.getUserSettings();
+                const sourceLang = settings.parentLanguage;
+                const targetLang = settings.targetLanguage; // Use the global target language
+        
+                if (!sourceLang || !targetLang) {
+                    alert('Source or target language is not set. Please check your settings.');
+                    return;
+                }
+
+                // 3. Perform the translation.
                 const result = await deepL.translate(textToTranslate, sourceLang, targetLang);
+
                 if (result.text) {
                     targetLangTextarea.value = result.text;
                 } else {
                     alert('Translation failed: ' + (result.error || 'Unknown error'));
                 }
-            } else if (!textToTranslate) {
-                alert('Please enter text to translate.');
-            } else {
-                alert('Translation service is not available. Check API key and internet connection.');
+
+            } catch (error) {
+                console.error("Translation process failed:", error);
+                alert("An error occurred while trying to translate.");
             }
             return;
         }

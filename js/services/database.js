@@ -57,7 +57,7 @@ class MessageAppDB extends Dexie {
             profiles: 'id, displayName, mainTranslation, language, timezone, birthdate',
             categories: 'id, title, order, language',
             translations: 'hash, sourceText, sourceLang, targetLang, translatedText, timestamp',
-            userSettings: 'id, appLanguage, parentLanguage, deeplApiKey, deeplUsage, onboardingCompleted'
+            userSettings: 'id, appLanguage, parentLanguage, targetLanguage, deeplApiKey, deeplUsage, onboardingCompleted'
         }).upgrade(tx => {
             // Add default language to existing profiles and categories
             return tx.table('profiles').toCollection().modify(profile => {
