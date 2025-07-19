@@ -1,6 +1,8 @@
 import { eventBus, EVENTS } from '../utils/events.js';
 import { MessageService } from '../services/messages.js';
 import { ProfileService } from '../services/profiles.js';
+import { DatabaseService } from '../services/database.js'; 
+import { deepL } from '../services/deepl.js'; 
 import { i18n } from '../services/i18n.js';
 
 class FloatingActionButton extends HTMLElement {
@@ -121,6 +123,52 @@ class FloatingActionButton extends HTMLElement {
                     console.error('Error adding message:', error);
                     alert('Failed to add message. Please try again.');
                 }
+            }
+        });
+
+        // Handle translation
+        const translateBtn = this.shadowRoot.querySelector('.translate-btn');
+        translateBtn.addEventListener('click', async () => {
+            const baseLangTextarea = this.shadowRoot.getElementById('message-base-lang');
+            const targetLangTextarea = this.shadowRoot.getElementById('message-target-lang');
+            const textToTranslate = baseLangTextarea.value;
+
+            if (!textToTranslate.trim()) {
+                alert('Please enter some text in your language first.');
+                return;
+            }
+
+            if (!deepL.isAvailable()) {
+                alert('Translation service is not configured. Please add your API key in the settings.');
+                return;
+            }
+
+            try {
+                const settings = await DatabaseService.getUserSettings();
+                const sourceLang = settings.parentLanguage;
+                const targetLang = settings.targetLanguage;
+
+                if (!sourceLang || !targetLang) {
+                    alert('Source or target language is not configured. Please complete the onboarding process.');
+                    return;
+                }
+
+                // Show a simple loading state
+                targetLangTextarea.value = 'Translating...';
+
+                const result = await deepL.translate(textToTranslate, sourceLang, targetLang);
+
+                if (result.text) {
+                    targetLangTextarea.value = result.text;
+                } else {
+                    targetLangTextarea.value = ''; // Clear on failure
+                    alert('Translation failed: ' + (result.error || 'Unknown error'));
+                }
+
+            } catch (error) {
+                targetLangTextarea.value = ''; // Clear on error
+                console.error("Translation process failed:", error);
+                alert("An error occurred during translation.");
             }
         });
 
@@ -598,12 +646,17 @@ class FloatingActionButton extends HTMLElement {
                         <div class="helper-text">Use {name} to insert the kid's name</div>
                     </div>
                     <div class="form-group">
-                        <label for="message-target-lang">Message in target language</label>
+                        <label for="message-target-lang" data-i18n="settings.messageInTargetLanguage">Message in target language</label>
                         <div class="input-with-button">
                             <textarea id="message-target-lang" name="targetLang" class="styled-textarea" required></textarea>
                             <button type="button" class="insert-name-btn" data-target="message-target-lang">{name}</button>
                         </div>
-                        <div class="helper-text">Use {name} to insert the kid's name</div>
+                        <div class="helper-text" data-i18n="fab.nameHelp">Use {name} to insert the kid's name</div>
+                    </div>
+                    <div class="form-group" style="margin-top: -0.5rem;">
+                        <button type="button" class="secondary-button translate-btn" style="width: auto; padding: 0.5rem 1rem; font-size: 0.875rem;">
+                            Translate
+                        </button>
                     </div>
                     <div class="form-actions">
                         <button type="button" class="secondary-button" onclick="this.closest('dialog').close()">Cancel</button>
