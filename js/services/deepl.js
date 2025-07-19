@@ -164,41 +164,27 @@ class DeepLService {
         if (!text || !text.trim()) {
             return { error: 'Empty text' };
         }
-
         if (sourceLang === targetLang) {
-            return { 
-                text: text, 
-                source: 'same-language',
-                charactersUsed: 0 
-            };
+            return { text: text, source: 'same-language' };
         }
-
-        // Check cache first
-        const cached = await this.getFromCache(text, sourceLang, targetLang);
-        if (cached) {
-            return cached;
-        }
-
-        // If not in cache and service unavailable, return error
         if (!this.isAvailable()) {
-            return { 
-                error: this.isInitialized ? 
-                    i18n.t('errors.networkError') : 
-                    'Translation service not configured' 
-            };
+            return { error: 'Translation service is not available.' };
         }
 
         try {
+            // **FIX START: Protect the {name} placeholder using XML tags**
+            const protectedText = text.replace(/{name}/g, '<notranslate>{name}</notranslate>');
+
             const response = await fetch(this.apiEndpoint, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    text: text.trim(),
+                    text: protectedText,
                     source_lang: sourceLang,
                     target_lang: targetLang,
-                    apiKey: this.usageApiKey
+                    apiKey: this.usageApiKey,
+                    tag_handling: 'xml',       // Tell DeepL to handle XML
+                    ignore_tags: 'notranslate' // Tell DeepL to ignore our custom tag
                 })
             });
 
@@ -208,40 +194,28 @@ class DeepLService {
             }
 
             const data = await response.json();
-            
             if (data.error) {
                 throw new Error(data.error);
             }
 
-            const translatedText = data.translations?.[0]?.text || data.text;
-            
+            let translatedText = data.translations?.[0]?.text || data.text;
             if (!translatedText) {
                 throw new Error('No translation received');
             }
 
-            // Cache the translation
-            await this.saveToCache(text, sourceLang, targetLang, translatedText);
-
-            return {
-                text: translatedText,
-                source: 'deepl',
-                charactersUsed: text.length
-            };
+            // **FIX END: Remove the protective tags after translation**
+            translatedText = translatedText.replace(/<notranslate>{name}<\/notranslate>/g, '{name}');
+            
+            return { text: translatedText, source: 'deepl' };
 
         } catch (error) {
             console.error('Translation error:', error);
-            
-            // Return helpful error messages
             let errorMessage = i18n.t('errors.translationFailed');
-            
             if (error.message.includes('quota')) {
-                errorMessage = 'Translation quota exceeded. Please check your DeepL usage.';
-            } else if (error.message.includes('401')) {
-                errorMessage = 'Invalid API key. Please check your DeepL configuration.';
-            } else if (error.message.includes('403')) {
-                errorMessage = 'Access denied. Please verify your DeepL API key.';
+                errorMessage = 'Translation quota exceeded.';
+            } else if (error.message.includes('401') || error.message.includes('403')) {
+                errorMessage = 'Invalid API key.';
             }
-            
             return { error: errorMessage };
         }
     }

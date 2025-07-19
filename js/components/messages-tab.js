@@ -62,21 +62,28 @@ class MessagesTab extends HTMLElement {
             const baseLangTextarea = form.querySelector('textarea[name="baseLang"]');
             const targetLangTextarea = form.querySelector('textarea[name="targetLang"]');
             const textToTranslate = baseLangTextarea.value;
+            
+            // Get the source language from user settings
+            const sourceLang = this.userSettings?.parentLanguage;
+            // Get the target language from the currently selected profile
+            const targetLang = this.activeProfile?.language;
+
+            if (!sourceLang || !targetLang) {
+                alert('Please select a profile and ensure languages are set correctly.');
+                return;
+            }
 
             if (textToTranslate && deepL.isAvailable()) {
-                // You'll need to know the source and target languages.
-                // For now, let's assume 'EN' and 'FR' as an example.
-                // In a real implementation, you'd get this from user settings.
-                const result = await deepL.translate(textToTranslate, 'EN', 'FR');
+                const result = await deepL.translate(textToTranslate, sourceLang, targetLang);
                 if (result.text) {
                     targetLangTextarea.value = result.text;
                 } else {
-                    alert('Translation failed: ' + result.error);
+                    alert('Translation failed: ' + (result.error || 'Unknown error'));
                 }
             } else if (!textToTranslate) {
                 alert('Please enter text to translate.');
             } else {
-                alert('Translation service is not available. Check your API key or internet connection.');
+                alert('Translation service is not available. Check API key and internet connection.');
             }
             return;
         }
