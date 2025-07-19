@@ -5,19 +5,20 @@ exports.handler = async function(event, context) {
     }
 
     try {
-        const { text, target_lang, source_lang } = JSON.parse(event.body);
-        const apiKey = process.env.DEEPL_API_KEY; // Securely access your API key
+        // **FIX:** Read the apiKey from the request body sent by the client
+        const { text, target_lang, source_lang, apiKey } = JSON.parse(event.body);
 
+        // Check if the user-provided API key is present
         if (!apiKey) {
-            throw new Error('API key is not configured.');
+            return { statusCode: 400, body: JSON.stringify({ error: 'API key is missing.' }) };
         }
         
-        // Use the free API endpoint
         const apiEndpoint = 'https://api-free.deepl.com/v2/translate';
 
         const response = await fetch(apiEndpoint, {
             method: 'POST',
             headers: {
+                // Use the user's API key for authorization
                 'Authorization': `DeepL-Auth-Key ${apiKey}`,
                 'Content-Type': 'application/json',
             },
