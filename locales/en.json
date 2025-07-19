@@ -186,5 +186,15 @@
     "categoryNotFound": "Category not found",
     "translationFailed": "Translation failed",
     "networkError": "Network error. Please check your connection."
+  },
+  "fab": {
+    "addMessage": "Add Message",
+    "editKid": "Edit Kid", 
+    "selectCategory": "Select Category",
+    "createNewCategory": "➕ Create New Category",
+    "newCategoryName": "New Category Name",
+    "selectKidFirst": "Please select a kid first",
+    "messageAdded": "Message added successfully!",
+    "nameHelp": "Use {name} to insert the kid's name"
   }
 }

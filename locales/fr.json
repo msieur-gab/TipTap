@@ -186,5 +186,15 @@
     "categoryNotFound": "Catégorie non trouvée",
     "translationFailed": "Échec de la traduction",
     "networkError": "Erreur réseau. Veuillez vérifier votre connexion."
-  }
+  },
+  "fab": {
+        "addMessage": "Ajouter un Message",
+        "editKid": "Modifier l'Enfant",
+        "selectCategory": "Sélectionner une Catégorie",
+        "createNewCategory": "➕ Créer une Nouvelle Catégorie", 
+        "newCategoryName": "Nom de la Nouvelle Catégorie",
+        "selectKidFirst": "Veuillez d'abord sélectionner un enfant",
+        "messageAdded": "Message ajouté avec succès !",
+        "nameHelp": "Utilisez {name} pour insérer le nom de l'enfant"
+    }
 }

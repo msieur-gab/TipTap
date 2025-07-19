@@ -239,6 +239,20 @@ class MessagesTab extends HTMLElement {
     render() {
         this.shadowRoot.innerHTML = `
             <style>
+                /* Container for fixed positioning */
+                .messages-tab-container {
+                    display: flex;
+                    flex-direction: column;
+                    height: 100%;
+                    position: relative;
+                }
+
+                .messages-content {
+                    flex: 1;
+                    overflow-y: auto;
+                    padding-bottom: 80px; /* Space for fixed button */
+                }
+
                 /* General Card & Form Styling from Mockup */
                 .card { background: var(--container-color); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.25rem; border: 1px solid var(--color-border); }
                 .add-phrase-card { background-color: #f8fafc; margin-top: 1.5rem; padding: 1.5rem; }
@@ -274,6 +288,27 @@ class MessagesTab extends HTMLElement {
                 .expand-btn svg { transition: transform 0.3s ease; }
                 .expand-btn.expanded svg { transform: rotate(180deg); }
 
+                /* Fixed Add Category Button */
+                #add-category-btn {
+                    position: fixed;
+                    bottom: 1rem;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: calc(100% - 2rem);
+                    max-width: 568px;
+                    padding: 1rem;
+                    border: none;
+                    background-color: var(--color-text-dark);
+                    color: var(--primary-text-color);
+                    border-radius: 12px;
+                    cursor: pointer;
+                    font-weight: 600;
+                    font-size: 1rem;
+                    z-index: 1000;
+                    box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.15);
+                    backdrop-filter: blur(10px);
+                }
+
                 /* Dialog Styles */
                 dialog { border: none; border-radius: 16px; padding: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 90%; max-width: 400px; }
                 dialog::backdrop { background-color: rgba(0,0,0,0.4); }
@@ -281,8 +316,12 @@ class MessagesTab extends HTMLElement {
                 .styled-input { width: 100%; box-sizing: border-box; background-color: #f9fafb; border: 1px solid var(--color-border); border-radius: 12px; padding: 0.875rem 1rem; font-size: 1rem; font-family: inherit; color: var(--color-text-dark); }
             </style>
 
-            <div id="messages-container"></div>
-            <button id="add-category-btn" class="primary-button" data-i18n="settings.addCategory">Add New Category</button>
+            <div class="messages-tab-container">
+                <div class="messages-content">
+                    <div id="messages-container"></div>
+                </div>
+                <button id="add-category-btn" class="primary-button" data-i18n="settings.addCategory">Add New Category</button>
+            </div>
 
             <dialog id="add-category-dialog">
                 <h3 data-i18n="settings.addCategory">Add New Category</h3>

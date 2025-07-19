@@ -66,6 +66,7 @@ class ProfileSelector extends HTMLElement {
         if (this.activeNickname) {
             eventBus.emit(EVENTS.NICKNAME_SELECTED, selection);
         }
+        
     }
 
     getCurrentSelection() {

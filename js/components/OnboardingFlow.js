@@ -289,20 +289,24 @@ class OnboardingFlow extends HTMLElement {
     }
 
     handleNext() {
-        // Validation for required fields
-        if (this.state.currentStep === 6 && !this.state.currentKid.name.trim()) {
-            alert(i18n.t('onboarding.step6.placeholders.childName'));
+        // Correct validation for the current step order
+        if (this.state.currentStep === 4 && !this.state.parentLanguage) {
+            alert(i18n.t('onboarding.placeholders.chooseLanguage'));
             return;
         }
-        if (this.state.currentStep === 7 && !this.state.currentKid.language) {
+        // if (this.state.currentStep === 5 && !this.state.currentKid.name.trim()) {
+        //     alert(i18n.t('onboarding.step5.placeholders.childName'));
+        //     return;
+        // }
+        if (this.state.currentStep === 6 && !this.state.currentKid.language) {
             alert(i18n.t('onboarding.panelTitles.childLanguage'));
             return;
         }
 
-        // Save current kid before moving to next step
-        if (this.state.currentStep === 7 && this.state.currentKid.name) {
-            this.saveCurrentKid();
-        }
+        // Correct step to save the kid's data is after completing step 6
+        // if (this.state.currentStep === 6 && this.state.currentKid.name) {
+        //     this.saveCurrentKid();
+        // }
 
         this.goToStep(this.state.currentStep + 1);
     }
@@ -446,8 +450,12 @@ class OnboardingFlow extends HTMLElement {
 
     finishOnboarding() {
         // Save current kid if filled
-        if (this.state.currentKid.name && this.state.currentKid.language) {
-            this.saveCurrentKid();
+        // if (this.state.currentKid.name && this.state.currentKid.language) {
+        //     this.saveCurrentKid();
+        // }
+
+        if (this.state.currentKid.name.trim() && this.state.currentKid.language) {
+            this.state.kids.push({ ...this.state.currentKid });
         }
 
         // Emit completion event with collected data
@@ -455,6 +463,7 @@ class OnboardingFlow extends HTMLElement {
             detail: {
                 appLanguage: this.state.appLanguage,
                 parentLanguage: this.state.parentLanguage,
+                targetLanguage: this.state.currentKid.language,
                 kids: this.state.kids,
                 useTranslation: this.state.useTranslation,
                 apiKey: this.state.apiKey

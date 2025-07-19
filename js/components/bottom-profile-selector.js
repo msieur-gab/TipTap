@@ -123,7 +123,23 @@ class BottomProfileSelector extends HTMLElement {
         });
         general.innerHTML = `<img src="https://placehold.co/24x24/ccc/333?text=G" class="option-avatar"> <span>General</span>`;
         optionsContainer.appendChild(general);
+
+        const addNewProfile = document.createElement('div');
+        addNewProfile.className = 'option';
+        addNewProfile.style.cssText = 'color: var(--primary-color); font-weight: 600;';
+        addNewProfile.innerHTML = `<span>&#43; Add New Profile</span>`;
+        addNewProfile.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.closeDropdown();
+            // Dispatch a custom event to request the profile modal
+            this.dispatchEvent(new CustomEvent('request-profile-modal', {
+                bubbles: true,
+                composed: true
+            }));
+        });
+        optionsContainer.appendChild(addNewProfile);
     }
+    
 
     selectProfile(profile) {
         this.activeProfile = profile;

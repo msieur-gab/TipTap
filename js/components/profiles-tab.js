@@ -333,6 +333,20 @@ class ProfilesTab extends HTMLElement {
     render() {
         this.shadowRoot.innerHTML = `
             <style>
+                /* Container for fixed positioning */
+                .profiles-tab-container {
+                    display: flex;
+                    flex-direction: column;
+                    height: 100%;
+                    position: relative;
+                }
+
+                .profiles-content {
+                    flex: 1;
+                    overflow-y: auto;
+                    padding-bottom: 80px; /* Space for fixed button */
+                }
+
                 /* General Card & Form Styling */
                 .card { background: var(--container-color); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.25rem; border: 1px solid var(--color-border); }
                 .form-group { margin-bottom: 1rem; }
@@ -364,6 +378,27 @@ class ProfilesTab extends HTMLElement {
                 .nickname-info .translation { font-size: 0.9rem; color: var(--color-text-light); }
                 .add-nickname-form { display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem; }
                 .add-nickname-form .primary-button { margin-top: 0; }
+
+                /* Fixed Add Profile Button */
+                #add-profile-btn {
+                    position: fixed;
+                    bottom: 1rem;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: calc(100% - 2rem);
+                    max-width: 568px;
+                    padding: 1rem;
+                    border: none;
+                    background-color: var(--color-text-dark);
+                    color: var(--primary-text-color);
+                    border-radius: 12px;
+                    cursor: pointer;
+                    font-weight: 600;
+                    font-size: 1rem;
+                    z-index: 1000;
+                    box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.15);
+                    backdrop-filter: blur(10px);
+                }
                 
                 /* Dialog Styles */
                 dialog { border: none; border-radius: 16px; padding: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 90%; max-width: 400px; }
@@ -371,8 +406,12 @@ class ProfilesTab extends HTMLElement {
                 dialog h3 { margin-top: 0; }
             </style>
             
-            <div id="profiles-container"></div>
-            <button id="add-profile-btn" class="primary-button" data-i18n="settings.addProfile">Add New Profile</button>
+            <div class="profiles-tab-container">
+                <div class="profiles-content">
+                    <div id="profiles-container"></div>
+                </div>
+                <button id="add-profile-btn" class="primary-button" data-i18n="settings.addProfile">Add New Profile</button>
+            </div>
 
             <dialog id="add-profile-dialog">
                 <h3 data-i18n="settings.addProfile">Add New Profile</h3>
