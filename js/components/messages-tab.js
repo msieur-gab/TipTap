@@ -1,5 +1,6 @@
 import { eventBus, EVENTS } from '../utils/events.js';
 import { MessageService } from '../services/messages.js';
+import { deepL } from '../services/deepl.js';
 import { i18n } from '../services/i18n.js';
 
 class MessagesTab extends HTMLElement {
@@ -55,6 +56,30 @@ class MessagesTab extends HTMLElement {
         const categoryId = categoryCard?.dataset.categoryId;
         const phraseItem = button.closest('.phrase-item');
         const phraseId = phraseItem?.dataset.phraseId;
+
+        if (button.classList.contains('translate-btn')) {
+            const form = button.closest('form');
+            const baseLangTextarea = form.querySelector('textarea[name="baseLang"]');
+            const targetLangTextarea = form.querySelector('textarea[name="targetLang"]');
+            const textToTranslate = baseLangTextarea.value;
+
+            if (textToTranslate && deepL.isAvailable()) {
+                // You'll need to know the source and target languages.
+                // For now, let's assume 'EN' and 'FR' as an example.
+                // In a real implementation, you'd get this from user settings.
+                const result = await deepL.translate(textToTranslate, 'EN', 'FR');
+                if (result.text) {
+                    targetLangTextarea.value = result.text;
+                } else {
+                    alert('Translation failed: ' + result.error);
+                }
+            } else if (!textToTranslate) {
+                alert('Please enter text to translate.');
+            } else {
+                alert('Translation service is not available. Check your API key or internet connection.');
+            }
+            return;
+        }
 
         if (button.classList.contains('expand-btn')) {
             this.toggleCollapsible(categoryCard);
@@ -187,7 +212,8 @@ class MessagesTab extends HTMLElement {
                             <div class="form-group">
                                 <label data-i18n="settings.messageInTargetLanguage">Message in target language</label>
                                 <textarea name="targetLang" class="styled-textarea" required></textarea>
-                            </div>
+                                <button type="button" class="secondary-button translate-btn" style="margin-top: 8px;">Translate</button>
+                                </div>
                             <button type="submit" class="primary-button" data-i18n="settings.addMessage">Add Message</button>
                         </form>
                     </div>
@@ -227,7 +253,8 @@ class MessagesTab extends HTMLElement {
                 <div class="form-group">
                     <label data-i18n="settings.messageInTargetLanguage">Message in target language</label>
                     <textarea name="targetLang" class="styled-textarea" required>${phrase.targetLang}</textarea>
-                </div>
+                    <button type="button" class="secondary-button translate-btn" style="margin-top: 8px;">Translate</button>
+                    </div>
                 <div class="form-actions">
                     <button type="button" class="secondary-button" onclick="this.closest('messages-tab').shadowRoot.querySelector('messages-tab').editingPhrase = {categoryId: null, phraseId: null}; this.closest('messages-tab').shadowRoot.querySelector('messages-tab').loadCategories();" data-i18n="common.cancel">Cancel</button>
                     <button type="submit" class="primary-button" data-i18n="common.save">Save</button>

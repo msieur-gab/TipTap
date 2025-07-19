@@ -3,6 +3,7 @@ import { ProfileService } from './services/profiles.js';
 import { MessageService } from './services/messages.js';
 import { DatabaseService } from './services/database.js';
 import { InitialDataService } from './services/initial-data.js';
+import { deepL } from './services/deepl.js'; 
 import { i18n } from './services/i18n.js';
 import './components/OnboardingFlow.js';
 
@@ -20,6 +21,11 @@ class QuickMessagesApp {
             
             // 2. Explicitly initialize the i18n service with the saved language.
             await i18n.init(settings?.appLanguage);
+
+             // --> initialize DeepL  if API Key exist<--
+             if (settings?.deeplApiKey) {
+                await deepL.initialize(settings.deeplApiKey);
+            }
 
             // 3. Check if onboarding is complete.
             const onboardingCompleted = settings?.onboardingCompleted || false;
