@@ -25,7 +25,7 @@ export const ProfileService = {
             language: language,
             timezone: timezone,
             birthdate: birthdate,
-            image: avatar || `https://placehold.co/64x64/ccc/333?text=${displayName.charAt(0)}`,
+            image: avatar || `https://placehold.co/64x64/ccc/333?text=${(finalDisplayName || '?').charAt(0)}`,
             nicknames: []
         };
         
