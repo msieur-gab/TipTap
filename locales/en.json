@@ -49,11 +49,11 @@
     },
     "step7": {
       "title": "Translation Service",
-      "description": "Optional: Enable automatic translation between your languages with your own DeepL API key.",
+      "description": "Optional: Enable automatic translation with your own DeepL API key. We selected DeepL for its best-in-class quality and maximum data security.",
       "toggleTitle": "Enable Translation",
       "toggleDescription": "Get automatic translations with DeepL",
       "apiKeyPlaceholder": "DeepL API Key",
-      "apiKeyHelp": "Get your free API key from DeepL (500,000 characters/month free)"
+      "apiKeyHelp": "Creating a free account is straightforward and helps bridge the communication gap. Get your free key from <a href=\"https://www.deepl.com/pro-api\" target=\"_blank\">DeepL</a> (500,000 characters/month free). By using your key, you agree to DeepL's terms and are responsible for its usage."
     },
     "step8": {
       "title": "You're All Set!",

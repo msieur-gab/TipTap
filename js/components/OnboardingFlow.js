@@ -408,6 +408,12 @@ class OnboardingFlow extends HTMLElement {
             element.textContent = i18n.t(key);
         });
 
+         // Add this new block to handle HTML content
+        this.shadowRoot.querySelectorAll('[data-i18n-html]').forEach(element => {
+        const key = element.dataset.i18nHtml;
+        element.innerHTML = i18n.t(key);
+    });
+
         // Update placeholders
         const placeholders = this.shadowRoot.querySelectorAll('[data-i18n-placeholder]');
         placeholders.forEach(element => {
@@ -858,10 +864,9 @@ class OnboardingFlow extends HTMLElement {
                     </div>
                     
                     <div class="form-group" id="api-key-group" style="display: none;">
-                        <input type="password" id="api-key" class="styled-input" data-i18n-placeholder="onboarding.step7.apiKeyPlaceholder" placeholder="DeepL API Key">
-                        <p style="font-size: 0.875rem; color: var(--color-text-light); margin-top: 0.5rem;" data-i18n="onboarding.step7.apiKeyHelp">
-                            Get your free API key from DeepL (500,000 characters/month free)
-                        </p>
+                        <input type="password" id="api-key" class="styled-input" data-i18n-placeholder="onboarding.step7.apiKeyPlaceholder">
+
+                        <p style="font-size: 0.875rem; color: var(--color-text-light); margin-top: 0.5rem;" data-i18n-html="onboarding.step7.apiKeyHelp"></p>
                     </div>
                 </div>
             </div>
