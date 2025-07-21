@@ -75,7 +75,7 @@ class DeepLService {
         }
 
         try {
-            const response = await fetch(`${this.baseUrl}/deepl-translate`, {
+            const response = await fetch(`${this.baseUrl}/translate`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
