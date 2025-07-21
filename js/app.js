@@ -24,7 +24,7 @@ class QuickMessagesApp {
 
              // --> initialize DeepL  if API Key exist<--
              if (settings?.deeplApiKey) {
-                await deepL.initialize(settings.deeplApiKey);
+                // await deepL.initialize(settings.deeplApiKey);
             }
 
             // 3. Check if onboarding is complete.
