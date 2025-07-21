@@ -77,7 +77,7 @@ class MessagesTab extends HTMLElement {
             try {
                 // 1. Fetch the latest user settings.
                 const settings = await DatabaseService.getUserSettings();
-                const sourceLang = settings.parentLanguage;
+                const sourceLang = settings.sourceLanguage;
                 const targetLang = settings.targetLanguage; // Use the global target language
         
                 if (!sourceLang || !targetLang) {
