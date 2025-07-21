@@ -1,5 +1,4 @@
 import { DatabaseService } from './database.js';
-// import { DEFAULT_PROFILES } from '../config/defaults.js';
 import { eventBus, EVENTS } from '../utils/events.js';
 import { generateId } from '../utils/helpers.js';
 
@@ -15,17 +14,16 @@ export const ProfileService = {
      * @param {object} profileData - The kid's profile data from onboarding.
      */
     async createProfile(profileData) {
-        const { name, displayName, mainTranslation, language, timezone, birthdate, avatar } = profileData;
-        const finalDisplayName = displayName || name;
+        const { originalName, translatedName, language, timezone, birthdate, avatar } = profileData;
 
         const newProfile = {
             id: generateId(),
-            displayName: finalDisplayName,
-            mainTranslation: mainTranslation || finalDisplayName, // Fallback to name
+            originalName: originalName,
+            translatedName: translatedName || originalName, // Fallback to originalName if not provided
             language: language,
             timezone: timezone,
             birthdate: birthdate,
-            image: avatar || `https://placehold.co/64x64/ccc/333?text=${(finalDisplayName || '?').charAt(0)}`,
+            image: avatar || `https://placehold.co/64x64/ccc/333?text=${(originalName || '?').charAt(0)}`,
             nicknames: []
         };
         

@@ -72,7 +72,7 @@ class ProfilesTab extends HTMLElement {
             this.renderProfiles();
         } else if (button.classList.contains('delete-btn')) {
             const profile = this.profiles.find(p => p.id === profileId);
-            if (confirm(i18n.t('settings.confirmDelete', { item: profile.displayName }))) {
+            if (confirm(i18n.t('settings.confirmDelete', { item: profile.originalName }))) {
                 await ProfileService.deleteProfile(profileId);
             }
         } else if (button.classList.contains('cancel-edit-btn')) {
@@ -135,7 +135,7 @@ class ProfilesTab extends HTMLElement {
             const profileId = profileCard.dataset.profileId;
             const formData = new FormData(form);
             const updates = {
-                displayName: formData.get('displayName'),
+                originalName: formData.get('originalName'),
                 mainTranslation: formData.get('mainTranslation'),
                 birthdate: formData.get('birthdate'),
                 timezone: formData.get('timezone')
@@ -186,7 +186,7 @@ class ProfilesTab extends HTMLElement {
             <div class="profile-header">
                 <img src="${profile.image || 'https://placehold.co/64x64/ccc/333?text=?'}" alt="Avatar" class="profile-avatar">
                 <div class="profile-info">
-                    <h3>${profile.displayName}</h3>
+                    <h3>${profile.originalName}</h3>
                     <p>${profile.mainTranslation}</p>
                 </div>
                 <div class="profile-actions">
@@ -229,8 +229,8 @@ class ProfilesTab extends HTMLElement {
                     </label>
                 </div>
                 <div class="form-group">
-                    <label for="displayName-${profile.id}" data-i18n="settings.profileName">Name</label>
-                    <input type="text" id="displayName-${profile.id}" name="displayName" class="styled-input" value="${profile.displayName}" required>
+                    <label for="originalName-${profile.id}" data-i18n="settings.profileName">Name</label>
+                    <input type="text" id="originalName-${profile.id}" name="originalName" class="styled-input" value="${profile.originalName}" required>
                 </div>
                 <div class="form-group">
                     <label for="mainTranslation-${profile.id}" data-i18n="settings.profileTranslation">Translation</label>

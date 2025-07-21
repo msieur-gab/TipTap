@@ -96,7 +96,7 @@ class ProfileManager extends HTMLElement {
                 }
                 break;
             case 'delete-profile':
-                if (confirm(i18n.t('settings.confirmDelete', { item: this.profile.displayName }))) {
+                if (confirm(i18n.t('settings.confirmDelete', { item: this.profile.originalName }))) {
                     await ProfileService.deleteProfile(this.profileId);
                     this.dispatchEvent(new CustomEvent('profile-deleted', {
                         detail: { profileId: this.profileId }
@@ -144,8 +144,8 @@ class ProfileManager extends HTMLElement {
 
         if (form.classList.contains('profile-form')) {
             const profileData = {
-                displayName: formData.get('displayName'),
-                mainTranslation: formData.get('mainTranslation'),
+                originalName: formData.get('originalName'),
+                translatedName: formData.get('translatedName'),
                 birthdate: formData.get('birthdate'),
                 country: formData.get('country'),
                 timezone: formData.get('timezone'),
@@ -218,8 +218,8 @@ class ProfileManager extends HTMLElement {
                             <div class="avatar-overlay"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg></div>
                         </label>
                     </div>
-                    <div class="form-group"><label data-i18n="settings.profileName">Name</label><input type="text" name="displayName" class="styled-input" value="${profile.displayName || ''}" required></div>
-                    <div class="form-group"><label data-i18n="settings.profileTranslation">Translation</label><input type="text" name="mainTranslation" class="styled-input" value="${profile.mainTranslation || ''}" required></div>
+                    <div class="form-group"><label data-i18n="settings.profileName">Name</label><input type="text" name="originalName" class="styled-input" value="${profile.originalName || ''}" required></div>
+                    <div class="form-group"><label data-i18n="settings.profileTranslation">Translation</label><input type="text" name="translatedName" class="styled-input" value="${profile.translatedName || ''}" required></div>
                     <div class="form-group"><label data-i18n="settings.profileBirthday">Birthday</label><input type="date" name="birthdate" class="styled-input" value="${profile.birthdate || ''}"></div>
                     <div class="form-group"><label data-i18n="settings.profileCountry">Country</label><select name="country" class="styled-input"><option value="">Select Country</option>${countryOptions}</select></div>
                     <div class="form-group"><label data-i18n="settings.profileTimezone">Timezone</label><select name="timezone" class="styled-input"><option value="">Select timezone</option></select></div>
@@ -287,20 +287,20 @@ class ProfileManager extends HTMLElement {
     renderMinimizedProfile() {
         if (!this.profile) return '';
         return `
-            <div class="minimized-profile" data-action="expand-profile" title="Edit Profile Details">
-                <img src="${this.profile.image || 'https://placehold.co/50x50/ccc/333?text=?'}" 
-                     alt="Avatar" class="mini-avatar">
-                <div class="mini-info">
-                    <h4>${this.profile.displayName}</h4>
-                    <span>${this.profile.mainTranslation}</span>
-                </div>
-                <svg class="expand-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                </svg>
+        <div class="minimized-profile" data-action="expand-profile" title="Edit Profile Details">
+            <img src="${this.profile.image || 'https://placehold.co/50x50/ccc/333?text=?'}" 
+                 alt="Avatar" class="mini-avatar">
+            <div class="mini-info">
+                <h4>${this.profile.originalName}</h4>
+                <span>${this.profile.translatedName}</span>
             </div>
-        `;
-    }
+            <svg class="expand-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+        </div>
+    `;
+}
 
     render() {
         let content = '';

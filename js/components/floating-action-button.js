@@ -34,7 +34,7 @@ class FloatingActionButton extends HTMLElement {
             if (profile) {
                 this.currentKidSelection = {
                     profileId: profile.id,
-                    name: profile.displayName || profile.name
+                    name: profile.originalName || profile.name
                 };
             } else {
                 this.currentKidSelection = null;

@@ -1,5 +1,6 @@
 import { eventBus, EVENTS } from '../utils/events.js';
 import { ProfileService } from '../services/profiles.js';
+import { i18n } from '../services/i18n.js';
 
 class BottomProfileSelector extends HTMLElement {
     constructor() {
@@ -27,10 +28,19 @@ class BottomProfileSelector extends HTMLElement {
     }
 
     setupEvents() {
-        const selector = this.shadowRoot.querySelector('.selector-container');
-        selector.addEventListener('click', (e) => {
-            e.stopPropagation();
-            this.toggleDropdown();
+        const container = this.shadowRoot.querySelector('.container');
+        
+        container.addEventListener('click', (e) => {
+            if (this.classList.contains('no-profiles')) {
+                this.dispatchEvent(new CustomEvent('request-profile-modal', {
+                    bubbles: true,
+                    composed: true,
+                    detail: { forceCreate: true }
+                }));
+            } else {
+                e.stopPropagation();
+                this.toggleDropdown();
+            }
         });
     }
 
@@ -69,20 +79,44 @@ class BottomProfileSelector extends HTMLElement {
         }
     }
 
+    // updateDisplay() {
+    //     const avatar = this.shadowRoot.querySelector('.avatar');
+    //     const name = this.shadowRoot.querySelector('.name');
+        
+    //     if (this.activeProfile && avatar && name) {
+    //         const activeNickname = this.activeNickname && this.activeProfile.nicknames.find(n => n.id === this.activeNickname.id);
+    //         // name.textContent = activeNickname ? activeNickname.display : this.activeProfile.originalName || 'Loading...';
+    //         name.textContent = this.activeProfile.originalName || 'Loading...';
+
+    //         avatar.src = this.activeProfile.image || 'https://placehold.co/40x40/ccc/333?text=?';
+    //     } else if (avatar && name) {
+    //         avatar.src = 'https://placehold.co/40x40/ccc/333?text=?';
+    //         name.textContent = 'No Profile';
+    //         this.activeProfile = null;
+    //     }
+    // }
+
     updateDisplay() {
         const avatar = this.shadowRoot.querySelector('.avatar');
         const name = this.shadowRoot.querySelector('.name');
+        const label = this.shadowRoot.querySelector('.label');
         
-        if (this.activeProfile && avatar && name) {
-            const activeNickname = this.activeNickname && this.activeProfile.nicknames.find(n => n.id === this.activeNickname.id);
-            // name.textContent = activeNickname ? activeNickname.display : this.activeProfile.displayName || 'Loading...';
-            name.textContent = this.activeProfile.displayName || 'Loading...';
-
-            avatar.src = this.activeProfile.image || 'https://placehold.co/40x40/ccc/333?text=?';
-        } else if (avatar && name) {
-            avatar.src = 'https://placehold.co/40x40/ccc/333?text=?';
-            name.textContent = 'No Profile';
+        // --- UX IMPROVEMENT: Handle the "no profiles" state ---
+        if (this.profiles.length === 0) {
+            this.classList.add('no-profiles');
+            label.style.display = 'none'; // Hide the "Messages for" label
+            name.textContent = i18n.t('settings.addProfile'); // Show "Add New Profile"
+            avatar.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='12' y1='5' x2='12' y2='19'%3E%3C/line%3E%3Cline x1='5' y1='12' x2='19' y2='12'%3E%3C/line%3E%3C/svg%3E`;
+            avatar.style.backgroundColor = '#1f2937';
             this.activeProfile = null;
+        } else {
+            this.classList.remove('no-profiles');
+            label.style.display = 'block';
+            if (this.activeProfile && avatar && name) {
+                name.textContent = this.activeProfile.originalName || 'Loading...';
+                avatar.src = this.activeProfile.image || 'https://placehold.co/40x40/ccc/333?text=?';
+                avatar.style.backgroundColor = '';
+            }
         }
     }
 
@@ -98,7 +132,7 @@ class BottomProfileSelector extends HTMLElement {
                 e.stopPropagation();
                 this.selectProfile(profile);
             });
-            option.innerHTML = `<img src="${profile.image}" class="option-avatar"> <span>${profile.displayName}</span>`;
+            option.innerHTML = `<img src="${profile.image}" class="option-avatar"> <span>${profile.originalName}</span>`;
             optionsContainer.appendChild(option);
 
             if (profile.nicknames && profile.nicknames.length > 0) {
@@ -119,7 +153,7 @@ class BottomProfileSelector extends HTMLElement {
         general.className = 'option';
         general.addEventListener('click', (e) => {
             e.stopPropagation();
-            this.selectProfile({ id: 'general', displayName: 'General', image: 'https://placehold.co/40x40/ccc/333?text=G' });
+            this.selectProfile({ id: 'general', originalName: 'General', image: 'https://placehold.co/40x40/ccc/333?text=G' });
         });
         general.innerHTML = `<img src="https://placehold.co/24x24/ccc/333?text=G" class="option-avatar"> <span>General</span>`;
         optionsContainer.appendChild(general);
@@ -149,12 +183,10 @@ class BottomProfileSelector extends HTMLElement {
         
         const selection = this.activeProfile.id === 'general' 
             ? { baseLang_value: '', targetLang_value: '' }
-            : { baseLang_value: this.activeProfile.displayName, targetLang_value: this.activeProfile.mainTranslation };
+            : { baseLang_value: this.activeProfile.originalName, targetLang_value: this.activeProfile.translatedName };
         
-            // eventBus.emit(EVENTS.PROFILE_SELECTED, { profile: this.activeProfile, nickname: null });
-            eventBus.emit(EVENTS.PROFILE_SELECTED, { profile: this.activeProfile, nickname: null });
-
-        }
+        eventBus.emit(EVENTS.PROFILE_SELECTED, { profile: this.activeProfile, nickname: null });
+    }
 
     selectNickname(profile, nickname) {
         this.activeProfile = profile;
@@ -191,19 +223,18 @@ class BottomProfileSelector extends HTMLElement {
         this.shadowRoot.innerHTML = `
             <style>
                 :host {
-                    /* --- FAB Styling --- */
                     position: fixed;
-                    bottom: 2rem; /* As requested */
+                    bottom: 2rem;
                     left: 50%;
                     transform: translateX(-50%);
                     min-width: 20vw;
-                    max-width: 450px; /* Adjusted max-width */
+                    max-width: 450px;
                     background-color: rgba(0,0,0,0.85);
                     backdrop-filter: blur(2px);
                     -webkit-backdrop-filter: blur(2px);
                     z-index: 100;
-                    border-radius: 16px; /* Rounded corners for floating look */
-                    box-shadow: 0 8px 24px rgba(0,0,0,0.15); /* More prominent shadow */
+                    border-radius: 16px;
+                    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
                     border: 1px solid var(--color-border);
                 }
                 .container {
@@ -211,18 +242,17 @@ class BottomProfileSelector extends HTMLElement {
                     align-items: center;
                     justify-content: space-between;
                     padding: 0.75rem 1rem;
-
-                    
+                    cursor: pointer;
+                }
+                :host(.no-profiles) .arrow {
+                    display: none;
                 }
                 .left { display: flex; align-items: center; gap: 0.75rem; }
-                .avatar { width: 48px; height: 48px; border-radius: 50%; }
+                .avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; padding: 12px; box-sizing: border-box;}
                 .info-stack { display: flex; flex-direction: column; }
                 .label { font-size: 0.8rem; color: #FFF; }
-                .selector-container { position: relative; display: flex; align-items: center; gap: 0.25rem; cursor: pointer; padding: 0.1rem 0.25rem; margin-left: -0.25rem; border-radius: 6px; }
-                .selector-container:hover { background-color:rgb(59, 59, 59); }
-                .name { font-size: 1rem;white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis; font-weight: 700; color: white; }
+                .selector-container { position: relative; display: flex; align-items: center; gap: 0.25rem; border-radius: 6px; }
+                .name { font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 700; color: white; }
                 .arrow { width: 20px; height: 20px; color:rgb(192, 192, 192); transition: transform 0.2s; }
                 .dropdown {
                     position: absolute;
@@ -230,7 +260,6 @@ class BottomProfileSelector extends HTMLElement {
                     left: 0;
                     width: 100%;
                     background: black;
-                    // border: 1px solid #e5e7eb;
                     border-radius: 8px;
                     box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
                     z-index: 10;
@@ -238,7 +267,7 @@ class BottomProfileSelector extends HTMLElement {
                     display: none;
                     color: white;
                 }
-                .option { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; cursor: pointer; border-bottom: 1px solid #f3f4f6; }
+                .option { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; cursor: pointer; border-bottom: 1px solid #333; }
                 .option:hover { background-color:rgb(24, 24, 24); }
                 .option:last-child { border-bottom: none; }
                 .option-avatar { width: 24px; height: 24px; border-radius: 50%; }

@@ -77,7 +77,7 @@ class AppHeader extends HTMLElement {
                 const zonedTime = getZonedTime(profile.timezone);
                 const timeString = formatTime(zonedTime, profile.timezone);
                 profileTimeCard.querySelector('.card-content').textContent = timeString;
-                profileTimeCard.querySelector('.card-title').textContent = i18n.t('time.profileTime', { name: profile.displayName });
+                profileTimeCard.querySelector('.card-title').textContent = i18n.t('time.profileTime', { name: profile.originalName });
             };
             update(); // Update immediately
             this.profileTimeInterval = setInterval(update, 1000); // Then update every second
@@ -91,7 +91,7 @@ class AppHeader extends HTMLElement {
             const birthdayContent = birthdayCard.querySelector('.card-content');
             
             
-            birthdayCard.querySelector('.card-title').textContent = i18n.t('time.birthday', { name: profile.displayName });
+            birthdayCard.querySelector('.card-title').textContent = i18n.t('time.birthday', { name: profile.originalName });
         
             if (days === 0) {
                 birthdayContent.textContent = i18n.t('time.today');

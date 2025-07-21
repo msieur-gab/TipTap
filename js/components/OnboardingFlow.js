@@ -10,13 +10,15 @@ class OnboardingFlow extends HTMLElement {
         
         this.state = {
             currentStep: 1,
-            totalSteps: 8, // Total steps is now 8
-            appLanguage: '',
-            parentLanguage: '',
-            parentLanguageName: '',
+            totalSteps: 9,
+            sourceLanguage: '',
+            targetLanguage: '',
+            userName: '',
+            userSignature: '',
             kids: [],
             currentKid: {
-                name: '',
+                originalName: '', // Use new name
+                translatedName: '', // Use new name
                 birthdate: '',
                 timezone: '',
                 language: '',
@@ -76,9 +78,20 @@ class OnboardingFlow extends HTMLElement {
         const apiKey = this.shadowRoot.getElementById('api-key');
         const avatarUpload = this.shadowRoot.getElementById('avatar-upload');
         const translationToggle = this.shadowRoot.getElementById('translation-toggle');
+        const userNameInput = this.shadowRoot.getElementById('user-name');
+        const userSignatureInput = this.shadowRoot.getElementById('user-signature');
+
+        
+        userNameInput?.addEventListener('input', (e) => {
+            this.state.userName = e.target.value;
+        });
+
+        userSignatureInput?.addEventListener('input', (e) => {
+            this.state.userSignature = e.target.value;
+        });
 
         childName?.addEventListener('input', (e) => {
-            this.state.currentKid.name = e.target.value;
+            this.state.currentKid.originalName = e.target.value;
         });
 
         childBirthdate?.addEventListener('input', (e) => {
@@ -221,16 +234,18 @@ class OnboardingFlow extends HTMLElement {
         const text = option.dataset.text || value;
         
         if (panelType === 'app-language') {
-            this.state.appLanguage = value;
+            // this.state.appLanguage = value;
             i18n.setLocale(value); // Change app language immediately
+            this.state.sourceLanguage = value; // Set the source language for later
             this.updateDisplayText('app-language-display', text);
         } else if (panelType === 'parent-language') {
-            this.state.parentLanguage = value;
-            this.state.parentLanguageName = text;
+            this.state.sourceLanguage = value;
+            // this.state.sourceLanguageName = text;
             this.updateDisplayText('parent-language-display', text);
         } else if (panelType === 'child-language') {
+            this.state.targetLanguage = value;
             this.state.currentKid.language = value;
-            this.state.currentKid.languageName = text;
+            // this.state.currentKid.languageName = text;
             this.updateDisplayText('child-language-display', text);
         }
         else if (panelType === 'country') {
@@ -289,11 +304,16 @@ class OnboardingFlow extends HTMLElement {
     }
 
     handleNext() {
-        // Correct validation for the current step order
-        if (this.state.currentStep === 4 && !this.state.parentLanguage) {
+
+        if (this.state.currentStep === 1 && !this.state.sourceLanguage) {
             alert(i18n.t('onboarding.placeholders.chooseLanguage'));
             return;
-        }
+       }
+        // Correct validation for the current step order
+        // if (this.state.currentStep === 4 && !this.state.sourceLanguage) {
+        //     alert(i18n.t('onboarding.placeholders.chooseLanguage'));
+        //     return;
+        // }
         // if (this.state.currentStep === 5 && !this.state.currentKid.name.trim()) {
         //     alert(i18n.t('onboarding.step5.placeholders.childName'));
         //     return;
@@ -312,14 +332,17 @@ class OnboardingFlow extends HTMLElement {
     }
 
     saveCurrentKid() {
-        if (this.state.currentKid.name && this.state.currentKid.language) {
-            this.state.kids.push({ ...this.state.currentKid });
-            // Reset current kid
+        if (this.state.currentKid.originalName && this.state.targetLanguage) {
+            this.state.kids.push({ 
+                ...this.state.currentKid,
+                language: this.state.targetLanguage
+            });
             this.state.currentKid = {
-                name: '',
+                originalName: '',
+                translatedName: '',
                 birthdate: '',
                 timezone: '',
-                language: '',
+                language: this.state.targetLanguage,
                 languageName: '',
                 avatar: null
             };
@@ -430,9 +453,9 @@ class OnboardingFlow extends HTMLElement {
             summary.classList.remove('hidden');
             kidsList.innerHTML = this.state.kids.map(kid => `
                 <div class="kid-item">
-                    <div class="kid-avatar">${kid.name.charAt(0)}</div>
+                    <div class="kid-avatar">${kid.originalName.charAt(0)}</div>
                     <div class="kid-info">
-                        <div class="kid-name">${kid.name}</div>
+                        <div class="kid-name">${kid.originalName}</div>
                         <div class="kid-details">${kid.languageName}${kid.birthdate ? ` • ${this.getAge(kid.birthdate)} years old` : ''}</div>
                     </div>
                 </div>
@@ -460,16 +483,17 @@ class OnboardingFlow extends HTMLElement {
         //     this.saveCurrentKid();
         // }
 
-        if (this.state.currentKid.name.trim() && this.state.currentKid.language) {
+        if (this.state.currentKid.originalName.trim() && this.state.currentKid.targetLanguage) {
             this.state.kids.push({ ...this.state.currentKid });
         }
 
         // Emit completion event with collected data
         this.dispatchEvent(new CustomEvent('onboarding-complete', {
             detail: {
-                appLanguage: this.state.appLanguage,
-                parentLanguage: this.state.parentLanguage,
-                targetLanguage: this.state.currentKid.language,
+                userName: this.state.userName,
+                userSignature: this.state.userSignature,
+                sourceLanguage: this.state.sourceLanguage,
+                targetLanguage: this.state.targetLanguage, // This should be collected in a previous step
                 kids: this.state.kids,
                 useTranslation: this.state.useTranslation,
                 apiKey: this.state.apiKey
@@ -837,6 +861,8 @@ class OnboardingFlow extends HTMLElement {
                 </div>
             </div>
 
+            
+
             <!-- Step 7: Translation setup -->
             <div id="step-7" class="onboarding-step hidden">
                 <div class="illustration-container">
@@ -871,8 +897,21 @@ class OnboardingFlow extends HTMLElement {
                 </div>
             </div>
 
-            <!-- Step 8: Summary & finish -->
             <div id="step-8" class="onboarding-step hidden">
+                <div class="step-header">
+                    <h2 data-i18n="onboarding.step8.title">Your Profile</h2>
+                    <p data-i18n="onboarding.step8.description">This helps personalize the app for you.</p>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="user-name" class="styled-input" placeholder="Your Name (e.g., John)">
+                </div>
+                <div class="form-group">
+                    <input type="text" id="user-signature" class="styled-input" placeholder="How you sign messages (e.g., Dad)">
+                </div>
+            </div>
+
+            <!-- Step 8: Summary & finish -->
+            <div id="step-9" class="onboarding-step hidden">
                 <div class="illustration-container">
                     <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
                         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
@@ -881,8 +920,8 @@ class OnboardingFlow extends HTMLElement {
                 </div>
                 <div class="bottom-content-container">
                     <div class="step-header">
-                        <h2 data-i18n="onboarding.step8.title">You're All Set!</h2>
-                        <p data-i18n="onboarding.step8.description">Your family messaging app is ready. You can add more children and customize messages anytime.</p>
+                        <h2 data-i18n="onboarding.step9.title">You're All Set!</h2>
+                        <p data-i18n="onboarding.step9.description">Your family messaging app is ready. You can add more children and customize messages anytime.</p>
                     </div>
                 </div>
             </div>

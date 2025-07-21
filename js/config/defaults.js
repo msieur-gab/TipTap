@@ -1,7 +1,7 @@
 export const DEFAULT_PROFILES = [
     { 
         id: 'léna', 
-        displayName: "Léna", 
+        originalName: "Léna", 
         mainTranslation: "蕾娜", 
         image: `https://placehold.co/64x64/f8b4b4/333?text=L`,
         // New fields
@@ -13,7 +13,7 @@ export const DEFAULT_PROFILES = [
     },
     { 
         id: 'leelou', 
-        displayName: "Leelou", 
+        originalName: "Leelou", 
         mainTranslation: "理露", 
         image: `https://placehold.co/64x64/b4d2f8/333?text=S`,
         // New fields

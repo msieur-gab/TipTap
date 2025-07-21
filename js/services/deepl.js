@@ -180,8 +180,8 @@ class DeepLService {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     text: protectedText,
-                    source_lang: sourceLang,
-                    target_lang: targetLang,
+                    source_lang: sourceLang.toUpperCase(),
+                    target_lang: targetLang.toUpperCase(),
                     apiKey: this.usageApiKey,
                     tag_handling: 'xml',       // Tell DeepL to handle XML
                     ignore_tags: 'notranslate' // Tell DeepL to ignore our custom tag

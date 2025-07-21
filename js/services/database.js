@@ -1,122 +1,34 @@
 // js/services/database.js
 // Database service using Dexie with enhanced i18n and translation support
-class MessageAppDB extends Dexie {
+class TipTapApp extends Dexie {
     constructor() {
-        super('MessageAppDB');
+        super('TipTapApp');
         
-        // Version 1 - Original schema
+        // Version 1 - The new, clean schema
         this.version(1).stores({
-            profiles: 'id, displayName, mainTranslation',
-            categories: 'id, title, order'
-        });
-
-        // Version 2 - Updated field names for language neutrality
-        this.version(2).stores({
-            profiles: 'id, displayName, mainTranslation',
-            categories: 'id, title, order'
-        }).upgrade(tx => {
-            // Migrate profiles - update nickname field names
-            return tx.table('profiles').toCollection().modify(profile => {
-                if (profile.nicknames) {
-                    profile.nicknames.forEach(nickname => {
-                        // Migrate fr_value -> baseLang_value
-                        if (nickname.fr_value && !nickname.baseLang_value) {
-                            nickname.baseLang_value = nickname.fr_value;
-                            delete nickname.fr_value;
-                        }
-                        // Migrate cn_value -> targetLang_value
-                        if (nickname.cn_value && !nickname.targetLang_value) {
-                            nickname.targetLang_value = nickname.cn_value;
-                            delete nickname.cn_value;
-                        }
-                    });
-                }
-            }).then(() => {
-                // Migrate categories - update phrase field names and placeholders
-                return tx.table('categories').toCollection().modify(category => {
-                    if (category.phrases) {
-                        category.phrases.forEach(phrase => {
-                            // Migrate fr -> baseLang
-                            if (phrase.fr && !phrase.baseLang) {
-                                phrase.baseLang = phrase.fr.replace(/{nom}/g, '{name}');
-                                delete phrase.fr;
-                            }
-                            // Migrate cn -> targetLang
-                            if (phrase.cn && !phrase.targetLang) {
-                                phrase.targetLang = phrase.cn.replace(/{nom}/g, '{name}');
-                                delete phrase.cn;
-                            }
-                        });
-                    }
-                });
-            });
-        });
-
-        // Version 3 - Add i18n and translation support
-        this.version(3).stores({
-            profiles: 'id, displayName, mainTranslation, language, timezone, birthdate',
-            categories: 'id, title, order, language',
-            translations: 'hash, sourceText, sourceLang, targetLang, translatedText, timestamp',
-            userSettings: 'id, appLanguage, parentLanguage, targetLanguage, deeplApiKey, deeplUsage, onboardingCompleted'
-        }).upgrade(tx => {
-            // Add default language to existing profiles and categories
-            return tx.table('profiles').toCollection().modify(profile => {
-                if (!profile.language) {
-                    profile.language = 'ZH'; // Default to Chinese for existing profiles
-                }
-            }).then(() => {
-                return tx.table('categories').toCollection().modify(category => {
-                    if (!category.language) {
-                        category.language = 'EN'; // Default to English for categories
-                    }
-                });
-            }).then(() => {
-                // Create initial user settings if they don't exist
-                return tx.table('userSettings').put({
-                    id: 'global',
-                    appLanguage: 'en',
-                    parentLanguage: 'EN',
-                    deeplApiKey: null,
-                    deeplUsage: { characterCount: 0, characterLimit: 500000, lastUpdated: Date.now() },
-                    onboardingCompleted: false
-                });
-            });
+            userSettings: 'id, userName, userSignature, sourceLanguage, targetLanguage, deeplApiKey, deeplUsage, onboardingCompleted',
+            // --- FIX: Added 'nicknames' to the profile schema ---
+            profiles: 'id, originalName, translatedName, timezone, birthdate, nicknames',
+            // --- FIX: Added 'phrases' to the categories schema ---
+            categories: 'id, title, order, phrases',
+            translations: 'hash, sourceText, sourceLang, targetLang, translatedText, timestamp'
         });
     }
 }
 
-export const db = new MessageAppDB();
+export const db = new TipTapApp();
 
 // Enhanced database operations
 export const DatabaseService = {
     // Generic operations
-    async get(table, id) {
-        return await db[table].get(id);
-    },
+    async get(table, id) { return await db[table].get(id); },
+    async getAll(table) { return await db[table].toArray(); },
+    async add(table, data) { return await db[table].add(data); },
+    async update(table, id, data) { return await db[table].update(id, data); },
+    async put(table, data) { return await db[table].put(data); },
+    async delete(table, id) { return await db[table].delete(id); },
+    async clear(table) { return await db[table].clear(); },
 
-    async getAll(table) {
-        return await db[table].toArray();
-    },
-
-    async add(table, data) {
-        return await db[table].add(data);
-    },
-
-    async update(table, id, data) {
-        return await db[table].update(id, data);
-    },
-
-    async put(table, data) {
-        return await db[table].put(data);
-    },
-
-    async delete(table, id) {
-        return await db[table].delete(id);
-    },
-
-    async clear(table) {
-        return await db[table].clear();
-    },
 
     // Specific operations
     async getAllProfiles() {
@@ -135,8 +47,10 @@ export const DatabaseService = {
             // Create default settings if they don't exist
             settings = {
                 id: 'global',
-                appLanguage: 'en',
-                parentLanguage: 'EN',
+                userName: '',
+                userSignature: '',
+                sourceLanguage: 'en',
+                targetLanguage: 'zh',
                 deeplApiKey: null,
                 deeplUsage: { 
                     characterCount: 0, 
@@ -203,15 +117,15 @@ export const DatabaseService = {
     },
 
     // Profiles with enhanced language support
-    async createProfileWithLanguage(displayName, mainTranslation, language = 'ZH', timezone = null, birthdate = null) {
+    async createProfileWithLanguage(originalName, mainTranslation, language = 'ZH', timezone = null, birthdate = null) {
         const newProfile = {
             id: this.generateId(),
-            displayName,
+            originalName,
             mainTranslation,
             language,
             timezone,
             birthdate,
-            image: `https://placehold.co/64x64/ccc/333?text=${displayName.charAt(0)}`,
+            image: `https://placehold.co/64x64/ccc/333?text=${originalName.charAt(0)}`,
             nicknames: []
         };
         await this.put('profiles', newProfile);

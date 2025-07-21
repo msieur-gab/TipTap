@@ -31,14 +31,14 @@ export const InitialDataService = {
      */
     async setupInitialData(settings) {
         // Use parentLanguage and the now-guaranteed targetLanguage
-        const { parentLanguage, targetLanguage } = settings;
+        const { sourceLanguage, targetLanguage } = settings;
 
-        if (!parentLanguage || !targetLanguage) {
+        if (!sourceLanguage || !targetLanguage) {
             console.error("Cannot set up initial data: Missing parent or target language information.");
             return;
         }
 
-        const parentData = await fetchLocaleData(parentLanguage);
+        const parentData = await fetchLocaleData(sourceLanguage);
         const childData = await fetchLocaleData(targetLanguage);
 
         const categoryKeys = Object.keys(parentData.categories);
@@ -61,7 +61,7 @@ export const InitialDataService = {
                 title: parentData.categories[key],
                 order: index,
                 phrases: combinedPhrases,
-                language: parentLanguage
+                language: sourceLanguage
             };
 
             await DatabaseService.put('categories', newCategory);

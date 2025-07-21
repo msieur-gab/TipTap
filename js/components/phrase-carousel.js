@@ -73,8 +73,8 @@ class PhraseCarousel extends HTMLElement {
                     this.currentSelection = { baseLang_value: '', targetLang_value: '' };
                 } else {
                     this.currentSelection = {
-                        baseLang_value: profile.displayName,
-                        targetLang_value: profile.mainTranslation
+                        baseLang_value: profile.originalName,
+                        targetLang_value: profile.translatedName
                     };
                 }
             }
