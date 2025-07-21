@@ -14,13 +14,12 @@ export const ProfileService = {
      * @param {object} profileData - The kid's profile data from onboarding.
      */
     async createProfile(profileData) {
-        const { originalName, translatedName, language, timezone, birthdate, avatar } = profileData;
+        const { originalName, translatedName, timezone, birthdate, avatar } = profileData;
 
         const newProfile = {
             id: generateId(),
             originalName: originalName,
             translatedName: translatedName || originalName, // Fallback to originalName if not provided
-            language: language,
             timezone: timezone,
             birthdate: birthdate,
             image: avatar || `https://placehold.co/64x64/ccc/333?text=${(originalName || '?').charAt(0)}`,
