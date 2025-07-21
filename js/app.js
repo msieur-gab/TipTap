@@ -1,3 +1,4 @@
+// js/app.js
 import { eventBus, EVENTS } from './utils/events.js';
 import { ProfileService } from './services/profiles.js';
 import { MessageService } from './services/messages.js';
@@ -22,9 +23,9 @@ class QuickMessagesApp {
             // 2. Explicitly initialize the i18n service with the saved language.
             await i18n.init(settings?.sourceLanguage);
 
-             // --> initialize DeepL  if API Key exist<--
+             // --> initialize DeepL if API Key exists <--
              if (settings?.deeplApiKey) {
-                // await deepL.initialize(settings.deeplApiKey);
+                await deepL.initialize(settings.deeplApiKey); // FIX: This line was commented out.
             }
 
             // 3. Check if onboarding is complete.
@@ -81,13 +82,6 @@ class QuickMessagesApp {
         
         console.log('Initializing Quick Messages App...');
         
-        // Load main app content from index.html
-        // const response = await fetch('index.html');
-        // const text = await response.text();
-        // const parser = new DOMParser();
-        // const doc = parser.parseFromString(text, 'text/html');
-        // document.body.innerHTML = doc.body.innerHTML;
-        
         await this.initializeServices();
         this.setupGlobalEventListeners();
         
@@ -97,8 +91,7 @@ class QuickMessagesApp {
     }
 
     async initializeServices() {
-        // await ProfileService.initialize();
-        // await MessageService.initialize();
+        // Initialization logic can go here if needed in the future
     }
 
     setupGlobalEventListeners() {

@@ -9,7 +9,6 @@ class DeepLService {
         console.log('DeepL initialized with API key');
     }
 
-    // Add this method for backward compatibility  
     isAvailable() {
         return !!this.apiKey;
     }
@@ -50,10 +49,10 @@ class DeepLService {
             const characterLimit = parseInt(data.character_limit) || 0;
             
             const usageData = {
-                character_count: characterCount,  // Keep old format for compatibility
-                character_limit: characterLimit,  // Keep old format for compatibility
-                characterCount,                   // New format
-                characterLimit,                   // New format
+                character_count: characterCount,
+                character_limit: characterLimit,
+                characterCount,
+                characterLimit,
                 usagePercentage: characterLimit > 0 ? 
                     Math.round((characterCount / characterLimit) * 100) : 0,
                 remainingCharacters: Math.max(0, characterLimit - characterCount)
@@ -68,7 +67,7 @@ class DeepLService {
         }
     }
 
-    async translateText(text, targetLanguage, sourceLanguage = 'auto', apiKey = null) {
+    async translate(text, targetLanguage, sourceLanguage = 'auto', apiKey = null) {
         const keyToUse = apiKey || this.apiKey;
         
         if (!keyToUse) {
@@ -95,8 +94,9 @@ class DeepLService {
             }
 
             const data = await response.json();
+            // FIX: Return the text directly for easier use in components
             return {
-                translatedText: data.translations[0].text,
+                text: data.translations[0].text,
                 detectedSourceLanguage: data.translations[0].detected_source_language
             };
 
@@ -119,8 +119,6 @@ class DeepLService {
         };
     }
 }
-
-
 
 // Create and export singleton
 const deeplService = new DeepLService();
