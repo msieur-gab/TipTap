@@ -36,10 +36,9 @@ class UserSettingsPanel extends HTMLElement {
         this.profiles = await ProfileService.getAllProfiles();
         
         if (this.settings.deeplApiKey) {
-            await deepL.initialize(this.settings.deeplApiKey);
             try {
-                // FIX: Call getUsage() correctly and handle the response
-                const usageData = await deepL.getUsage();
+                // FIX: Pass API key directly to getUsage(), no initialize needed
+                const usageData = await deepL.getUsage(this.settings.deeplApiKey);
                 console.log('DeepL usage data:', usageData);
                 
                 // Handle both possible response formats
@@ -130,16 +129,16 @@ class UserSettingsPanel extends HTMLElement {
         const form = e.target;
         const useTranslation = this.shadowRoot.querySelector('#translation-toggle').classList.contains('active');
         const apiKeyInput = form.querySelector('#api-key');
-
+    
         const newSettings = {
             userName: form.querySelector('#user-name').value,
             userSignature: form.querySelector('#user-signature').value,
             deeplApiKey: useTranslation ? apiKeyInput.value : null,
         };
-
+    
         await DatabaseService.updateUserSettings(newSettings);
-        await deepL.initialize(newSettings.deeplApiKey);
-
+        // FIX: Remove the initialize call, it doesn't exist
+    
         const saveButton = form.querySelector('.primary-button');
         saveButton.textContent = i18n.t('common.saved'); // Use i18n for feedback
         setTimeout(() => { saveButton.textContent = i18n.t('common.save'); }, 2000);
