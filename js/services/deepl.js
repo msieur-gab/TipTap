@@ -23,9 +23,7 @@ class DeepLService {
         }
 
         try {
-            console.log('🔑 Using API key:', keyToUse.slice(0, 8) + '...' + keyToUse.slice(-4));
-            console.log('🔑 Key type:', keyToUse.endsWith(':fx') ? 'FREE key' : 'PRO key');
-        
+            
             console.log('Requesting DeepL usage for key ending with:', keyToUse.slice(-4));
             
             const response = await fetch(`${this.baseUrl}/deepl-usage`, {
