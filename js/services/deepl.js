@@ -32,6 +32,34 @@ class DeepLService {
         return this.isInitialized && navigator.onLine;
     }
 
+    async getUsage() {
+        if (!this.isAvailable()) {
+            return { error: i18n.t('errors.networkError') };
+        }
+
+        try {
+            const response = await fetch(this.usageApiEndpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ apiKey: this.apiKey })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(errorData.message || `HTTP ${response.status}`);
+            }
+
+            const data = await response.json();
+            return {
+                character_count: data.character_count || 0,
+                character_limit: data.character_limit || 500000,
+            };
+        } catch (error) {
+            console.error('Error fetching DeepL usage:', error);
+            return { error: i18n.t('errors.translationFailed'), character_count: 0, character_limit: 500000 };
+        }
+    }
+
     /**
      * Generate cache hash for translation request
      */
