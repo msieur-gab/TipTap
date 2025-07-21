@@ -86,7 +86,7 @@ class MessagesTab extends HTMLElement {
                 }
 
                 // 3. Perform the translation.
-                const result = await deepL.translate(textToTranslate, sourceLang, targetLang);
+                const result = await deepL.translate(textToTranslate, targetLang, sourceLang);
 
                 if (result.text) {
                     targetLangTextarea.value = result.text;
