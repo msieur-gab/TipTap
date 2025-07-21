@@ -2,6 +2,7 @@ import { eventBus, EVENTS } from '../utils/events.js';
 import { MessageService } from '../services/messages.js';
 import { deepL } from '../services/deepl.js';
 import { i18n } from '../services/i18n.js';
+import { DatabaseService } from '../services/database.js';
 
 class MessagesTab extends HTMLElement {
     constructor() {
