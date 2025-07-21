@@ -1,25 +1,20 @@
 import { eventBus, EVENTS } from '../utils/events.js';
 import { MessageService } from '../services/messages.js';
+import { deepL } from '../services/deepl.js';
 import { i18n } from '../services/i18n.js';
+import { DatabaseService } from '../services/database.js';
 
 class MessagesTab extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
         this.categories = [];
-        this.editingPhrase = { categoryId: null, phraseId: null };
-        this.boundUpdateContent = this.updateContent.bind(this);
     }
 
     connectedCallback() {
         this.render();
         this.setupEventListeners();
         this.loadCategories();
-        i18n.addListener(this.boundUpdateContent);
-    }
-
-    disconnectedCallback() {
-        i18n.removeListener(this.boundUpdateContent);
     }
 
     setupEventListeners() {
@@ -63,6 +58,49 @@ class MessagesTab extends HTMLElement {
         const phraseItem = button.closest('.phrase-item');
         const phraseId = phraseItem?.dataset.phraseId;
 
+        if (button.classList.contains('translate-btn')) {
+            const form = button.closest('form');
+            const baseLangTextarea = form.querySelector('textarea[name="baseLang"]');
+            const targetLangTextarea = form.querySelector('textarea[name="targetLang"]');
+            const textToTranslate = baseLangTextarea.value;
+
+            if (!textToTranslate) {
+                alert('Please enter text to translate.');
+                return;
+            }
+
+            if (!deepL.isAvailable()) {
+                alert('Translation service is not available. Please check your API key and internet connection.');
+                return;
+            }
+
+            try {
+                // 1. Fetch the latest user settings.
+                const settings = await DatabaseService.getUserSettings();
+                const sourceLang = settings.sourceLanguage;
+                const targetLang = settings.targetLanguage; // Use the global target language
+        
+                if (!sourceLang || !targetLang) {
+                    alert('Source or target language is not set. Please check your settings.');
+                    return;
+                }
+
+                // 3. Perform the translation.
+                const result = await deepL.translate(textToTranslate, targetLang, sourceLang);
+
+                if (result.text) {
+                    targetLangTextarea.value = result.text;
+                } else {
+                    alert('Translation failed: ' + (result.error || 'Unknown error'));
+                }
+
+            } catch (error) {
+                console.error("Translation process failed:", error);
+                alert("An error occurred while trying to translate.");
+            }
+            return;
+        }
+
         if (button.classList.contains('expand-btn')) {
             this.toggleCollapsible(categoryCard);
         } else if (button.classList.contains('edit-category-btn')) {
@@ -73,7 +111,7 @@ class MessagesTab extends HTMLElement {
                 await MessageService.deleteCategory(categoryId);
             }
         } else if (button.classList.contains('edit-phrase-btn')) {
-            this.showEditPhraseModal(categoryId, phraseId);
+            this.editPhrase(phraseItem, categoryId, phraseId);
         } else if (button.classList.contains('delete-phrase-btn')) {
              if (confirm(i18n.t('settings.confirmDelete', { item: 'this phrase' }))) {
                 await MessageService.deletePhrase(categoryId, phraseId);
@@ -104,16 +142,12 @@ class MessagesTab extends HTMLElement {
         });
     }
 
-    showEditPhraseModal(categoryId, phraseId) {
-        const modal = this.shadowRoot.getElementById('edit-phrase-modal');
-        const messageManager = modal.querySelector('message-manager');
-        
-        // Configure MessageManager for editing
-        messageManager.setAttribute('mode', 'edit');
-        messageManager.setAttribute('category-id', categoryId);
-        messageManager.setAttribute('phrase-id', phraseId);
-        
-        modal.showModal();
+    editPhrase(phraseItem, categoryId, phraseId) {
+        const category = this.categories.find(c => c.id === categoryId);
+        const phrase = category?.phrases.find(p => String(p.id) === phraseId);
+        if (!phrase) return;
+
+        phraseItem.innerHTML = this.createEditPhraseForm(phrase);
     }
 
     async handleSubmit(event) {
@@ -128,15 +162,20 @@ class MessagesTab extends HTMLElement {
                 form.reset();
             }
         } else if (form.classList.contains('add-phrase-form')) {
-            const modal = this.shadowRoot.getElementById('add-phrase-modal');
-            const messageManager = modal.querySelector('message-manager');
-            
-            // Configure MessageManager for creating in specific category
             const categoryId = form.closest('.card').dataset.categoryId;
-            messageManager.setAttribute('mode', 'create');
-            messageManager.setAttribute('category-id', categoryId);
-            
-            modal.showModal();
+            const baseLang = form.querySelector('textarea[name="baseLang"]').value;
+            const targetLang = form.querySelector('textarea[name="targetLang"]').value;
+            if (baseLang && targetLang) {
+                await MessageService.addPhrase(categoryId, baseLang, targetLang);
+                form.reset();
+            }
+        } else if (form.classList.contains('edit-phrase-form')) {
+            const phraseId = form.closest('.phrase-item').dataset.phraseId;
+            const categoryId = form.closest('.card').dataset.categoryId;
+            const baseLang = form.querySelector('textarea[name="baseLang"]').value;
+            const targetLang = form.querySelector('textarea[name="targetLang"]').value;
+            await MessageService.updatePhrase(categoryId, phraseId, { baseLang, targetLang });
+            // The CATEGORIES_UPDATED event will trigger a re-render
         }
     }
     
@@ -185,7 +224,16 @@ class MessagesTab extends HTMLElement {
                     <div class="phrases-list">${phrasesHTML}</div>
                     <div class="add-phrase-card">
                         <h4 data-i18n="settings.addMessage">Add New Message</h4>
-                        <form class="add-phrase-form">
+                         <form class="add-phrase-form">
+                            <div class="form-group">
+                                <label data-i18n="settings.messageInYourLanguage">Message in your language</label>
+                                <textarea name="baseLang" class="styled-textarea" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="settings.messageInTargetLanguage">Message in target language</label>
+                                <textarea name="targetLang" class="styled-textarea" required></textarea>
+                                <button type="button" class="secondary-button translate-btn" style="margin-top: 8px;">Translate</button>
+                                </div>
                             <button type="submit" class="primary-button" data-i18n="settings.addMessage">Add Message</button>
                         </form>
                     </div>
@@ -214,32 +262,25 @@ class MessagesTab extends HTMLElement {
             </div>
         `;
     }
-
-    setupModalListeners() {
-        // Add phrase modal
-        const addPhraseModal = this.shadowRoot.getElementById('add-phrase-modal');
-        const addMessageManager = addPhraseModal.querySelector('message-manager');
-        
-        addMessageManager.addEventListener('message-created', () => {
-            addPhraseModal.close();
-        });
-
-        // Edit phrase modal
-        const editPhraseModal = this.shadowRoot.getElementById('edit-phrase-modal');
-        const editMessageManager = editPhraseModal.querySelector('message-manager');
-        
-        editMessageManager.addEventListener('message-updated', () => {
-            editPhraseModal.close();
-        });
-
-        // Close modals on backdrop click
-        [addPhraseModal, editPhraseModal].forEach(modal => {
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.close();
-                }
-            });
-        });
+    
+    createEditPhraseForm(phrase) {
+        return `
+            <form class="edit-phrase-form">
+                 <div class="form-group">
+                    <label data-i18n="settings.messageInYourLanguage">Message in your language</label>
+                    <textarea name="baseLang" class="styled-textarea" required>${phrase.baseLang}</textarea>
+                </div>
+                <div class="form-group">
+                    <label data-i18n="settings.messageInTargetLanguage">Message in target language</label>
+                    <textarea name="targetLang" class="styled-textarea" required>${phrase.targetLang}</textarea>
+                    <button type="button" class="secondary-button translate-btn" style="margin-top: 8px;">Translate</button>
+                    </div>
+                <div class="form-actions">
+                    <button type="button" class="secondary-button" onclick="this.closest('messages-tab').shadowRoot.querySelector('messages-tab').editingPhrase = {categoryId: null, phraseId: null}; this.closest('messages-tab').shadowRoot.querySelector('messages-tab').loadCategories();" data-i18n="common.cancel">Cancel</button>
+                    <button type="submit" class="primary-button" data-i18n="common.save">Save</button>
+                </div>
+            </form>
+        `;
     }
 
     render() {
@@ -263,7 +304,13 @@ class MessagesTab extends HTMLElement {
                 .card { background: var(--container-color); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.25rem; border: 1px solid var(--color-border); }
                 .add-phrase-card { background-color: #f8fafc; margin-top: 1.5rem; padding: 1.5rem; }
                 .add-phrase-card h4 { margin-top: 0; margin-bottom: 1rem; font-size: 1rem; font-weight: 600; }
+                .form-group { margin-bottom: 1rem; }
+                .form-group label { display: block; font-size: 0.875rem; font-weight: 500; color: var(--color-text-light); margin-bottom: 0.5rem; }
+                .styled-textarea { width: 100%; box-sizing: border-box; background-color: #f9fafb; border: 1px solid var(--color-border); border-radius: 12px; padding: 0.875rem 1rem; font-size: 1rem; font-family: inherit; color: var(--color-text-dark); resize: vertical; min-height: 70px; }
+                .styled-textarea:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2); }
                 .primary-button { width: 100%; padding: 1rem; border: none; background-color: var(--color-text-dark); color: var(--primary-text-color); border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 1rem; }
+                .secondary-button { width: 100%; padding: 1rem; border: 1px solid var(--color-border); background-color: transparent; color: var(--color-text-dark); border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 1rem; }
+                .form-actions { display: flex; gap: 1rem; margin-top: 1.5rem; }
                 
                 /* Messages Specifics */
                 .category-header { display: flex; align-items: center; justify-content: space-between; }
@@ -314,15 +361,6 @@ class MessagesTab extends HTMLElement {
                 dialog::backdrop { background-color: rgba(0,0,0,0.4); }
                 dialog h3 { margin-top: 0; }
                 .styled-input { width: 100%; box-sizing: border-box; background-color: #f9fafb; border: 1px solid var(--color-border); border-radius: 12px; padding: 0.875rem 1rem; font-size: 1rem; font-family: inherit; color: var(--color-text-dark); }
-                .form-group { margin-bottom: 1rem; }
-                .form-group label { display: block; font-size: 0.875rem; font-weight: 500; color: var(--color-text-light); margin-bottom: 0.5rem; }
-                .form-actions { display: flex; gap: 1rem; margin-top: 1.5rem; }
-                .secondary-button { width: 100%; padding: 1rem; border: 1px solid var(--color-border); background-color: transparent; color: var(--color-text-dark); border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 1rem; }
-                
-                .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border); }
-                .modal-header h3 { margin: 0; font-size: 1.25rem; font-weight: 600; color: var(--color-text-dark); }
-                .close-button { background: none; border: none; cursor: pointer; padding: 0.5rem; color: var(--color-text-light); border-radius: 6px; }
-                .close-button:hover { background-color: var(--color-border); }
             </style>
 
             <div class="messages-tab-container">
@@ -345,36 +383,7 @@ class MessagesTab extends HTMLElement {
                     </div>
                 </form>
             </dialog>
-
-            <dialog id="add-phrase-modal">
-                <div class="modal-header">
-                    <h3>Add New Message</h3>
-                    <button type="button" class="close-button" onclick="this.closest('dialog').close()">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                        </svg>
-                    </button>
-                </div>
-                <message-manager mode="create"></message-manager>
-            </dialog>
-
-            <dialog id="edit-phrase-modal">
-                <div class="modal-header">
-                    <h3>Edit Message</h3>
-                    <button type="button" class="close-button" onclick="this.closest('dialog').close()">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                        </svg>
-                    </button>
-                </div>
-                <message-manager mode="edit"></message-manager>
-            </dialog>
         `;
-        
-        // Set up modal listeners after render
-        setTimeout(() => this.setupModalListeners(), 0);
     }
 }
 

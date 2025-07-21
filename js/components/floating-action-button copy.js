@@ -1,5 +1,9 @@
 // js/components/floating-action-button.js
 import { eventBus, EVENTS } from '../utils/events.js';
+import { MessageService } from '../services/messages.js';
+import { ProfileService } from '../services/profiles.js';
+import { DatabaseService } from '../services/database.js';
+import { deepL } from '../services/deepl.js';
 import { i18n } from '../services/i18n.js';
 
 class FloatingActionButton extends HTMLElement {
@@ -8,11 +12,17 @@ class FloatingActionButton extends HTMLElement {
         this.attachShadow({ mode: 'open' });
         this.isExpanded = false;
         this.currentKidSelection = null;
+        this.categories = [];
     }
 
     connectedCallback() {
         this.render();
         this.setupEventListeners();
+        this.loadCategories();
+    }
+
+    async loadCategories() {
+        this.categories = await MessageService.getAllCategories();
     }
 
     setupEventListeners() {
@@ -37,6 +47,11 @@ class FloatingActionButton extends HTMLElement {
         // Listen for the custom event from the profile selector
         document.addEventListener('request-profile-modal', () => {
             this.showProfileManagementModal(true); // Pass true to force 'create' mode
+        });
+
+        // Listen for category updates
+        eventBus.on(EVENTS.CATEGORIES_UPDATED, () => {
+            this.loadCategories();
         });
 
         // FAB button interactions
@@ -67,17 +82,96 @@ class FloatingActionButton extends HTMLElement {
     setupModalListeners() {
         // Add Message Modal
         const addMessageModal = this.shadowRoot.getElementById('add-message-modal');
-        const messageManager = addMessageModal.querySelector('message-manager');
-
-        // Listen for message manager events
-        messageManager.addEventListener('message-created', (e) => {
-            addMessageModal.close();
-            this.showSuccessMessage(i18n.t('fab.messageAdded'));
+        const addMessageForm = this.shadowRoot.getElementById('add-message-form');
+        const categorySelect = this.shadowRoot.getElementById('message-category-select');
+        const newCategoryInput = this.shadowRoot.getElementById('new-category-input');
+        
+        // Handle category selection change
+        categorySelect.addEventListener('change', (e) => {
+            const isNewCategory = e.target.value === 'new';
+            newCategoryInput.style.display = isNewCategory ? 'block' : 'none';
+            newCategoryInput.required = isNewCategory;
+        });
+        
+        addMessageForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(addMessageForm);
+            let categoryId = formData.get('category');
+            const baseLang = formData.get('baseLang');
+            const targetLang = formData.get('targetLang');
+            const newCategoryName = formData.get('newCategory');
+            
+            // Create new category if needed
+            if (categoryId === 'new' && newCategoryName) {
+                try {
+                    const newCategory = await MessageService.createCategory(newCategoryName);
+                    categoryId = newCategory.id;
+                } catch (error) {
+                    console.error('Error creating category:', error);
+                    alert('Failed to create category. Please try again.');
+                    return;
+                }
+            }
+            
+            if (categoryId && baseLang && targetLang) {
+                try {
+                    await MessageService.addPhrase(categoryId, baseLang, targetLang);
+                    addMessageModal.close();
+                    addMessageForm.reset();
+                    newCategoryInput.style.display = 'none';
+                    this.showSuccessMessage(i18n.t('fab.messageAdded'));
+                } catch (error) {
+                    console.error('Error adding message:', error);
+                    alert('Failed to add message. Please try again.');
+                }
+            }
         });
 
-        messageManager.addEventListener('message-updated', (e) => {
-            addMessageModal.close();
-            this.showSuccessMessage('Message updated successfully!');
+        // Handle translation
+        const translateBtn = this.shadowRoot.querySelector('.translate-btn');
+        translateBtn.addEventListener('click', async () => {
+            const baseLangTextarea = this.shadowRoot.getElementById('message-base-lang');
+            const targetLangTextarea = this.shadowRoot.getElementById('message-target-lang');
+            const textToTranslate = baseLangTextarea.value;
+
+            if (!textToTranslate.trim()) {
+                alert('Please enter some text in your language first.');
+                return;
+            }
+
+            if (!deepL.isAvailable()) {
+                alert('Translation service is not configured. Please add your API key in the settings.');
+                return;
+            }
+
+            try {
+                const settings = await DatabaseService.getUserSettings();
+                // FIX: Use sourceLanguage instead of parentLanguage
+                const sourceLang = settings.sourceLanguage; 
+                const targetLang = settings.targetLanguage;
+
+                if (!sourceLang || !targetLang) {
+                    alert('Source or target language is not configured. Please complete the onboarding process.');
+                    return;
+                }
+
+                // Show a simple loading state
+                targetLangTextarea.value = 'Translating...';
+
+                const result = await deepL.translate(textToTranslate, targetLang, sourceLang);
+
+                if (result.text) {
+                    targetLangTextarea.value = result.text;
+                } else {
+                    targetLangTextarea.value = ''; // Clear on failure
+                    alert('Translation failed: ' + (result.error || 'Unknown error'));
+                }
+
+            } catch (error) {
+                targetLangTextarea.value = ''; // Clear on error
+                console.error("Translation process failed:", error);
+                alert("An error occurred during translation.");
+            }
         });
 
         // Profile Management Modal
@@ -107,6 +201,16 @@ class FloatingActionButton extends HTMLElement {
             if (this.currentKidSelection?.profileId === e.detail.profileId) {
                 this.currentKidSelection = null;
             }
+        });
+
+        // {name} insertion buttons
+        const insertNameBtns = this.shadowRoot.querySelectorAll('.insert-name-btn');
+        insertNameBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const targetTextarea = e.target.dataset.target;
+                const textarea = this.shadowRoot.getElementById(targetTextarea);
+                this.insertNamePlaceholder(textarea);
+            });
         });
 
         // Close modal on backdrop click
@@ -147,12 +251,14 @@ class FloatingActionButton extends HTMLElement {
 
     showAddMessageModal() {
         const modal = this.shadowRoot.getElementById('add-message-modal');
-        const messageManager = modal.querySelector('message-manager');
+        const categorySelect = modal.querySelector('#message-category-select');
         
-        // Configure for create mode
-        messageManager.setAttribute('mode', 'create');
-        messageManager.removeAttribute('category-id');
-        messageManager.removeAttribute('phrase-id');
+        // Populate categories
+        categorySelect.innerHTML = '<option value="">' + i18n.t('fab.selectCategory') + '</option>' +
+            this.categories.map(cat => 
+                `<option value="${cat.id}">${cat.title}</option>`
+            ).join('') +
+            '<option value="new">➕ ' + i18n.t('fab.createNewCategory') + '</option>';
         
         modal.showModal();
     }
@@ -173,6 +279,19 @@ class FloatingActionButton extends HTMLElement {
         }
     
         modal.showModal();
+    }
+
+    insertNamePlaceholder(textarea) {
+        const cursorPos = textarea.selectionStart;
+        const textBefore = textarea.value.substring(0, cursorPos);
+        const textAfter = textarea.value.substring(textarea.selectionEnd);
+        
+        textarea.value = textBefore + '{name}' + textAfter;
+        
+        // Position cursor after the inserted {name}
+        const newCursorPos = cursorPos + 6; // 6 = length of '{name}'
+        textarea.setSelectionRange(newCursorPos, newCursorPos);
+        textarea.focus();
     }
 
     showSuccessMessage(message) {
@@ -242,6 +361,10 @@ class FloatingActionButton extends HTMLElement {
                 #main-fab {
                     background-color: var(--color-text-dark);
                     color: var(--primary-text-color);
+                }
+
+                #main-fab.expanded {
+                    // transform: rotate(45deg);
                 }
 
                 .secondary-fab {
@@ -324,6 +447,114 @@ class FloatingActionButton extends HTMLElement {
                     background-color: var(--color-border);
                 }
 
+                dialog h3 {
+                    margin-top: 0;
+                    margin-bottom: 1.5rem;
+                    font-size: 1.25rem;
+                    font-weight: 600;
+                    color: var(--color-text-dark);
+                }
+
+                .form-group {
+                    margin-bottom: 1rem;
+                }
+
+                .form-group label {
+                    display: block;
+                    font-size: 0.875rem;
+                    font-weight: 500;
+                    color: var(--color-text-light);
+                    margin-bottom: 0.5rem;
+                }
+
+                .styled-input, .styled-textarea, .styled-select {
+                    width: 100%;
+                    box-sizing: border-box;
+                    background-color: #f9fafb;
+                    border: 1px solid var(--color-border);
+                    border-radius: 12px;
+                    padding: 0.875rem 1rem;
+                    font-size: 1rem;
+                    font-family: inherit;
+                    color: var(--color-text-dark);
+                }
+
+                .styled-textarea {
+                    resize: vertical;
+                    min-height: 80px;
+                }
+
+                .styled-input:focus, .styled-textarea:focus, .styled-select:focus {
+                    outline: none;
+                    border-color: var(--primary-color);
+                    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+                }
+
+                .input-with-button {
+                    position: relative;
+                }
+
+                .insert-name-btn {
+                    position: absolute;
+                    top: 0.5rem;
+                    right: 0.5rem;
+                    background-color: var(--primary-color);
+                    color: white;
+                    border: none;
+                    border-radius: 6px;
+                    padding: 0.25rem 0.5rem;
+                    font-size: 0.75rem;
+                    cursor: pointer;
+                    z-index: 10;
+                    opacity: 0.8;
+                    transition: opacity 0.2s ease;
+                }
+
+                .insert-name-btn:hover {
+                    opacity: 1;
+                }
+
+                .helper-text {
+                    font-size: 0.75rem;
+                    color: var(--color-text-light);
+                    margin-top: 0.25rem;
+                    font-style: italic;
+                }
+
+                #new-category-input {
+                    display: none;
+                }
+
+                .form-actions {
+                    display: flex;
+                    gap: 0.75rem;
+                    margin-top: 1.5rem;
+                }
+
+                .primary-button {
+                    flex: 1;
+                    padding: 1rem;
+                    border: none;
+                    background-color: var(--color-text-dark);
+                    color: var(--primary-text-color);
+                    border-radius: 12px;
+                    cursor: pointer;
+                    font-weight: 600;
+                    font-size: 1rem;
+                }
+
+                .secondary-button {
+                    flex: 1;
+                    padding: 1rem;
+                    border: 1px solid var(--color-border);
+                    background-color: transparent;
+                    color: var(--color-text-dark);
+                    border-radius: 12px;
+                    cursor: pointer;
+                    font-weight: 600;
+                    font-size: 1rem;
+                }
+
                 /* Success Toast */
                 #success-toast {
                     position: fixed;
@@ -375,16 +606,44 @@ class FloatingActionButton extends HTMLElement {
             </div>
 
             <dialog id="add-message-modal">
-                <div class="modal-header">
-                    <h3>Add New Message</h3>
-                    <button type="button" class="close-button" onclick="this.closest('dialog').close()">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                        </svg>
-                    </button>
-                </div>
-                <message-manager mode="create"></message-manager>
+                <h3>Add New Message</h3>
+                <form id="add-message-form">
+                    <div class="form-group">
+                        <label for="message-category-select">Category</label>
+                        <select id="message-category-select" name="category" class="styled-select" required>
+                            <option value="">Select Category</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="new-category-input">
+                        <label for="new-category-name">New Category Name</label>
+                        <input type="text" id="new-category-name" name="newCategory" class="styled-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-base-lang">Message in your language</label>
+                        <div class="input-with-button">
+                            <textarea id="message-base-lang" name="baseLang" class="styled-textarea" required></textarea>
+                            <button type="button" class="insert-name-btn" data-target="message-base-lang">{name}</button>
+                        </div>
+                        <div class="helper-text">Use {name} to insert the kid's name</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-target-lang" data-i18n="settings.messageInTargetLanguage">Message in target language</label>
+                        <div class="input-with-button">
+                            <textarea id="message-target-lang" name="targetLang" class="styled-textarea" required></textarea>
+                            <button type="button" class="insert-name-btn" data-target="message-target-lang">{name}</button>
+                        </div>
+                        <div class="helper-text" data-i18n="fab.nameHelp">Use {name} to insert the kid's name</div>
+                    </div>
+                    <div class="form-group" style="margin-top: -0.5rem;">
+                        <button type="button" class="secondary-button translate-btn" style="width: auto; padding: 0.5rem 1rem; font-size: 0.875rem;">
+                            Translate
+                        </button>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="secondary-button" onclick="this.closest('dialog').close()">Cancel</button>
+                        <button type="submit" class="primary-button">Add Message</button>
+                    </div>
+                </form>
             </dialog>
 
             <dialog id="profile-management-modal" class="large-modal">
