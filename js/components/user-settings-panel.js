@@ -37,11 +37,36 @@ class UserSettingsPanel extends HTMLElement {
         
         if (this.settings.deeplApiKey) {
             await deepL.initialize(this.settings.deeplApiKey);
-            this.usage = await deepL.getUsage();
+            try {
+                // FIX: Call getUsage() correctly and handle the response
+                const usageData = await deepL.getUsage();
+                console.log('DeepL usage data:', usageData);
+                
+                // Handle both possible response formats
+                if (usageData && typeof usageData === 'object') {
+                    if ('characterCount' in usageData) {
+                        // New format
+                        this.usage = usageData;
+                    } else if ('character_count' in usageData) {
+                        // Old format - convert it
+                        this.usage = {
+                            character_count: usageData.character_count,
+                            character_limit: usageData.character_limit
+                        };
+                    } else {
+                        this.usage = { character_count: 0, character_limit: 500000 };
+                    }
+                } else {
+                    this.usage = { character_count: 0, character_limit: 500000 };
+                }
+            } catch (error) {
+                console.error('Failed to load DeepL usage:', error);
+                this.usage = { character_count: 0, character_limit: 500000 };
+            }
         } else {
             this.usage = { character_count: 0, character_limit: 500000 };
         }
-
+    
         this.render(); // Re-render with the loaded data
     }
 
