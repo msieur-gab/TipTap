@@ -4,17 +4,7 @@ import { eventBus, EVENTS } from '../utils/events.js';
 import { generateId } from '../utils/helpers.js';
 
 export const MessageService = {
-    // async initialize() {
-    //     const categories = await DatabaseService.getAllCategories();
-    //     if (categories.length === 0) {
-    //         // Initialize with default categories
-    //         for (const category of DEFAULT_CATEGORIES) {
-    //             await DatabaseService.put('categories', category);
-    //         }
-    //     }
-    //     eventBus.emit(EVENTS.CATEGORIES_UPDATED);
-    // },
-
+  
     async getAllCategories() {
         return await DatabaseService.getAllCategories();
     },
