@@ -1,8 +1,9 @@
+// js/components/floating-action-button.js
 import { eventBus, EVENTS } from '../utils/events.js';
 import { MessageService } from '../services/messages.js';
 import { ProfileService } from '../services/profiles.js';
-import { DatabaseService } from '../services/database.js'; 
-import { deepL } from '../services/deepl.js'; 
+import { DatabaseService } from '../services/database.js';
+import { deepL } from '../services/deepl.js';
 import { i18n } from '../services/i18n.js';
 
 class FloatingActionButton extends HTMLElement {
@@ -145,7 +146,8 @@ class FloatingActionButton extends HTMLElement {
 
             try {
                 const settings = await DatabaseService.getUserSettings();
-                const sourceLang = settings.parentLanguage;
+                // FIX: Use sourceLanguage instead of parentLanguage
+                const sourceLang = settings.sourceLanguage; 
                 const targetLang = settings.targetLanguage;
 
                 if (!sourceLang || !targetLang) {
@@ -156,7 +158,7 @@ class FloatingActionButton extends HTMLElement {
                 // Show a simple loading state
                 targetLangTextarea.value = 'Translating...';
 
-                const result = await deepL.translate(textToTranslate, sourceLang, targetLang);
+                const result = await deepL.translate(textToTranslate, targetLang, sourceLang);
 
                 if (result.text) {
                     targetLangTextarea.value = result.text;
@@ -171,8 +173,6 @@ class FloatingActionButton extends HTMLElement {
                 alert("An error occurred during translation.");
             }
         });
-
-        // Add Nickname Modal - REMOVED (handled by ProfileManager)
 
         // Profile Management Modal
         const profileModal = this.shadowRoot.getElementById('profile-management-modal');
@@ -280,24 +280,6 @@ class FloatingActionButton extends HTMLElement {
     
         modal.showModal();
     }
-
-    // showProfileManagementModal() {
-    //     const modal = this.shadowRoot.getElementById('profile-management-modal');
-    //     const profileManager = modal.querySelector('profile-manager');
-        
-    //     // Configure based on current selection
-    //     if (this.currentKidSelection && this.currentKidSelection.profileId) {
-    //         // Edit existing profile
-    //         profileManager.setAttribute('mode', 'edit');
-    //         profileManager.setAttribute('profile-id', this.currentKidSelection.profileId);
-    //     } else {
-    //         // Create new profile
-    //         profileManager.setAttribute('mode', 'create');
-    //         profileManager.removeAttribute('profile-id');
-    //     }
-        
-    //     modal.showModal();
-    // }
 
     insertNamePlaceholder(textarea) {
         const cursorPos = textarea.selectionStart;
@@ -623,7 +605,6 @@ class FloatingActionButton extends HTMLElement {
                 </button>
             </div>
 
-            <!-- Add Message Modal -->
             <dialog id="add-message-modal">
                 <h3>Add New Message</h3>
                 <form id="add-message-form">
@@ -665,7 +646,6 @@ class FloatingActionButton extends HTMLElement {
                 </form>
             </dialog>
 
-            <!-- Profile Management Modal -->
             <dialog id="profile-management-modal" class="large-modal">
                 <div class="modal-header">
                     <h3>Profile Management</h3>
@@ -679,7 +659,6 @@ class FloatingActionButton extends HTMLElement {
                 <profile-manager></profile-manager>
             </dialog>
 
-            <!-- Success Toast -->
             <div id="success-toast"></div>
         `;
     }
