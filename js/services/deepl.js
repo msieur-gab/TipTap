@@ -4,8 +4,73 @@ class DeepLService {
         this.baseUrl = '/.netlify/functions';
     }
 
-    async translateText(text, targetLanguage, sourceLanguage = 'auto', apiKey) {
-        if (!apiKey) {
+    async initialize(apiKey) {
+        this.apiKey = apiKey;
+        console.log('DeepL initialized with API key');
+    }
+
+    // Add this method for backward compatibility  
+    isAvailable() {
+        return !!this.apiKey;
+    }
+
+
+    async getUsage(apiKey = null) {
+        const keyToUse = apiKey || this.apiKey;
+        
+        if (!keyToUse) {
+            throw new Error('DeepL API key is required');
+        }
+
+        try {
+            console.log('Requesting DeepL usage for key ending with:', keyToUse.slice(-4));
+            
+            const response = await fetch(`${this.baseUrl}/deepl-usage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ apiKey: keyToUse })
+            });
+
+            console.log('Usage response status:', response.status);
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error('Usage API error:', errorData);
+                throw new Error(errorData.error || `Usage request failed: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log('Raw usage data received:', data);
+
+            // Parse the data according to DeepL API specification
+            const characterCount = parseInt(data.character_count) || 0;
+            const characterLimit = parseInt(data.character_limit) || 0;
+            
+            const usageData = {
+                character_count: characterCount,  // Keep old format for compatibility
+                character_limit: characterLimit,  // Keep old format for compatibility
+                characterCount,                   // New format
+                characterLimit,                   // New format
+                usagePercentage: characterLimit > 0 ? 
+                    Math.round((characterCount / characterLimit) * 100) : 0,
+                remainingCharacters: Math.max(0, characterLimit - characterCount)
+            };
+
+            console.log('Processed usage data:', usageData);
+            return usageData;
+
+        } catch (error) {
+            console.error('DeepL usage error:', error);
+            throw error;
+        }
+    }
+
+    async translateText(text, targetLanguage, sourceLanguage = 'auto', apiKey = null) {
+        const keyToUse = apiKey || this.apiKey;
+        
+        if (!keyToUse) {
             throw new Error('DeepL API key is required for translation');
         }
 
@@ -19,7 +84,7 @@ class DeepLService {
                     text,
                     target_lang: targetLanguage,
                     source_lang: sourceLanguage,
-                    apiKey
+                    apiKey: keyToUse
                 })
             });
 
@@ -40,54 +105,6 @@ class DeepLService {
         }
     }
 
-    async getUsage(apiKey) {
-        if (!apiKey) {
-            throw new Error('DeepL API key is required');
-        }
-
-        try {
-            console.log('Requesting DeepL usage for key ending with:', apiKey.slice(-4));
-            
-            const response = await fetch(`${this.baseUrl}/deepl-usage`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ apiKey })
-            });
-
-            console.log('Usage response status:', response.status);
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                console.error('Usage API error:', errorData);
-                throw new Error(errorData.error || `Usage request failed: ${response.status}`);
-            }
-
-            const data = await response.json();
-            console.log('Raw usage data received:', data);
-
-            // Parse the data according to DeepL API specification
-            const characterCount = parseInt(data.character_count) || 0;
-            const characterLimit = parseInt(data.character_limit) || 0;
-            
-            const usageData = {
-                characterCount,
-                characterLimit,
-                usagePercentage: characterLimit > 0 ? 
-                    Math.round((characterCount / characterLimit) * 100) : 0,
-                remainingCharacters: Math.max(0, characterLimit - characterCount)
-            };
-
-            console.log('Processed usage data:', usageData);
-            return usageData;
-
-        } catch (error) {
-            console.error('DeepL usage error:', error);
-            throw error;
-        }
-    }
-
     formatUsage(usageData) {
         if (!usageData) return null;
         
@@ -101,6 +118,8 @@ class DeepLService {
         };
     }
 }
+
+
 
 // Create and export singleton
 const deeplService = new DeepLService();
