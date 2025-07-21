@@ -1,3 +1,4 @@
+// netlify/functions/translate.js
 exports.handler = async function(event, context) {
     // Only allow POST requests
     if (event.httpMethod !== 'POST') {
@@ -5,10 +6,9 @@ exports.handler = async function(event, context) {
     }
 
     try {
-        // **FIX:** Read the apiKey from the request body sent by the client
-        const { text, target_lang, source_lang, apiKey } = JSON.parse(event.body);
+        // FIX: Destructure the new parameters from the request body
+        const { text, target_lang, source_lang, apiKey, tag_handling, ignore_tags } = JSON.parse(event.body);
 
-        // Check if the user-provided API key is present
         if (!apiKey) {
             return { statusCode: 400, body: JSON.stringify({ error: 'API key is missing.' }) };
         }
@@ -18,14 +18,15 @@ exports.handler = async function(event, context) {
         const response = await fetch(apiEndpoint, {
             method: 'POST',
             headers: {
-                // Use the user's API key for authorization
                 'Authorization': `DeepL-Auth-Key ${apiKey}`,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                text: [text],
+                text: [text], // DeepL API expects an array of strings
                 target_lang: target_lang,
                 source_lang: source_lang,
+                tag_handling: tag_handling, // Pass the tag handling option
+                ignore_tags: ignore_tags ? [ignore_tags] : undefined // Pass the tags to ignore
             }),
         });
 

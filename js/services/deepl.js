@@ -75,16 +75,19 @@ class DeepLService {
         }
 
         try {
+            // Protect the {name} placeholder using XML tags
+            const protectedText = text.replace(/{name}/g, '<notranslate>{name}</notranslate>');
+
             const response = await fetch(`${this.baseUrl}/translate`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    text,
+                    text: protectedText,
                     target_lang: targetLanguage,
                     source_lang: sourceLanguage,
-                    apiKey: keyToUse
+                    apiKey: keyToUse,
+                    tag_handling: 'xml',
+                    ignore_tags: 'notranslate'
                 })
             });
 
@@ -94,9 +97,13 @@ class DeepLService {
             }
 
             const data = await response.json();
-            // FIX: Return the text directly for easier use in components
+            let translatedText = data.translations[0].text;
+            
+            // The API should return the tag as is, but we ensure it's clean just in case.
+            translatedText = translatedText.replace(/<\/?notranslate>/g, '');
+
             return {
-                text: data.translations[0].text,
+                text: translatedText,
                 detectedSourceLanguage: data.translations[0].detected_source_language
             };
 
