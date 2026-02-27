@@ -14,7 +14,7 @@ class MessageManager extends HTMLElement {
         this.phraseId = null;
         this.phrase = null;
         this.categories = [];
-        this.currentSelection = { baseLang_value: '', targetLang_value: '' };
+        this.currentSelection = { sourceLang_value: '', targetLang_value: '' };
         this.boundUpdateContent = this.updateContent.bind(this);
     }
 
@@ -71,15 +71,15 @@ class MessageManager extends HTMLElement {
             const { profile, nickname } = data;
             if (nickname) {
                 this.currentSelection = {
-                    baseLang_value: nickname.baseLang_value || nickname.display,
+                    sourceLang_value: nickname.sourceLang_value || nickname.display,
                     targetLang_value: nickname.targetLang_value || nickname.display
                 };
             } else if (profile) {
                 if (profile.id === 'general') {
-                    this.currentSelection = { baseLang_value: '', targetLang_value: '' };
+                    this.currentSelection = { sourceLang_value: '', targetLang_value: '' };
                 } else {
                     this.currentSelection = {
-                        baseLang_value: profile.originalName,
+                        sourceLang_value: profile.originalName,
                         targetLang_value: profile.translatedName
                     };
                 }
@@ -129,7 +129,7 @@ class MessageManager extends HTMLElement {
         const formData = new FormData(form);
         
         let categoryId = formData.get('category');
-        const baseLang = formData.get('baseLang');
+        const sourceLang = formData.get('sourceLang');
         const targetLang = formData.get('targetLang');
         const newCategoryName = formData.get('newCategory');
         
@@ -145,24 +145,24 @@ class MessageManager extends HTMLElement {
             }
         }
         
-        if (!categoryId || !baseLang || !targetLang) {
+        if (!categoryId || !sourceLang || !targetLang) {
             alert('Please fill in all required fields');
             return;
         }
 
         try {
             if (this.mode === 'create') {
-                await MessageService.addPhrase(categoryId, baseLang, targetLang);
+                await MessageService.addPhrase(categoryId, sourceLang, targetLang);
                 this.dispatchEvent(new CustomEvent('message-created', {
-                    detail: { categoryId, baseLang, targetLang }
+                    detail: { categoryId, sourceLang, targetLang }
                 }));
             } else if (this.mode === 'edit') {
-                await MessageService.updatePhrase(this.categoryId, this.phraseId, { 
-                    baseLang, 
-                    targetLang 
+                await MessageService.updatePhrase(this.categoryId, this.phraseId, {
+                    sourceLang,
+                    targetLang
                 });
                 this.dispatchEvent(new CustomEvent('message-updated', {
-                    detail: { categoryId: this.categoryId, phraseId: this.phraseId, baseLang, targetLang }
+                    detail: { categoryId: this.categoryId, phraseId: this.phraseId, sourceLang, targetLang }
                 }));
             }
             
@@ -180,9 +180,9 @@ class MessageManager extends HTMLElement {
     }
 
     async handleTranslation() {
-        const baseLangTextarea = this.shadowRoot.getElementById('message-base-lang');
+        const sourceLangTextarea = this.shadowRoot.getElementById('message-base-lang');
         const targetLangTextarea = this.shadowRoot.getElementById('message-target-lang');
-        const textToTranslate = baseLangTextarea.value;
+        const textToTranslate = sourceLangTextarea.value;
 
         if (!textToTranslate.trim()) {
             alert(i18n.t('fab.nameHelp')); // Reuse existing translation
@@ -279,7 +279,7 @@ class MessageManager extends HTMLElement {
 
     render() {
         const isEditing = this.mode === 'edit';
-        const phrase = this.phrase || { baseLang: '', targetLang: '' };
+        const phrase = this.phrase || { sourceLang: '', targetLang: '' };
         
         this.shadowRoot.innerHTML = `
             <style>
@@ -424,7 +424,7 @@ class MessageManager extends HTMLElement {
                 <div class="form-group">
                     <label for="message-base-lang" data-i18n="settings.messageInYourLanguage">Message in your language</label>
                     <div class="input-with-button">
-                        <textarea id="message-base-lang" name="baseLang" class="styled-textarea" required>${phrase.baseLang}</textarea>
+                        <textarea id="message-base-lang" name="sourceLang" class="styled-textarea" required>${phrase.sourceLang}</textarea>
                         <button type="button" class="insert-name-btn" data-action="insert-name-base">{name}</button>
                     </div>
                     <div class="helper-text" data-i18n="fab.nameHelp">Use {name} to insert the name</div>

@@ -156,7 +156,7 @@ class ProfilesTab extends HTMLElement {
             const nicknameId = this.editingNickname.nicknameId;
             const display = form.querySelector('input[name="nickname_display"]').value;
             const translation = form.querySelector('input[name="nickname_translation"]').value;
-            await ProfileService.updateNickname(profileId, nicknameId, { display, baseLang_value: display, targetLang_value: translation });
+            await ProfileService.updateNickname(profileId, nicknameId, { display, sourceLang_value: display, targetLang_value: translation });
             this.editingNickname = { profileId: null, nicknameId: null };
             this.renderProfiles();
         }

@@ -11,6 +11,7 @@ class TipTapApp extends Dexie {
             categories: 'id, title, order, phrases',
             translations: 'hash, sourceText, sourceLang, targetLang, translatedText, timestamp'
         });
+
     }
 }
 

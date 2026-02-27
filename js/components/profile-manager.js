@@ -174,7 +174,7 @@ class ProfileManager extends HTMLElement {
             if (this.editingNickname) {
                 await ProfileService.updateNickname(this.profileId, this.editingNickname, {
                     display: nickname,
-                    baseLang_value: nickname,
+                    sourceLang_value: nickname,
                     targetLang_value: translation
                 });
                 this.editingNickname = null;

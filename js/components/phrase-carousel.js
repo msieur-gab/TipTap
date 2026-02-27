@@ -7,7 +7,7 @@ class PhraseCarousel extends HTMLElement {
     constructor() {
         super();
         this.categories = [];
-        this.currentSelection = { baseLang_value: '', targetLang_value: '' };
+        this.currentSelection = { sourceLang_value: '', targetLang_value: '' };
         this.currentCategoryIndex = 0;
         this.observer = null;
     }
@@ -64,16 +64,16 @@ class PhraseCarousel extends HTMLElement {
             if (nickname) {
                 // If a nickname is selected, use its values
                 this.currentSelection = {
-                    baseLang_value: nickname.baseLang_value || nickname.display,
+                    sourceLang_value: nickname.sourceLang_value || nickname.display,
                     targetLang_value: nickname.targetLang_value || nickname.display
                 };
             } else if (profile) {
                 // Otherwise, use the main profile's values
                 if (profile.id === 'general') {
-                    this.currentSelection = { baseLang_value: '', targetLang_value: '' };
+                    this.currentSelection = { sourceLang_value: '', targetLang_value: '' };
                 } else {
                     this.currentSelection = {
-                        baseLang_value: profile.originalName,
+                        sourceLang_value: profile.originalName,
                         targetLang_value: profile.translatedName
                     };
                 }
@@ -162,15 +162,15 @@ class PhraseCarousel extends HTMLElement {
     updatePhraseDisplay() {
         const phrases = document.querySelectorAll('.phrase-card');
         phrases.forEach(phraseEl => {
-            const baseLangTemplate = phraseEl.dataset.baseLangTemplate;
+            const sourceLangTemplate = phraseEl.dataset.sourceLangTemplate;
             const targetLangTemplate = phraseEl.dataset.targetLangTemplate;
             
             const baseDisplayEl = phraseEl.querySelector('.card__text--base');
             const targetDisplayEl = phraseEl.querySelector('.card__text--target');
 
-            if (baseDisplayEl && baseLangTemplate) {
-                const replacements = { name: this.currentSelection.baseLang_value };
-                baseDisplayEl.textContent = replaceNameTemplate(baseLangTemplate, replacements);
+            if (baseDisplayEl && sourceLangTemplate) {
+                const replacements = { name: this.currentSelection.sourceLang_value };
+                baseDisplayEl.textContent = replaceNameTemplate(sourceLangTemplate, replacements);
             }
             if (targetDisplayEl && targetLangTemplate) {
                 const replacements = { name: this.currentSelection.targetLang_value };
@@ -332,7 +332,7 @@ class PhraseCarousel extends HTMLElement {
     createPhraseCard(phrase) {
         const card = document.createElement('div');
         card.className = 'phrase-card';
-        card.dataset.baseLangTemplate = phrase.baseLang;
+        card.dataset.sourceLangTemplate = phrase.sourceLang;
         card.dataset.targetLangTemplate = phrase.targetLang;
         card.style.cssText = `
             background-color: var(--color-surface);
@@ -348,7 +348,7 @@ class PhraseCarousel extends HTMLElement {
         
         card.innerHTML = `
             <div class="card__text-wrapper" style="min-width: 0;">
-                <p class="card__text--base" style="font-size: 1rem; color: var(--color-text-dark); margin: 0 0 0.25rem 0; overflow-wrap: break-word;">${phrase.baseLang}</p>
+                <p class="card__text--base" style="font-size: 1rem; color: var(--color-text-dark); margin: 0 0 0.25rem 0; overflow-wrap: break-word;">${phrase.sourceLang}</p>
                 <p class="card__text--target" style="font-size: 0.9rem; color: var(--color-text-light); margin: 0; overflow-wrap: break-word;">${phrase.targetLang}</p>
             </div>
             <button class="card__copy-button" title="Copy" style="flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--color-border); background-color: #f9fafb; color: var(--color-text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background-color 0.2s ease;">

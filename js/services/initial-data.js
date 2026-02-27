@@ -51,7 +51,7 @@ export const InitialDataService = {
                 const childPhrase = childPhrases[i];
                 return {
                     id: parentPhrase.id,
-                    baseLang: parentPhrase.text,
+                    sourceLang: parentPhrase.text,
                     targetLang: childPhrase ? childPhrase.text : parentPhrase.text
                 };
             });
