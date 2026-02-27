@@ -15,7 +15,10 @@
       "close": "Schließen",
       "confirm": "Bestätigen",
       "yes": "Ja",
-      "no": "Nein"
+      "no": "Nein",
+      "saved": "Gespeichert",
+      "translating": "Übersetzung läuft...",
+      "translate": "Übersetzen"
     },
     "onboarding": {
       "step1": {
@@ -53,10 +56,6 @@
         "apiKeyHelp": "Holen Sie sich Ihren kostenlosen API-Schlüssel von DeepL (500.000 Zeichen/Monat kostenlos)"
       },
       "step7": {
-        "title": "Ihr Profil",
-        "description": "Dies hilft, die App für Sie zu personalisieren."
-      },
-      "step8": {
         "title": "Alles bereit!",
         "description": "Ihre Familien-Nachrichten-App ist bereit. Sie können jederzeit weitere Kinder hinzufügen und Nachrichten anpassen."
       },
@@ -156,6 +155,7 @@
       "title": "Einstellungen",
       "profiles": "Profile",
       "messages": "Nachrichten",
+      "more": "Mehr",
       "addProfile": "Profil hinzufügen",
       "addCategory": "Kategorie hinzufügen",
       "addMessage": "Nachricht hinzufügen",
@@ -169,7 +169,27 @@
       "messageInYourLanguage": "Nachricht in deiner Sprache (benutze {name} für den Namen)...",
       "messageInTargetLanguage": "Nachricht in der Zielsprache (benutze {name} für den Namen)...",
       "confirmDelete": "Bist du sicher, dass du das löschen möchtest?",
-      "selectCountry": "-- Land auswählen --"
+      "selectCountry": "-- Land auswählen --",
+      "dataManagement": "Datenverwaltung",
+      "exportData": "Daten exportieren",
+      "exportDescription": "Laden Sie alle Ihre Profile, Nachrichten und Einstellungen als Sicherungsdatei herunter.",
+      "importData": "Daten importieren",
+      "importDescription": "Aus einer Sicherungsdatei wiederherstellen. Dies ersetzt alle aktuellen Daten.",
+      "importConfirm": "Dies wird alle Ihre aktuellen Daten ersetzen. Sind Sie sicher?",
+      "translationService": "Übersetzungsdienst",
+      "enableTranslation": "Übersetzung aktivieren",
+      "enableTranslationDesc": "DeepL für automatische Übersetzungen verwenden",
+      "apiKey": "DeepL API-Schlüssel",
+      "monthlyUsage": "Monatliche Nutzung",
+      "usageError": "Nutzungsdaten konnten nicht abgerufen werden.",
+      "usageCounter": "{count} / {limit} Zeichen",
+      "manageProfiles": "Profile verwalten",
+      "saveChanges": "Änderungen speichern",
+      "createProfile": "Profil erstellen",
+      "deleteProfile": "Profil löschen",
+      "selectTimezone": "Zeitzone auswählen",
+      "newNickname": "Neuer Spitzname",
+      "updateMessage": "Nachricht aktualisieren"
     },
     "time": {
       "profileTime": "Uhrzeit bei {name}",
@@ -184,6 +204,21 @@
       "profileNotFound": "Profil nicht gefunden",
       "categoryNotFound": "Kategorie nicht gefunden",
       "translationFailed": "Übersetzung fehlgeschlagen",
-      "networkError": "Netzwerkfehler. Bitte überprüfe deine Verbindung."
+      "networkError": "Netzwerkfehler. Bitte überprüfe deine Verbindung.",
+      "fillRequired": "Bitte füllen Sie alle Pflichtfelder aus.",
+      "translationNotConfigured": "Der Übersetzungsdienst ist nicht konfiguriert. Bitte fügen Sie Ihren API-Schlüssel in den Einstellungen hinzu.",
+      "languageNotConfigured": "Quell- oder Zielsprache ist nicht konfiguriert. Bitte schließen Sie die Einrichtung ab.",
+      "imageError": "Bildverarbeitung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+      "loadingFailed": "Fehler beim Laden"
+    },
+    "fab": {
+      "addMessage": "Nachricht hinzufügen",
+      "editKid": "Kind bearbeiten",
+      "selectCategory": "Kategorie auswählen",
+      "createNewCategory": "➕ Neue Kategorie erstellen",
+      "newCategoryName": "Name der neuen Kategorie",
+      "selectKidFirst": "Bitte wählen Sie zuerst ein Kind aus",
+      "messageAdded": "Nachricht erfolgreich hinzugefügt!",
+      "nameHelp": "Verwenden Sie {name} um den Namen des Kindes einzufügen"
     }
   }

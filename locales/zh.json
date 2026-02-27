@@ -15,7 +15,10 @@
       "close": "关闭",
       "confirm": "确认",
       "yes": "是",
-      "no": "否"
+      "no": "否",
+      "saved": "已保存",
+      "translating": "翻译中...",
+      "translate": "翻译"
     },
     "onboarding": {
       "step1": {
@@ -53,10 +56,6 @@
         "apiKeyHelp": "从 DeepL 获取您的免费 API 密钥（每月 500,000 个字符免费）"
       },
       "step7": {
-        "title": "您的个人资料",
-        "description": "这有助于为您个性化应用。"
-      },
-      "step8": {
         "title": "一切就绪！",
         "description": "您的家庭消息应用已准备就绪。您可以随时添加更多的孩子和自定义消息。"
       },
@@ -156,6 +155,7 @@
       "title": "设置",
       "profiles": "个人资料",
       "messages": "消息",
+      "more": "更多",
       "addProfile": "添加个人资料",
       "addCategory": "添加类别",
       "addMessage": "添加消息",
@@ -169,7 +169,27 @@
       "messageInYourLanguage": "用您的语言发送消息（使用 {name} 代表名字）...",
       "messageInTargetLanguage": "用目标语言发送消息（使用 {name} 代表名字）...",
       "confirmDelete": "您确定要删除吗？",
-      "selectCountry": "-- 选择国家 --"
+      "selectCountry": "-- 选择国家 --",
+      "dataManagement": "数据管理",
+      "exportData": "导出数据",
+      "exportDescription": "将所有个人资料、消息和设置下载为备份文件。",
+      "importData": "导入数据",
+      "importDescription": "从备份文件恢复。这将替换所有当前数据。",
+      "importConfirm": "这将替换您的所有当前数据。您确定吗？",
+      "translationService": "翻译服务",
+      "enableTranslation": "启用翻译",
+      "enableTranslationDesc": "使用 DeepL 进行自动翻译",
+      "apiKey": "DeepL API 密钥",
+      "monthlyUsage": "月度使用量",
+      "usageError": "无法获取使用数据。",
+      "usageCounter": "{count} / {limit} 字符",
+      "manageProfiles": "管理个人资料",
+      "saveChanges": "保存更改",
+      "createProfile": "创建个人资料",
+      "deleteProfile": "删除个人资料",
+      "selectTimezone": "选择时区",
+      "newNickname": "新昵称",
+      "updateMessage": "更新消息"
     },
     "time": {
       "profileTime": "{name}的时间",
@@ -184,6 +204,21 @@
       "profileNotFound": "未找到个人资料",
       "categoryNotFound": "未找到类别",
       "translationFailed": "翻译失败",
-      "networkError": "网络错误。请检查您的连接。"
+      "networkError": "网络错误。请检查您的连接。",
+      "fillRequired": "请填写所有必填项。",
+      "translationNotConfigured": "翻译服务未配置。请在设置中添加您的 API 密钥。",
+      "languageNotConfigured": "源语言或目标语言未配置。请完成初始设置。",
+      "imageError": "图片处理失败。请重试。",
+      "loadingFailed": "加载失败"
+    },
+    "fab": {
+      "addMessage": "添加消息",
+      "editKid": "编辑孩子",
+      "selectCategory": "选择类别",
+      "createNewCategory": "➕ 创建新类别",
+      "newCategoryName": "新类别名称",
+      "selectKidFirst": "请先选择一个孩子",
+      "messageAdded": "消息添加成功！",
+      "nameHelp": "使用 {name} 插入孩子的名字"
     }
   }

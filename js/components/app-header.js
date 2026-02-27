@@ -302,7 +302,7 @@ class AppHeader extends HTMLElement {
 
                     </div>
                     <div class="card-text-container">
-                        <span class="card-title">Profile's Time</span>
+                        <span class="card-title">${i18n.t('time.profileTime', { name: '' })}</span>
                         <div class="card-content">--:--</div>
                     </div>
                 </div>
@@ -313,7 +313,7 @@ class AppHeader extends HTMLElement {
 
                     </div>
                     <div class="card-text-container">
-                        <span class="card-title">Birthday In</span>
+                        <span class="card-title">${i18n.t('time.birthday', { name: '' })}</span>
                         <div class="card-content">...</div>
                     </div>
                 </div>

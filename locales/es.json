@@ -15,7 +15,10 @@
       "close": "Cerrar",
       "confirm": "Confirmar",
       "yes": "Sí",
-      "no": "No"
+      "no": "No",
+      "saved": "Guardado",
+      "translating": "Traduciendo...",
+      "translate": "Traducir"
     },
     "onboarding": {
       "step1": {
@@ -53,10 +56,6 @@
         "apiKeyHelp": "Obtén tu clave de API gratuita de DeepL (500,000 caracteres/mes gratis)"
       },
       "step7": {
-        "title": "Tu Perfil",
-        "description": "Esto ayuda a personalizar la aplicación para ti."
-      },
-      "step8": {
         "title": "¡Todo Listo!",
         "description": "Tu aplicación de mensajería familiar está lista. Puedes añadir más hijos y personalizar los mensajes en cualquier momento."
       },
@@ -156,6 +155,7 @@
       "title": "Ajustes",
       "profiles": "Perfiles",
       "messages": "Mensajes",
+      "more": "Más",
       "addProfile": "Añadir Perfil",
       "addCategory": "Añadir Categoría",
       "addMessage": "Añadir Mensaje",
@@ -169,7 +169,27 @@
       "messageInYourLanguage": "Mensaje en tu idioma (usa {name} para el nombre)...",
       "messageInTargetLanguage": "Mensaje en el idioma de destino (usa {name} para el nombre)...",
       "confirmDelete": "¿Estás seguro/a de que quieres eliminar esto?",
-      "selectCountry": "-- Selecciona un País --"
+      "selectCountry": "-- Selecciona un País --",
+      "dataManagement": "Gestión de Datos",
+      "exportData": "Exportar Datos",
+      "exportDescription": "Descarga todos tus perfiles, mensajes y ajustes como archivo de copia de seguridad.",
+      "importData": "Importar Datos",
+      "importDescription": "Restaurar desde un archivo de copia de seguridad. Esto reemplazará todos los datos actuales.",
+      "importConfirm": "Esto reemplazará todos tus datos actuales. ¿Estás seguro/a?",
+      "translationService": "Servicio de Traducción",
+      "enableTranslation": "Activar Traducción",
+      "enableTranslationDesc": "Usar DeepL para traducciones automáticas",
+      "apiKey": "Clave API de DeepL",
+      "monthlyUsage": "Uso Mensual",
+      "usageError": "No se pudieron obtener los datos de uso.",
+      "usageCounter": "{count} / {limit} caracteres",
+      "manageProfiles": "Gestionar Perfiles",
+      "saveChanges": "Guardar Cambios",
+      "createProfile": "Crear Perfil",
+      "deleteProfile": "Eliminar Perfil",
+      "selectTimezone": "Seleccionar zona horaria",
+      "newNickname": "Nuevo apodo",
+      "updateMessage": "Actualizar Mensaje"
     },
     "time": {
       "profileTime": "Hora de {name}",
@@ -184,6 +204,21 @@
       "profileNotFound": "Perfil no encontrado",
       "categoryNotFound": "Categoría no encontrada",
       "translationFailed": "Fallo en la traducción",
-      "networkError": "Error de red. Por favor, comprueba tu conexión."
+      "networkError": "Error de red. Por favor, comprueba tu conexión.",
+      "fillRequired": "Por favor, complete todos los campos obligatorios.",
+      "translationNotConfigured": "El servicio de traducción no está configurado. Por favor, añade tu clave API en los ajustes.",
+      "languageNotConfigured": "El idioma de origen o destino no está configurado. Por favor, completa la configuración inicial.",
+      "imageError": "Error al procesar la imagen. Por favor, inténtalo de nuevo.",
+      "loadingFailed": "Error al cargar"
+    },
+    "fab": {
+      "addMessage": "Añadir Mensaje",
+      "editKid": "Editar Niño",
+      "selectCategory": "Seleccionar Categoría",
+      "createNewCategory": "➕ Crear Nueva Categoría",
+      "newCategoryName": "Nombre de la Nueva Categoría",
+      "selectKidFirst": "Por favor, selecciona primero un niño",
+      "messageAdded": "¡Mensaje añadido con éxito!",
+      "nameHelp": "Usa {name} para insertar el nombre del niño"
     }
   }

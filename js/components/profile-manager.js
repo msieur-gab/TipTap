@@ -39,6 +39,12 @@ class ProfileManager extends HTMLElement {
         this.loadTimezoneData();
         this.loadData();
         this.setupEventListeners();
+        this.boundUpdateLanguage = () => { if (this.isConnected) this.render(); };
+        i18n.addListener(this.boundUpdateLanguage);
+    }
+
+    disconnectedCallback() {
+        i18n.removeListener(this.boundUpdateLanguage);
     }
 
     async loadTimezoneData() {
@@ -129,7 +135,7 @@ class ProfileManager extends HTMLElement {
                 reader.readAsDataURL(processedImage.blob);
             } catch (error) {
                 console.error('Error processing image:', error);
-                alert('Failed to process image. Please try again.');
+                alert(i18n.t('errors.imageError'));
             }
         } else if (target.name === 'country') {
             const timezoneSelect = this.shadowRoot.querySelector('select[name="timezone"]');
@@ -190,7 +196,7 @@ class ProfileManager extends HTMLElement {
         if (!timezoneSelect || !this.timezoneData.length) return;
         const countryData = this.timezoneData.find(d => d.country === countryCode);
         if (!countryData) {
-            timezoneSelect.innerHTML = '<option value="">Select timezone</option>';
+            timezoneSelect.innerHTML = `<option value="">${i18n.t('settings.selectTimezone')}</option>`;
             return;
         }
         timezoneSelect.innerHTML = countryData.timezones.map(tz => {
@@ -221,13 +227,13 @@ class ProfileManager extends HTMLElement {
                     <div class="form-group"><label data-i18n="settings.profileName">Name</label><input type="text" name="originalName" class="styled-input" value="${profile.originalName || ''}" required></div>
                     <div class="form-group"><label data-i18n="settings.profileTranslation">Translation</label><input type="text" name="translatedName" class="styled-input" value="${profile.translatedName || ''}" required></div>
                     <div class="form-group"><label data-i18n="settings.profileBirthday">Birthday</label><input type="date" name="birthdate" class="styled-input" value="${profile.birthdate || ''}"></div>
-                    <div class="form-group"><label data-i18n="settings.profileCountry">Country</label><select name="country" class="styled-input"><option value="">Select Country</option>${countryOptions}</select></div>
-                    <div class="form-group"><label data-i18n="settings.profileTimezone">Timezone</label><select name="timezone" class="styled-input"><option value="">Select timezone</option></select></div>
+                    <div class="form-group"><label data-i18n="settings.profileCountry">Country</label><select name="country" class="styled-input"><option value="" data-i18n="settings.selectCountry">${i18n.t('settings.selectCountry')}</option>${countryOptions}</select></div>
+                    <div class="form-group"><label data-i18n="settings.profileTimezone">Timezone</label><select name="timezone" class="styled-input"><option value="" data-i18n="settings.selectTimezone">${i18n.t('settings.selectTimezone')}</option></select></div>
                     <div class="form-actions">
-                        ${isEditing ? `<button type="button" class="secondary-button" data-action="collapse-profile">Cancel</button>` : ''}
-                        <button type="submit" class="primary-button">${isEditing ? 'Save Changes' : 'Create Profile'}</button>
+                        ${isEditing ? `<button type="button" class="secondary-button" data-action="collapse-profile" data-i18n="common.cancel">${i18n.t('common.cancel')}</button>` : ''}
+                        <button type="submit" class="primary-button" data-i18n="${isEditing ? 'settings.saveChanges' : 'settings.createProfile'}">${isEditing ? i18n.t('settings.saveChanges') : i18n.t('settings.createProfile')}</button>
                     </div>
-                    ${isEditing ? `<div class="delete-action"><button type="button" class="delete-button" data-action="delete-profile">Delete Profile</button></div>` : ''}
+                    ${isEditing ? `<div class="delete-action"><button type="button" class="delete-button" data-action="delete-profile" data-i18n="settings.deleteProfile">${i18n.t('settings.deleteProfile')}</button></div>` : ''}
                 </form>
             </div>
         `;
@@ -242,8 +248,8 @@ class ProfileManager extends HTMLElement {
                     <div class="nickname-item editing" data-nickname-id="${nickname.id}">
                         <form class="nickname-form">
                             <div class="nickname-inputs">
-                                <input type="text" name="nickname" value="${nickname.display}" class="styled-input" placeholder="Nickname" required>
-                                <input type="text" name="translation" value="${nickname.targetLang_value}" class="styled-input" placeholder="Translation">
+                                <input type="text" name="nickname" value="${nickname.display}" class="styled-input" data-i18n-placeholder="settings.nickname" placeholder="${i18n.t('settings.nickname')}" required>
+                                <input type="text" name="translation" value="${nickname.targetLang_value}" class="styled-input" data-i18n-placeholder="settings.profileTranslation" placeholder="${i18n.t('settings.profileTranslation')}">
                             </div>
                             <div class="nickname-actions">
                                 <button type="submit" class="save-button" title="Save"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
@@ -275,10 +281,10 @@ class ProfileManager extends HTMLElement {
                 ${!this.editingNickname ? `
                     <form class="nickname-form add-nickname">
                         <div class="nickname-inputs">
-                            <input type="text" name="nickname" class="styled-input" placeholder="New nickname" required>
-                            <input type="text" name="translation" class="styled-input" placeholder="Translation">
+                            <input type="text" name="nickname" class="styled-input" data-i18n-placeholder="settings.newNickname" placeholder="${i18n.t('settings.newNickname')}" required>
+                            <input type="text" name="translation" class="styled-input" data-i18n-placeholder="settings.profileTranslation" placeholder="${i18n.t('settings.profileTranslation')}">
                         </div>
-                        <button type="submit" class="add-button">Add Nickname</button>
+                        <button type="submit" class="add-button" data-i18n="settings.addNickname">${i18n.t('settings.addNickname')}</button>
                     </form>` : ''}
             </div>
         `;

@@ -1,14 +1,15 @@
 import { eventBus, EVENTS } from '../utils/events.js';
 import { i18n } from '../services/i18n.js';
-import './user-settings-panel.js'; // Import the new component
-import './messages-tab.js'; // Ensure messages-tab is imported
+import './settings-tab.js';
+import './profiles-tab.js';
+import './messages-tab.js';
 
 class SettingsPanel extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
         this.isOpen = false;
-        this.activeTab = 'user'; 
+        this.activeTab = 'profiles';
     }
 
     connectedCallback() {
@@ -34,21 +35,22 @@ class SettingsPanel extends HTMLElement {
 
     updateContent() {
         this.shadowRoot.querySelectorAll('[data-i18n]').forEach(el => {
-            const key = el.dataset.i18n;
-            el.textContent = i18n.t(key);
+            el.textContent = i18n.t(el.dataset.i18n);
         });
-        // Update header title based on the active tab
         const headerTitle = this.shadowRoot.querySelector('.header h2');
         if (headerTitle) {
-             // Use a more generic title key for the user tab
-             const titleKey = this.activeTab === 'user' ? 'settings.profiles' : `settings.${this.activeTab}`;
-             headerTitle.textContent = i18n.t(titleKey);
+            const titleKeys = {
+                profiles: 'settings.profiles',
+                messages: 'settings.messages',
+                more: 'settings.more'
+            };
+            headerTitle.textContent = i18n.t(titleKeys[this.activeTab] || 'settings.title');
         }
     }
-    
+
     switchTab(tabName) {
         this.activeTab = tabName;
-        
+
         this.shadowRoot.querySelectorAll('.tab-button').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.tab === tabName);
         });
@@ -57,7 +59,7 @@ class SettingsPanel extends HTMLElement {
             content.classList.toggle('active', content.id === `tab-${tabName}`);
         });
 
-        this.updateContent(); // Update title
+        this.updateContent();
     }
 
     toggle() {
@@ -125,25 +127,31 @@ class SettingsPanel extends HTMLElement {
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                     </button>
                 </div>
-                
+
                 <div class="tabs">
-                    <button class="tab-button active" data-tab="user">
-                        <!-- CORRECTED SVG VIEWBOX -->
+                    <button class="tab-button active" data-tab="profiles">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                        <span data-i18n="settings.profiles">User</span>
+                        <span data-i18n="settings.profiles">Profiles</span>
                     </button>
                     <button class="tab-button" data-tab="messages">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                         <span data-i18n="settings.messages">Messages</span>
                     </button>
+                    <button class="tab-button" data-tab="more">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                        <span data-i18n="settings.more">More</span>
+                    </button>
                 </div>
-                
+
                 <div class="content">
-                    <div id="tab-user" class="tab-content active">
-                        <user-settings-panel></user-settings-panel>
+                    <div id="tab-profiles" class="tab-content active">
+                        <profiles-tab></profiles-tab>
                     </div>
                     <div id="tab-messages" class="tab-content">
                         <messages-tab></messages-tab>
+                    </div>
+                    <div id="tab-more" class="tab-content">
+                        <settings-tab></settings-tab>
                     </div>
                 </div>
             </div>

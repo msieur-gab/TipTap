@@ -15,7 +15,10 @@
     "close": "Close",
     "confirm": "Confirm",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "saved": "Saved",
+    "translating": "Translating...",
+    "translate": "Translate"
   },
   "onboarding": {
     "step1": {
@@ -53,10 +56,6 @@
       "apiKeyHelp": "Creating a free account is straightforward and helps bridge the communication gap. Get your free key from <a href=\"https://www.deepl.com/pro-api\" target=\"_blank\">DeepL</a> (500,000 characters/month free). By using your key, you agree to DeepL's terms and are responsible for its usage."
     },
     "step7": {
-      "title": "Your Profile",
-      "description": "This helps personalize the app for you."
-    },
-    "step8": {
       "title": "You're All Set!",
       "description": "Your family messaging app is ready. You can add more children and customize messages anytime."
     },
@@ -156,6 +155,7 @@
     "title": "Settings",
     "profiles": "Profiles",
     "messages": "Messages",
+    "more": "More",
     "addProfile": "Add Profile",
     "addCategory": "Add Category",
     "addMessage": "Add Message",
@@ -171,7 +171,27 @@
     "messageInYourLanguage": "Message in your language",
     "messageInTargetLanguage": "Message in target language",
     "confirmDelete": "Are you sure you want to delete {item}?",
-    "selectCountry": "-- Select Country --"
+    "selectCountry": "-- Select Country --",
+    "dataManagement": "Data Management",
+    "exportData": "Export Data",
+    "exportDescription": "Download all your profiles, messages, and settings as a backup file.",
+    "importData": "Import Data",
+    "importDescription": "Restore from a backup file. This will replace all current data.",
+    "importConfirm": "This will replace all your current data. Are you sure?",
+    "translationService": "Translation Service",
+    "enableTranslation": "Enable Translation",
+    "enableTranslationDesc": "Use DeepL for automatic translations",
+    "apiKey": "DeepL API Key",
+    "monthlyUsage": "Monthly Usage",
+    "usageError": "Could not retrieve usage data.",
+    "usageCounter": "{count} / {limit} characters",
+    "manageProfiles": "Manage Profiles",
+    "saveChanges": "Save Changes",
+    "createProfile": "Create Profile",
+    "deleteProfile": "Delete Profile",
+    "selectTimezone": "Select timezone",
+    "newNickname": "New nickname",
+    "updateMessage": "Update Message"
   },
   "time": {
     "profileTime": "{name}'s Time",
@@ -186,7 +206,12 @@
     "profileNotFound": "Profile not found",
     "categoryNotFound": "Category not found",
     "translationFailed": "Translation failed",
-    "networkError": "Network error. Please check your connection."
+    "networkError": "Network error. Please check your connection.",
+    "fillRequired": "Please fill in all required fields.",
+    "translationNotConfigured": "Translation service is not configured. Please add your API key in the settings.",
+    "languageNotConfigured": "Source or target language is not configured. Please complete the onboarding process.",
+    "imageError": "Failed to process image. Please try again.",
+    "loadingFailed": "Error loading"
   },
   "fab": {
     "addMessage": "Add Message",

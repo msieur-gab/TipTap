@@ -1,39 +1,33 @@
-import { eventBus, EVENTS } from '../utils/events.js';
+// js/components/settings-tab.js
 import { i18n } from '../services/i18n.js';
 import { DatabaseService } from '../services/database.js';
 import { deepL } from '../services/deepl.js';
-import { ProfileService } from '../services/profiles.js';
+import { eventBus, EVENTS } from '../utils/events.js';
 
-class UserSettingsPanel extends HTMLElement {
+class SettingsTab extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
         this.settings = {};
-        this.profiles = [];
         this.usage = { character_count: 0, character_limit: 500000, error: false };
-        this.boundUpdateData = this.loadData.bind(this);
-        this.boundUpdateContent = this.updateUIWithData.bind(this); // Rerender UI on lang change
+        this.boundUpdateContent = this.updateUIWithData.bind(this);
     }
 
     async connectedCallback() {
-        this.render(); // Render the static shell of the component ONCE
+        this.render();
         this.setupEventListeners();
-        await this.loadData(); // Fetch data and populate the shell
-        eventBus.on(EVENTS.PROFILES_UPDATED, this.boundUpdateData);
+        await this.loadData();
         i18n.addListener(this.boundUpdateContent);
     }
 
     disconnectedCallback() {
-        eventBus.off(EVENTS.PROFILES_UPDATED, this.boundUpdateData);
         i18n.removeListener(this.boundUpdateContent);
     }
 
     async loadData() {
         this.settings = await DatabaseService.getUserSettings();
-        this.profiles = await ProfileService.getAllProfiles();
-        
+
         if (this.settings.deeplApiKey) {
-            // Pass API key directly as you intended
             const usageData = await deepL.getUsage(this.settings.deeplApiKey);
             if (usageData.error) {
                 console.error("Could not fetch DeepL usage:", usageData.error);
@@ -44,8 +38,8 @@ class UserSettingsPanel extends HTMLElement {
         } else {
             this.usage = { character_count: 0, character_limit: 500000, error: false };
         }
-    
-        this.updateUIWithData(); // Populate the component with the new data
+
+        this.updateUIWithData();
     }
 
     setupEventListeners() {
@@ -61,101 +55,101 @@ class UserSettingsPanel extends HTMLElement {
             }
         });
 
-        // Use event delegation for profile buttons
-        this.shadowRoot.addEventListener('click', (e) => {
-            const editButton = e.target.closest('.edit-profile-btn');
-            const addButton = e.target.closest('#add-profile-btn');
-
-            if (editButton) {
-                const profileId = editButton.closest('.profile-list-item').dataset.profileId;
-                const modal = document.querySelector('#profile-modal');
-                const profileManager = document.querySelector('#profile-modal profile-manager');
-
-                if (modal && profileManager) {
-                    profileManager.setAttribute('mode', 'edit');
-                    profileManager.setAttribute('profile-id', profileId);
-                    modal.open();
-                }
-            } else if (addButton) {
-                const modal = document.querySelector('#profile-modal');
-                const profileManager = document.querySelector('#profile-modal profile-manager');
-
-                if (modal && profileManager) {
-                    profileManager.setAttribute('mode', 'create');
-                    profileManager.removeAttribute('profile-id');
-                    modal.open();
-                }
-            }
+        this.shadowRoot.querySelector('#export-btn')?.addEventListener('click', () => this.handleExport());
+        this.shadowRoot.querySelector('#import-btn')?.addEventListener('click', () => {
+            this.shadowRoot.querySelector('#import-file').click();
         });
+        this.shadowRoot.querySelector('#import-file')?.addEventListener('change', (e) => this.handleImport(e));
     }
 
     async handleSave(e) {
         e.preventDefault();
         const form = e.target;
         const useTranslation = this.shadowRoot.querySelector('#translation-toggle').classList.contains('active');
-        
+
         const newSettings = {
-            userName: form.querySelector('#user-name').value,
-            userSignature: form.querySelector('#user-signature').value,
             deeplApiKey: useTranslation ? form.querySelector('#api-key').value : null,
         };
-    
+
         await DatabaseService.updateUserSettings(newSettings);
-    
+
         const saveButton = form.querySelector('.primary-button');
         saveButton.textContent = i18n.t('common.saved');
         setTimeout(() => { saveButton.textContent = i18n.t('common.save'); }, 2000);
-        
+
         await this.loadData();
     }
-    
-    // This method only updates the dynamic parts of the component
+
+    async handleExport() {
+        try {
+            const data = await DatabaseService.exportData();
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const date = new Date().toISOString().split('T')[0];
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `tiptap-backup-${date}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            eventBus.emit(EVENTS.TOAST, { message: i18n.t('settings.exportData') + ' ✓', type: 'success' });
+        } catch (error) {
+            console.error('Export failed:', error);
+            eventBus.emit(EVENTS.TOAST, { message: i18n.t('common.error'), type: 'error' });
+        }
+    }
+
+    async handleImport(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        // Reset input so the same file can be re-selected
+        e.target.value = '';
+
+        try {
+            const text = await file.text();
+            const data = JSON.parse(text);
+
+            if (!data.version) {
+                eventBus.emit(EVENTS.TOAST, { message: i18n.t('common.error'), type: 'error' });
+                return;
+            }
+
+            if (!confirm(i18n.t('settings.importConfirm'))) return;
+
+            await DatabaseService.importData(data);
+            window.location.reload();
+        } catch (error) {
+            console.error('Import failed:', error);
+            eventBus.emit(EVENTS.TOAST, { message: i18n.t('common.error'), type: 'error' });
+        }
+    }
+
     updateUIWithData() {
-        // Update form values
-        this.shadowRoot.querySelector('#user-name').value = this.settings.userName || '';
-        this.shadowRoot.querySelector('#user-signature').value = this.settings.userSignature || '';
         this.shadowRoot.querySelector('#api-key').value = this.settings.deeplApiKey || '';
 
-        // Update toggle state
         const useTranslation = !!this.settings.deeplApiKey;
         const toggle = this.shadowRoot.querySelector('#translation-toggle');
         const apiKeyGroup = this.shadowRoot.querySelector('#api-key-group');
         toggle.classList.toggle('active', useTranslation);
         apiKeyGroup.style.display = useTranslation ? 'block' : 'none';
-        
-        // Update usage bar
+
         const usageCount = this.usage?.character_count ?? 0;
         const usageLimit = this.usage?.character_limit ?? 500000;
         const usagePercentage = usageLimit > 0 ? (usageCount / usageLimit) * 100 : 0;
-        
+
         const usageBar = this.shadowRoot.querySelector('.usage-bar');
-        if(usageBar) usageBar.style.width = `${usagePercentage.toFixed(2)}%`;
+        if (usageBar) usageBar.style.width = `${usagePercentage.toFixed(2)}%`;
 
         const usageDetails = this.shadowRoot.querySelector('.usage-details span:first-child');
-        if(usageDetails) usageDetails.textContent = i18n.t('settings.usageCounter', { count: usageCount.toLocaleString(), limit: usageLimit.toLocaleString() });
-        
-        const usagePercentSpan = this.shadowRoot.querySelector('.usage-details span:last-child');
-        if(usagePercentSpan) usagePercentSpan.textContent = `${usagePercentage.toFixed(0)}%`;
+        if (usageDetails) usageDetails.textContent = i18n.t('settings.usageCounter', { count: usageCount.toLocaleString(), limit: usageLimit.toLocaleString() });
 
-        // Update error message visibility
+        const usagePercentSpan = this.shadowRoot.querySelector('.usage-details span:last-child');
+        if (usagePercentSpan) usagePercentSpan.textContent = `${usagePercentage.toFixed(0)}%`;
+
         const errorContainer = this.shadowRoot.querySelector('.usage-error-container');
         errorContainer.style.display = this.usage.error ? 'block' : 'none';
         this.shadowRoot.querySelector('.usage-display-container').style.display = this.usage.error ? 'none' : 'block';
 
-        // Re-render profile list
-        const profileList = this.shadowRoot.querySelector('.profile-list');
-        profileList.innerHTML = this.profiles.map(profile => `
-            <div class="profile-list-item" data-profile-id="${profile.id}">
-                <img src="${profile.image || `https://placehold.co/48x48/ccc/333?text=${profile.originalName.charAt(0)}`}" alt="Avatar" class="profile-avatar">
-                <div class="profile-info">
-                    <div class="name">${profile.originalName}</div>
-                    <div class="translation">${profile.translatedName || ''}</div>
-                </div>
-                <button class="edit-profile-btn" data-i18n="common.edit">Edit</button>
-            </div>
-        `).join('');
-
-        // Apply all translations
         this.shadowRoot.querySelectorAll('[data-i18n]').forEach(el => {
             el.textContent = i18n.t(el.dataset.i18n);
         });
@@ -164,7 +158,6 @@ class UserSettingsPanel extends HTMLElement {
         });
     }
 
-    // This method builds the component's structure once
     render() {
         this.shadowRoot.innerHTML = `
             <style>
@@ -188,30 +181,13 @@ class UserSettingsPanel extends HTMLElement {
                 .usage-bar-wrapper { width: 100%; background-color: #e5e7eb; border-radius: 8px; height: 12px; overflow: hidden; margin: 0.5rem 0; }
                 .usage-bar { width: 0%; height: 100%; background-color: var(--primary-color, #2563eb); border-radius: 8px; transition: width 0.5s ease; }
                 .usage-details { display: flex; justify-content: space-between; }
-                .profile-list-item { display: flex; align-items: center; padding: 1rem; border-radius: 12px; background-color: #f8fafc; margin-bottom: 0.75rem; }
-                .profile-avatar { width: 48px; height: 48px; border-radius: 50%; margin-right: 1rem; object-fit: cover; }
-                .profile-info { flex-grow: 1; }
-                .profile-info .name { font-weight: 600; color: var(--color-text-dark, #1f2937); }
-                .profile-info .translation { font-size: 0.9rem; color: var(--color-text-light, #6b7280); }
-                .edit-profile-btn { background: none; border: 1px solid var(--color-border, #e5e7eb); color: var(--color-text-dark, #1f2937); border-radius: 8px; padding: 0.5rem 1rem; font-weight: 500; cursor: pointer; }
-                .add-profile-btn { width: 100%; padding: 0.875rem; border: 2px dashed var(--color-border, #e5e7eb); background: none; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 0.95rem; color: var(--color-text-light, #6b7280); margin-top: 0.5rem; transition: all 0.2s; }
-                .add-profile-btn:hover { border-color: var(--color-text-dark, #1f2937); color: var(--color-text-dark, #1f2937); }
                 .error-message { background-color: #fff1f2; color: #be123c; padding: 0.75rem 1rem; border-radius: 8px; font-size: 0.875rem; text-align: center; }
+                .data-actions { display: flex; flex-direction: column; gap: 1rem; }
+                .data-action p { font-size: 0.875rem; color: var(--color-text-light, #6b7280); margin: 0 0 0.75rem 0; }
+                .action-button { width: 100%; padding: 1rem; border: none; background-color: var(--color-text-dark, #1f2937); color: var(--primary-text-color, #fff); border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 1rem; }
             </style>
             <div class="settings-content">
                 <form id="settings-form">
-                    <div class="card">
-                        <h3 data-i18n="settings.yourProfile">Your Profile</h3>
-                        <div class="form-group">
-                            <label for="user-name" data-i18n="settings.yourName">Your Name</label>
-                            <input type="text" id="user-name" name="user-name" class="styled-input" data-i18n-placeholder="settings.yourNamePlaceholder">
-                        </div>
-                        <div class="form-group">
-                            <label for="user-signature" data-i18n="settings.messageSignature">Message Signature</label>
-                            <input type="text" id="user-signature" name="user-signature" class="styled-input" data-i18n-placeholder="settings.messageSignaturePlaceholder">
-                        </div>
-                    </div>
-
                     <div class="card">
                         <h3 data-i18n="settings.translationService">Translation Service</h3>
                         <div class="toggle-container">
@@ -245,15 +221,23 @@ class UserSettingsPanel extends HTMLElement {
                         <button type="submit" class="primary-button" data-i18n="common.save">Save Settings</button>
                     </div>
                 </form>
-
                 <div class="card">
-                    <h3 data-i18n="settings.manageProfiles">Manage Profiles</h3>
-                    <div class="profile-list"></div>
-                    <button type="button" class="add-profile-btn" id="add-profile-btn" data-i18n="settings.addProfile">+ Add Profile</button>
+                    <h3 data-i18n="settings.dataManagement">Data Management</h3>
+                    <div class="data-actions">
+                        <div class="data-action">
+                            <p data-i18n="settings.exportDescription">Download all your profiles, messages, and settings as a backup file.</p>
+                            <button type="button" class="action-button" id="export-btn" data-i18n="settings.exportData">Export Data</button>
+                        </div>
+                        <div class="data-action">
+                            <p data-i18n="settings.importDescription">Restore from a backup file. This will replace all current data.</p>
+                            <button type="button" class="action-button" id="import-btn" data-i18n="settings.importData">Import Data</button>
+                            <input type="file" id="import-file" accept=".json" style="display: none;">
+                        </div>
+                    </div>
                 </div>
             </div>
         `;
     }
 }
 
-customElements.define('user-settings-panel', UserSettingsPanel);
+customElements.define('settings-tab', SettingsTab);

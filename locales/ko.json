@@ -15,7 +15,10 @@
       "close": "닫기",
       "confirm": "확인",
       "yes": "예",
-      "no": "아니요"
+      "no": "아니요",
+      "saved": "저장됨",
+      "translating": "번역 중...",
+      "translate": "번역"
     },
     "onboarding": {
       "step1": {
@@ -53,10 +56,6 @@
         "apiKeyHelp": "DeepL에서 무료 API 키를 받으세요 (월 500,000자 무료)"
       },
       "step7": {
-        "title": "내 프로필",
-        "description": "앱을 사용자에게 맞게 개인화하는 데 도움이 됩니다."
-      },
-      "step8": {
         "title": "모든 준비가 끝났습니다!",
         "description": "가족 메시지 앱이 준비되었습니다. 언제든지 자녀를 추가하고 메시지를 사용자 지정할 수 있습니다."
       },
@@ -156,6 +155,7 @@
       "title": "설정",
       "profiles": "프로필",
       "messages": "메시지",
+      "more": "더보기",
       "addProfile": "프로필 추가",
       "addCategory": "카테고리 추가",
       "addMessage": "메시지 추가",
@@ -169,7 +169,27 @@
       "messageInYourLanguage": "당신의 언어로 메시지 (이름에 {name} 사용)...",
       "messageInTargetLanguage": "대상 언어로 메시지 (이름에 {name} 사용)...",
       "confirmDelete": "이것을 삭제하시겠습니까?",
-      "selectCountry": "-- 국가 선택 --"
+      "selectCountry": "-- 국가 선택 --",
+      "dataManagement": "데이터 관리",
+      "exportData": "데이터 내보내기",
+      "exportDescription": "모든 프로필, 메시지 및 설정을 백업 파일로 다운로드합니다.",
+      "importData": "데이터 가져오기",
+      "importDescription": "백업 파일에서 복원합니다. 현재 모든 데이터가 대체됩니다.",
+      "importConfirm": "현재 모든 데이터가 대체됩니다. 계속하시겠습니까?",
+      "translationService": "번역 서비스",
+      "enableTranslation": "번역 활성화",
+      "enableTranslationDesc": "DeepL로 자동 번역 사용",
+      "apiKey": "DeepL API 키",
+      "monthlyUsage": "월간 사용량",
+      "usageError": "사용 데이터를 가져올 수 없습니다.",
+      "usageCounter": "{count} / {limit} 자",
+      "manageProfiles": "프로필 관리",
+      "saveChanges": "변경 사항 저장",
+      "createProfile": "프로필 만들기",
+      "deleteProfile": "프로필 삭제",
+      "selectTimezone": "시간대 선택",
+      "newNickname": "새 닉네임",
+      "updateMessage": "메시지 수정"
     },
     "time": {
       "profileTime": "{name}의 시간",
@@ -184,6 +204,21 @@
       "profileNotFound": "프로필을 찾을 수 없습니다",
       "categoryNotFound": "카테고리를 찾을 수 없습니다",
       "translationFailed": "번역에 실패했습니다",
-      "networkError": "네트워크 오류. 연결을 확인하세요."
+      "networkError": "네트워크 오류. 연결을 확인하세요.",
+      "fillRequired": "모든 필수 항목을 입력하세요.",
+      "translationNotConfigured": "번역 서비스가 설정되지 않았습니다. 설정에서 API 키를 추가하세요.",
+      "languageNotConfigured": "소스 언어 또는 대상 언어가 설정되지 않았습니다. 초기 설정을 완료하세요.",
+      "imageError": "이미지 처리에 실패했습니다. 다시 시도하세요.",
+      "loadingFailed": "로딩 오류"
+    },
+    "fab": {
+      "addMessage": "메시지 추가",
+      "editKid": "자녀 편집",
+      "selectCategory": "카테고리 선택",
+      "createNewCategory": "➕ 새 카테고리 만들기",
+      "newCategoryName": "새 카테고리 이름",
+      "selectKidFirst": "먼저 자녀를 선택하세요",
+      "messageAdded": "메시지가 추가되었습니다!",
+      "nameHelp": "{name}을 사용하여 자녀 이름 삽입"
     }
   }

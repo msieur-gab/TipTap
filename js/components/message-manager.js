@@ -146,7 +146,7 @@ class MessageManager extends HTMLElement {
         }
         
         if (!categoryId || !sourceLang || !targetLang) {
-            alert('Please fill in all required fields');
+            alert(i18n.t('errors.fillRequired'));
             return;
         }
 
@@ -190,7 +190,7 @@ class MessageManager extends HTMLElement {
         }
 
         if (!deepL.isAvailable()) {
-            alert('Translation service is not configured. Please add your API key in the settings.');
+            alert(i18n.t('errors.translationNotConfigured'));
             return;
         }
 
@@ -200,12 +200,12 @@ class MessageManager extends HTMLElement {
             const targetLang = settings.targetLanguage;
 
             if (!sourceLang || !targetLang) {
-                alert('Source or target language is not configured. Please complete the onboarding process.');
+                alert(i18n.t('errors.languageNotConfigured'));
                 return;
             }
 
             // Show loading state
-            targetLangTextarea.value = 'Translating...';
+            targetLangTextarea.value = i18n.t('common.translating');
             targetLangTextarea.disabled = true;
 
             const result = await deepL.translate(textToTranslate, targetLang, sourceLang);
@@ -214,13 +214,13 @@ class MessageManager extends HTMLElement {
                 targetLangTextarea.value = result.text;
             } else {
                 targetLangTextarea.value = '';
-                alert('Translation failed: ' + (result.error || 'Unknown error'));
+                alert(i18n.t('errors.translationFailed'));
             }
 
         } catch (error) {
             targetLangTextarea.value = '';
             console.error("Translation process failed:", error);
-            alert("An error occurred during translation.");
+            alert(i18n.t('errors.translationFailed'));
         } finally {
             targetLangTextarea.disabled = false;
         }
@@ -271,7 +271,7 @@ class MessageManager extends HTMLElement {
         }).join('');
         
         if (!isEditing) {
-            options += '<option value="new">➕ Create New Category</option>';
+            options += `<option value="new">${i18n.t('fab.createNewCategory')}</option>`;
         }
         
         return options;
@@ -439,13 +439,13 @@ class MessageManager extends HTMLElement {
                     <div class="helper-text" data-i18n="fab.nameHelp">Use {name} to insert the name</div>
                 </div>
                 
-                <button type="button" class="secondary-button" data-action="translate">
-                    Translate
+                <button type="button" class="secondary-button" data-action="translate" data-i18n="common.translate">
+                    ${i18n.t('common.translate')}
                 </button>
                 
                 <div class="form-actions">
-                    <button type="submit" class="primary-button">
-                        ${isEditing ? 'Update Message' : 'Add Message'}
+                    <button type="submit" class="primary-button" data-i18n="${isEditing ? 'settings.updateMessage' : 'settings.addMessage'}">
+                        ${isEditing ? i18n.t('settings.updateMessage') : i18n.t('settings.addMessage')}
                     </button>
                 </div>
             </form>

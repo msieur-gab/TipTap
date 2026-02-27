@@ -54,8 +54,6 @@ class QuickMessagesApp {
 
             // 1. Save user settings
             await DatabaseService.updateUserSettings({
-                userName: settings.userName,
-                userSignature: settings.userSignature,
                 sourceLanguage: settings.sourceLanguage,
                 targetLanguage: settings.targetLanguage,
                 deeplApiKey: settings.apiKey,

@@ -15,7 +15,10 @@
       "close": "閉じる",
       "confirm": "確認",
       "yes": "はい",
-      "no": "いいえ"
+      "no": "いいえ",
+      "saved": "保存しました",
+      "translating": "翻訳中...",
+      "translate": "翻訳"
     },
     "onboarding": {
       "step1": {
@@ -53,10 +56,6 @@
         "apiKeyHelp": "DeepLから無料のAPIキーを取得（月50万文字まで無料）"
       },
       "step7": {
-        "title": "あなたのプロフィール",
-        "description": "アプリをあなた向けにカスタマイズするのに役立ちます。"
-      },
-      "step8": {
         "title": "準備完了！",
         "description": "あなたの家族のメッセージアプリの準備ができました。いつでもお子様を追加したり、メッセージをカスタマイズしたりできます。"
       },
@@ -156,6 +155,7 @@
       "title": "設定",
       "profiles": "プロフィール",
       "messages": "メッセージ",
+      "more": "その他",
       "addProfile": "プロフィールを追加",
       "addCategory": "カテゴリーを追加",
       "addMessage": "メッセージを追加",
@@ -169,7 +169,27 @@
       "messageInYourLanguage": "あなたの言語でのメッセージ（{name}を名前に使用）...",
       "messageInTargetLanguage": "ターゲット言語でのメッセージ（{name}を名前に使用）...",
       "confirmDelete": "これを削除してもよろしいですか？",
-      "selectCountry": "-- 国を選択 --"
+      "selectCountry": "-- 国を選択 --",
+      "dataManagement": "データ管理",
+      "exportData": "データをエクスポート",
+      "exportDescription": "すべてのプロフィール、メッセージ、設定をバックアップファイルとしてダウンロードします。",
+      "importData": "データをインポート",
+      "importDescription": "バックアップファイルから復元します。現在のすべてのデータが置き換えられます。",
+      "importConfirm": "現在のすべてのデータが置き換えられます。よろしいですか？",
+      "translationService": "翻訳サービス",
+      "enableTranslation": "翻訳を有効にする",
+      "enableTranslationDesc": "DeepLで自動翻訳を使用する",
+      "apiKey": "DeepL APIキー",
+      "monthlyUsage": "月間使用量",
+      "usageError": "使用データを取得できませんでした。",
+      "usageCounter": "{count} / {limit} 文字",
+      "manageProfiles": "プロフィール管理",
+      "saveChanges": "変更を保存",
+      "createProfile": "プロフィールを作成",
+      "deleteProfile": "プロフィールを削除",
+      "selectTimezone": "タイムゾーンを選択",
+      "newNickname": "新しいニックネーム",
+      "updateMessage": "メッセージを更新"
     },
     "time": {
       "profileTime": "{name}の時間",
@@ -184,6 +204,21 @@
       "profileNotFound": "プロフィールが見つかりません",
       "categoryNotFound": "カテゴリーが見つかりません",
       "translationFailed": "翻訳に失敗しました",
-      "networkError": "ネットワークエラーです。接続を確認してください。"
+      "networkError": "ネットワークエラーです。接続を確認してください。",
+      "fillRequired": "すべての必須項目を入力してください。",
+      "translationNotConfigured": "翻訳サービスが設定されていません。設定でAPIキーを追加してください。",
+      "languageNotConfigured": "ソース言語またはターゲット言語が設定されていません。初期設定を完了してください。",
+      "imageError": "画像の処理に失敗しました。もう一度お試しください。",
+      "loadingFailed": "読み込みエラー"
+    },
+    "fab": {
+      "addMessage": "メッセージを追加",
+      "editKid": "子供を編集",
+      "selectCategory": "カテゴリーを選択",
+      "createNewCategory": "➕ 新しいカテゴリーを作成",
+      "newCategoryName": "新しいカテゴリー名",
+      "selectKidFirst": "まずお子様を選択してください",
+      "messageAdded": "メッセージが追加されました！",
+      "nameHelp": "{name}を使ってお子様の名前を挿入"
     }
   }

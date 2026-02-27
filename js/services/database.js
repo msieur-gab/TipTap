@@ -6,7 +6,7 @@ class TipTapApp extends Dexie {
         
         // Version 1 - The new, clean schema
         this.version(1).stores({
-            userSettings: 'id, userName, userSignature, sourceLanguage, targetLanguage, deeplApiKey, deeplUsage, onboardingCompleted',
+            userSettings: 'id, sourceLanguage, targetLanguage, deeplApiKey, deeplUsage, onboardingCompleted',
             profiles: 'id, originalName, translatedName, timezone, birthdate, nicknames',
             categories: 'id, title, order, phrases',
             translations: 'hash, sourceText, sourceLang, targetLang, translatedText, timestamp'
@@ -46,8 +46,6 @@ export const DatabaseService = {
             // Create default settings if they don't exist
             settings = {
                 id: 'global',
-                userName: '',
-                userSignature: '',
                 sourceLanguage: 'en',
                 targetLanguage: 'zh',
                 deeplApiKey: null,
@@ -144,22 +142,29 @@ export const DatabaseService = {
             await this.clear('profiles');
             await this.clear('categories');
             await this.clear('userSettings');
-            
+            await this.clear('translations');
+
             // Import data
             if (data.profiles) {
                 for (const profile of data.profiles) {
                     await this.put('profiles', profile);
                 }
             }
-            
+
             if (data.categories) {
                 for (const category of data.categories) {
                     await this.put('categories', category);
                 }
             }
-            
+
             if (data.userSettings) {
                 await this.put('userSettings', data.userSettings);
+            }
+
+            if (data.translations) {
+                for (const translation of data.translations) {
+                    await this.put('translations', translation);
+                }
             }
 
             console.log('Data import completed');

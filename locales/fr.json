@@ -15,7 +15,10 @@
     "close": "Fermer",
     "confirm": "Confirmer",
     "yes": "Oui",
-    "no": "Non"
+    "no": "Non",
+    "saved": "Enregistré",
+    "translating": "Traduction en cours...",
+    "translate": "Traduire"
   },
   "onboarding": {
     "step1": {
@@ -53,10 +56,6 @@
       "apiKeyHelp": "Obtenez votre clé API gratuite de DeepL (500 000 caractères/mois gratuits)"
     },
     "step7": {
-      "title": "Votre Profil",
-      "description": "Cela permet de personnaliser l'application pour vous."
-    },
-    "step8": {
       "title": "Tout est Prêt !",
       "description": "Votre application de messagerie familiale est prête. Vous pouvez ajouter d'autres enfants et personnaliser les messages à tout moment."
     },
@@ -156,6 +155,7 @@
     "title": "Paramètres",
     "profiles": "Profils",
     "messages": "Messages",
+    "more": "Plus",
     "addProfile": "Ajouter un Profil",
     "addCategory": "Ajouter une Catégorie",
     "addMessage": "Ajouter un Message",
@@ -171,7 +171,27 @@
     "messageInYourLanguage": "Message dans votre langue",
     "messageInTargetLanguage": "Message dans la langue cible",
     "confirmDelete": "Êtes-vous sûr de vouloir supprimer {item} ?",
-    "selectCountry": "-- Sélectionner un Pays --"
+    "selectCountry": "-- Sélectionner un Pays --",
+    "dataManagement": "Gestion des Données",
+    "exportData": "Exporter les Données",
+    "exportDescription": "Téléchargez tous vos profils, messages et paramètres sous forme de fichier de sauvegarde.",
+    "importData": "Importer les Données",
+    "importDescription": "Restaurer à partir d'un fichier de sauvegarde. Cela remplacera toutes les données actuelles.",
+    "importConfirm": "Cela remplacera toutes vos données actuelles. Êtes-vous sûr ?",
+    "translationService": "Service de Traduction",
+    "enableTranslation": "Activer la Traduction",
+    "enableTranslationDesc": "Utiliser DeepL pour les traductions automatiques",
+    "apiKey": "Clé API DeepL",
+    "monthlyUsage": "Utilisation Mensuelle",
+    "usageError": "Impossible de récupérer les données d'utilisation.",
+    "usageCounter": "{count} / {limit} caractères",
+    "manageProfiles": "Gérer les Profils",
+    "saveChanges": "Enregistrer",
+    "createProfile": "Créer un Profil",
+    "deleteProfile": "Supprimer le Profil",
+    "selectTimezone": "Sélectionner un fuseau horaire",
+    "newNickname": "Nouveau surnom",
+    "updateMessage": "Modifier le Message"
   },
   "time": {
     "profileTime": "Heure de {name}",
@@ -186,7 +206,12 @@
     "profileNotFound": "Profil non trouvé",
     "categoryNotFound": "Catégorie non trouvée",
     "translationFailed": "Échec de la traduction",
-    "networkError": "Erreur réseau. Veuillez vérifier votre connexion."
+    "networkError": "Erreur réseau. Veuillez vérifier votre connexion.",
+    "fillRequired": "Veuillez remplir tous les champs obligatoires.",
+    "translationNotConfigured": "Le service de traduction n'est pas configuré. Veuillez ajouter votre clé API dans les paramètres.",
+    "languageNotConfigured": "La langue source ou cible n'est pas configurée. Veuillez compléter la configuration initiale.",
+    "imageError": "Échec du traitement de l'image. Veuillez réessayer.",
+    "loadingFailed": "Erreur de chargement"
   },
   "fab": {
         "addMessage": "Ajouter un Message",

@@ -2,6 +2,7 @@ import { eventBus, EVENTS } from '../utils/events.js';
 import { MessageService } from '../services/messages.js';
 import { copyToClipboard } from '../utils/clipboard.js';
 import { replaceNameTemplate } from '../utils/helpers.js';
+import { i18n } from '../services/i18n.js';
 
 class PhraseCarousel extends HTMLElement {
     constructor() {
@@ -253,7 +254,7 @@ class PhraseCarousel extends HTMLElement {
                 original: originalText
             });
         } else {
-            alert("Copy failed.");
+            alert(i18n.t('app.copyFailed'));
         }
     }
 

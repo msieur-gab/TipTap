@@ -17,14 +17,17 @@ class BottomProfileSelector extends HTMLElement {
     connectedCallback() {
         this.render();
         this.loadProfiles();
-        
+
         eventBus.on(EVENTS.PROFILES_UPDATED, this.boundLoadProfiles);
         document.addEventListener('click', this.boundCloseDropdown);
+        this.boundUpdateLanguage = () => { this.render(); this.loadProfiles(); };
+        i18n.addListener(this.boundUpdateLanguage);
     }
 
     disconnectedCallback() {
         eventBus.off(EVENTS.PROFILES_UPDATED, this.boundLoadProfiles);
         document.removeEventListener('click', this.boundCloseDropdown);
+        i18n.removeListener(this.boundUpdateLanguage);
     }
 
     setupEvents() {
@@ -75,7 +78,7 @@ class BottomProfileSelector extends HTMLElement {
         } catch (error) {
             console.error('Error loading profiles:', error);
             const name = this.shadowRoot.querySelector('.name');
-            if (name) name.textContent = 'Error loading';
+            if (name) name.textContent = i18n.t('errors.loadingFailed');
         }
     }
 
@@ -113,7 +116,7 @@ class BottomProfileSelector extends HTMLElement {
             this.classList.remove('no-profiles');
             label.style.display = 'block';
             if (this.activeProfile && avatar && name) {
-                name.textContent = this.activeProfile.originalName || 'Loading...';
+                name.textContent = this.activeProfile.originalName || i18n.t('common.loading');
                 avatar.src = this.activeProfile.image || 'https://placehold.co/40x40/ccc/333?text=?';
                 avatar.style.backgroundColor = '';
             }
@@ -153,15 +156,15 @@ class BottomProfileSelector extends HTMLElement {
         general.className = 'option';
         general.addEventListener('click', (e) => {
             e.stopPropagation();
-            this.selectProfile({ id: 'general', originalName: 'General', image: 'https://placehold.co/40x40/ccc/333?text=G' });
+            this.selectProfile({ id: 'general', originalName: i18n.t('app.general'), image: 'https://placehold.co/40x40/ccc/333?text=G' });
         });
-        general.innerHTML = `<img src="https://placehold.co/24x24/ccc/333?text=G" class="option-avatar"> <span>General</span>`;
+        general.innerHTML = `<img src="https://placehold.co/24x24/ccc/333?text=G" class="option-avatar"> <span>${i18n.t('app.general')}</span>`;
         optionsContainer.appendChild(general);
 
         const addNewProfile = document.createElement('div');
         addNewProfile.className = 'option';
         addNewProfile.style.cssText = 'color: var(--primary-color); font-weight: 600;';
-        addNewProfile.innerHTML = `<span>&#43; Add New Profile</span>`;
+        addNewProfile.innerHTML = `<span>+ ${i18n.t('settings.addProfile')}</span>`;
         addNewProfile.addEventListener('click', (e) => {
             e.stopPropagation();
             this.closeDropdown();
@@ -278,9 +281,9 @@ class BottomProfileSelector extends HTMLElement {
                 <div class="left">
                     <img src="https://placehold.co/40x40/ccc/333?text=?" class="avatar">
                     <div class="info-stack">
-                        <span class="label">Messages for</span>
+                        <span class="label">${i18n.t('app.messagesFor')}</span>
                         <div class="selector-container">
-                            <span class="name">Loading...</span>
+                            <span class="name">${i18n.t('common.loading')}</span>
                             <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <polyline points="6,9 12,15 18,9" style="transform: scaleY(-1); transform-origin: center;"></polyline>
                             </svg>
