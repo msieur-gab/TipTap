@@ -46,6 +46,10 @@ class MessagesTab extends HTMLElement {
         this.shadowRoot.querySelectorAll('[data-i18n-title]').forEach(el => {
             el.title = i18n.t(el.dataset.i18nTitle);
         });
+        const addModal = this.shadowRoot.querySelector('#add-phrase-modal');
+        if (addModal) addModal.setAttribute('title', i18n.t('messageManager.addMessage'));
+        const editModal = this.shadowRoot.querySelector('#edit-phrase-modal');
+        if (editModal) editModal.setAttribute('title', i18n.t('messageManager.editMessage'));
     }
 
     async handleClick(event) {
