@@ -289,13 +289,6 @@ class AppHeader extends HTMLElement {
             </div>
 
             <div class="carousel-container">
-                <!-- <div class="card">
-                    <span class="card-title">Current Time</span>
-                    <div class="card-content">
-                        <span id="time-card-content">--:--</span>
-                    </div>
-                </div> -->
-
                 <div class="card card--illustrated" id="profile-time-card" style="display: none;">
                     <div class="card-illustration">
                          <img src="./data/time.svg" alt="Timezone illustration">
@@ -318,36 +311,6 @@ class AppHeader extends HTMLElement {
                     </div>
                 </div>
 
-               <!--  <div class="card">
-                    <span class="card-title">Past 7 Days</span>
-                    <div class="graph-container">
-                        <div class="bar" style="height: 60%;"></div>
-                        <div class="bar" style="height: 80%;"></div>
-                        <div class="bar" style="height: 40%;"></div>
-                        <div class="bar" style="height: 50%;"></div>
-                        <div class="bar" style="height: 90%;"></div>
-                        <div class="bar" style="height: 70%;"></div>
-                        <div class="bar" style="height: 100%;"></div>
-                    </div>
-                </div> -->
-
-                <!-- <div class="card">
-                    <span class="card-title">Most used category</span>
-                    <div class="h-graph-container">
-                        <div class="h-bar-group">
-                            <span class="h-bar-label">Greetings</span>
-                            <div class="h-bar-wrapper"><div class="h-bar" style="width: 90%;"></div></div>
-                        </div>
-                        <div class="h-bar-group">
-                            <span class="h-bar-label">Affection</span>
-                            <div class="h-bar-wrapper"><div class="h-bar" style="width: 60%;"></div></div>
-                        </div>
-                        <div class="h-bar-group">
-                            <span class="h-bar-label">School</span>
-                            <div class="h-bar-wrapper"><div class="h-bar" style="width: 45%;"></div></div>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         `;
     }

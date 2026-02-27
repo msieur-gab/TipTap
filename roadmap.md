@@ -23,62 +23,9 @@ This phase focuses on simplifying the core logic and adding essential services t
 -   [ ] **Update `js/app.js`:**
     -   [ ] Adjust the `startOnboarding` event listener to reflect the simplified data being received from the `onboarding-complete` event.
 
-### Task 2: Extend DeepL Service for Quota
+### ~~Task 2: Extend DeepL Service for Quota~~ (Done)
 
-**Goal:** Add the functionality to fetch and display the user's DeepL API usage.
-
--   [ ] **Create a New Netlify Function for Usage:**
-    -   [ ] Create a new file: `netlify/functions/deepl-usage.js`.
-    -   [ ] This function will take an API key, make a request to the DeepL `/v2/usage` endpoint, and return the `character_count` and `character_limit`.
-
-    ```javascript
-    // netlify/functions/deepl-usage.js
-    exports.handler = async function(event) {
-        if (event.httpMethod !== 'POST') {
-            return { statusCode: 405, body: 'Method Not Allowed' };
-        }
-
-        try {
-            const { apiKey } = JSON.parse(event.body);
-            if (!apiKey) {
-                return { statusCode: 400, body: JSON.stringify({ error: 'API key is missing.' }) };
-            }
-            
-            const apiEndpoint = '[https://api-free.deepl.com/v2/usage](https://api-free.deepl.com/v2/usage)';
-
-            const response = await fetch(apiEndpoint, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `DeepL-Auth-Key ${apiKey}`,
-                    'Content-Type': 'application/json',
-                },
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                return {
-                    statusCode: response.status,
-                    body: JSON.stringify({ error: errorData.message || 'DeepL API error' }),
-                };
-            }
-
-            const data = await response.json();
-            return {
-                statusCode: 200,
-                body: JSON.stringify(data),
-            };
-
-        } catch (error) {
-            return {
-                statusCode: 500,
-                body: JSON.stringify({ error: error.message }),
-            };
-        }
-    };
-    ```
-
--   [ ] **Update `js/services/deepl.js`:**
-    -   [ ] Add a new `getUsage()` method that calls the new Netlify function and returns the usage data.
+Implemented in `netlify/functions/deepl-usage.js` and `js/services/deepl.js`. Usage displayed in `settings-tab.js`.
 
 ---
 
@@ -86,27 +33,14 @@ This phase focuses on simplifying the core logic and adding essential services t
 
 This phase focuses on creating the new settings panel and improving user feedback mechanisms.
 
-### Task 3: Create Core User Settings Panel
+### ~~Task 3: Create Core User Settings Panel~~ (Done)
 
-**Goal:** Build a new settings panel where users can manage their API key and view their translation quota.
+Implemented as `settings-panel.js` with tabs: `profiles-tab.js`, `messages-tab.js`, `settings-tab.js`.
 
--   [ ] **Create `js/components/user-settings-panel.js`:**
-    -   [ ] This component will have an input field for the DeepL API key.
-    -   [ ] It will have a section to display the usage quota, calling the `deepL.getUsage()` method.
-    -   [ ] Include a "Save" button that updates the `deeplApiKey` in the database via `DatabaseService.updateUserSettings()`.
+### ~~Task 4: Create a Reusable Toast Component~~ (Done)
 
-### Task 4: Create a Reusable Toast Component
+Implemented as `<app-toast>`. Triggered via `eventBus.emit(EVENTS.TOAST, { message })`.
 
-**Goal:** Replace all native `alert()` calls with a more elegant, non-blocking toast notification system.
-
--   [ ] **Create `js/components/feedback-toast.js`:**
-    -   [ ] The component should be able to display success, error, and info messages.
-    -   [ ] It should appear for a few seconds and then automatically disappear.
-    -   [ ] Create a global helper function or an event-based system to easily trigger the toast from any other component (e.g., `eventBus.emit(EVENTS.SHOW_TOAST, { message: 'Success!', type: 'success' });`).
-
--   [ ] **Integrate the Toast Component:**
-    -   [ ] Add `<feedback-toast></feedback-toast>` to the main `index.html`.
-    -   [ ] Go through all components and replace `alert()` calls with the new toast event.
 
 ---
 
@@ -114,16 +48,9 @@ This phase focuses on creating the new settings panel and improving user feedbac
 
 This phase is about improving the codebase and adding "smart" features that enhance the user experience.
 
-### Task 5: Refactor the Floating Action Button
+### ~~Task 5: Refactor the Floating Action Button~~ (Done)
 
-**Goal:** Decouple the message creation logic from the FAB for better code organization.
-
--   [ ] **Create `js/components/message-creator.js`:**
-    -   [ ] Move the message creation form and its logic from `floating-action-button.js` into this new component.
-    -   [ ] This component will be responsible for handling user input, translation, and adding the new message to the database.
-
--   [ ] **Update `floating-action-button.js`:**
-    -   [ ] The FAB will now be responsible only for toggling its menu and opening a modal containing the `<message-creator>` component.
+FAB has been removed. Message creation now handled by `<message-manager>` inside `<app-modal>`. See `messages-tab.js` and `message-manager.js`.
 
 ### Task 6: Implement Smart Category Display
 

@@ -30,7 +30,7 @@ export const InitialDataService = {
      * @param {object} settings - The settings object from the onboarding flow.
      */
     async setupInitialData(settings) {
-        // Use parentLanguage and the now-guaranteed targetLanguage
+        // Use sourceLanguage and the now-guaranteed targetLanguage
         const { sourceLanguage, targetLanguage } = settings;
 
         if (!sourceLanguage || !targetLanguage) {

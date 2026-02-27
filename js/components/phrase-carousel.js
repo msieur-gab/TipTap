@@ -50,15 +50,6 @@ class PhraseCarousel extends HTMLElement {
             this.loadCategories();
         });
 
-        // eventBus.on(EVENTS.PROFILE_SELECTED, (selection) => {
-        //     this.currentSelection = selection;
-        //     this.updatePhraseDisplay();
-        // });
-
-        // eventBus.on(EVENTS.NICKNAME_SELECTED, (selection) => {
-        //     this.currentSelection = selection;
-        //     this.updatePhraseDisplay();
-        // });
         eventBus.on(EVENTS.PROFILE_SELECTED, (data) => {
             const { profile, nickname } = data;
 

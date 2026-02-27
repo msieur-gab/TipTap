@@ -1,4 +1,4 @@
-// mobile message app/js/utils/image-processor.js
+// js/utils/image-processor.js
 
 export class ImageProcessor {
     static TARGET_FILE_SIZE = 50 * 1024; // Target 50KB maximum

@@ -82,23 +82,6 @@ class BottomProfileSelector extends HTMLElement {
         }
     }
 
-    // updateDisplay() {
-    //     const avatar = this.shadowRoot.querySelector('.avatar');
-    //     const name = this.shadowRoot.querySelector('.name');
-        
-    //     if (this.activeProfile && avatar && name) {
-    //         const activeNickname = this.activeNickname && this.activeProfile.nicknames.find(n => n.id === this.activeNickname.id);
-    //         // name.textContent = activeNickname ? activeNickname.display : this.activeProfile.originalName || 'Loading...';
-    //         name.textContent = this.activeProfile.originalName || 'Loading...';
-
-    //         avatar.src = this.activeProfile.image || 'https://placehold.co/40x40/ccc/333?text=?';
-    //     } else if (avatar && name) {
-    //         avatar.src = 'https://placehold.co/40x40/ccc/333?text=?';
-    //         name.textContent = 'No Profile';
-    //         this.activeProfile = null;
-    //     }
-    // }
-
     updateDisplay() {
         const avatar = this.shadowRoot.querySelector('.avatar');
         const name = this.shadowRoot.querySelector('.name');

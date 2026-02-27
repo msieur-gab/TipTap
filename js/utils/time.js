@@ -1,4 +1,4 @@
-// mobile message app/js/utils/time.js
+// js/utils/time.js
 
 // Access Luxon's classes from the global window object
 const DateTime = window.luxon.DateTime;

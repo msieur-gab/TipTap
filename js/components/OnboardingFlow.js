@@ -465,11 +465,6 @@ class OnboardingFlow extends HTMLElement {
     }
 
     finishOnboarding() {
-        // Save current kid if filled
-        // if (this.state.currentKid.name && this.state.currentKid.language) {
-        //     this.saveCurrentKid();
-        // }
-
         if (this.state.currentKid.originalName.trim() && this.state.targetLanguage) {
             this.state.kids.push({
                 ...this.state.currentKid,
