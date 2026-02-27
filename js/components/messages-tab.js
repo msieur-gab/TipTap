@@ -9,6 +9,7 @@ class MessagesTab extends HTMLElement {
         this.categories = [];
         this.editingPhrase = { categoryId: null, phraseId: null };
         this.boundUpdateContent = this.updateContent.bind(this);
+        this.boundLoadCategories = () => this.loadCategories();
     }
 
     connectedCallback() {
@@ -20,13 +21,11 @@ class MessagesTab extends HTMLElement {
 
     disconnectedCallback() {
         i18n.removeListener(this.boundUpdateContent);
+        eventBus.off(EVENTS.CATEGORIES_UPDATED, this.boundLoadCategories);
     }
 
     setupEventListeners() {
-        eventBus.on(EVENTS.CATEGORIES_UPDATED, () => {
-            this.loadCategories();
-        });
-
+        eventBus.on(EVENTS.CATEGORIES_UPDATED, this.boundLoadCategories);
         this.shadowRoot.addEventListener('click', this.handleClick.bind(this));
         this.shadowRoot.addEventListener('submit', this.handleSubmit.bind(this));
     }

@@ -11,6 +11,29 @@ class PhraseCarousel extends HTMLElement {
         this.currentSelection = { sourceLang_value: '', targetLang_value: '' };
         this.currentCategoryIndex = 0;
         this.observer = null;
+        this.boundHandleClick = this.handleClick.bind(this);
+        this.boundLoadCategories = () => this.loadCategories();
+        this.boundHandleProfileSelected = (data) => {
+            const { profile, nickname } = data;
+
+            if (nickname) {
+                this.currentSelection = {
+                    sourceLang_value: nickname.sourceLang_value || nickname.display,
+                    targetLang_value: nickname.targetLang_value || nickname.display
+                };
+            } else if (profile) {
+                if (profile.id === 'general') {
+                    this.currentSelection = { sourceLang_value: '', targetLang_value: '' };
+                } else {
+                    this.currentSelection = {
+                        sourceLang_value: profile.originalName,
+                        targetLang_value: profile.translatedName
+                    };
+                }
+            }
+
+            this.updatePhraseDisplay();
+        };
     }
 
     connectedCallback() {
@@ -26,11 +49,13 @@ class PhraseCarousel extends HTMLElement {
      * Cleanup method for removing observers and event listeners
      */
     cleanup() {
-        // Cleanup IntersectionObserver
         if (this.observer) {
             this.observer.disconnect();
             this.observer = null;
         }
+        eventBus.off(EVENTS.CATEGORIES_UPDATED, this.boundLoadCategories);
+        eventBus.off(EVENTS.PROFILE_SELECTED, this.boundHandleProfileSelected);
+        document.removeEventListener('click', this.boundHandleClick);
     }
 
     /**
@@ -45,42 +70,15 @@ class PhraseCarousel extends HTMLElement {
      * Sets up EventBus listeners for global state changes
      */
     setupGlobalEvents() {
-        // EventBus events for data updates
-        eventBus.on(EVENTS.CATEGORIES_UPDATED, () => {
-            this.loadCategories();
-        });
-
-        eventBus.on(EVENTS.PROFILE_SELECTED, (data) => {
-            const { profile, nickname } = data;
-
-            if (nickname) {
-                // If a nickname is selected, use its values
-                this.currentSelection = {
-                    sourceLang_value: nickname.sourceLang_value || nickname.display,
-                    targetLang_value: nickname.targetLang_value || nickname.display
-                };
-            } else if (profile) {
-                // Otherwise, use the main profile's values
-                if (profile.id === 'general') {
-                    this.currentSelection = { sourceLang_value: '', targetLang_value: '' };
-                } else {
-                    this.currentSelection = {
-                        sourceLang_value: profile.originalName,
-                        targetLang_value: profile.translatedName
-                    };
-                }
-            }
-            
-            this.updatePhraseDisplay();
-        });
+        eventBus.on(EVENTS.CATEGORIES_UPDATED, this.boundLoadCategories);
+        eventBus.on(EVENTS.PROFILE_SELECTED, this.boundHandleProfileSelected);
     }
 
     /**
      * Sets up DOM event listeners for user interactions
      */
     setupDOMEvents() {
-        // Tab clicks and phrase copy clicks
-        document.addEventListener('click', this.handleClick.bind(this));
+        document.addEventListener('click', this.boundHandleClick);
     }
 
     /**

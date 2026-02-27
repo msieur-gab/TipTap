@@ -16,6 +16,24 @@ class MessageManager extends HTMLElement {
         this.categories = [];
         this.currentSelection = { sourceLang_value: '', targetLang_value: '' };
         this.boundUpdateContent = this.updateContent.bind(this);
+        this.boundHandleProfileSelected = (data) => {
+            const { profile, nickname } = data;
+            if (nickname) {
+                this.currentSelection = {
+                    sourceLang_value: nickname.sourceLang_value || nickname.display,
+                    targetLang_value: nickname.targetLang_value || nickname.display
+                };
+            } else if (profile) {
+                if (profile.id === 'general') {
+                    this.currentSelection = { sourceLang_value: '', targetLang_value: '' };
+                } else {
+                    this.currentSelection = {
+                        sourceLang_value: profile.originalName,
+                        targetLang_value: profile.translatedName
+                    };
+                }
+            }
+        };
     }
 
     static get observedAttributes() {
@@ -45,6 +63,7 @@ class MessageManager extends HTMLElement {
 
     disconnectedCallback() {
         i18n.removeListener(this.boundUpdateContent);
+        eventBus.off(EVENTS.PROFILE_SELECTED, this.boundHandleProfileSelected);
     }
 
     async loadData() {
@@ -66,26 +85,7 @@ class MessageManager extends HTMLElement {
     }
 
     setupEventListeners() {
-        // Listen for profile selection to get name context
-        eventBus.on(EVENTS.PROFILE_SELECTED, (data) => {
-            const { profile, nickname } = data;
-            if (nickname) {
-                this.currentSelection = {
-                    sourceLang_value: nickname.sourceLang_value || nickname.display,
-                    targetLang_value: nickname.targetLang_value || nickname.display
-                };
-            } else if (profile) {
-                if (profile.id === 'general') {
-                    this.currentSelection = { sourceLang_value: '', targetLang_value: '' };
-                } else {
-                    this.currentSelection = {
-                        sourceLang_value: profile.originalName,
-                        targetLang_value: profile.translatedName
-                    };
-                }
-            }
-        });
-
+        eventBus.on(EVENTS.PROFILE_SELECTED, this.boundHandleProfileSelected);
         this.shadowRoot.addEventListener('click', this.handleClick.bind(this));
         this.shadowRoot.addEventListener('change', this.handleChange.bind(this));
         this.shadowRoot.addEventListener('submit', this.handleSubmit.bind(this));

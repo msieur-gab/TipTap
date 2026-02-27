@@ -10,6 +10,8 @@ class SettingsPanel extends HTMLElement {
         this.attachShadow({ mode: 'open' });
         this.isOpen = false;
         this.activeTab = 'profiles';
+        this.boundToggle = () => this.toggle();
+        this.boundUpdateContent = () => this.updateContent();
     }
 
     connectedCallback() {
@@ -18,9 +20,14 @@ class SettingsPanel extends HTMLElement {
         this.updateContent();
     }
 
+    disconnectedCallback() {
+        eventBus.off(EVENTS.SETTINGS_TOGGLE, this.boundToggle);
+        i18n.removeListener(this.boundUpdateContent);
+    }
+
     setupEventListeners() {
-        eventBus.on(EVENTS.SETTINGS_TOGGLE, () => this.toggle());
-        i18n.addListener(() => this.updateContent());
+        eventBus.on(EVENTS.SETTINGS_TOGGLE, this.boundToggle);
+        i18n.addListener(this.boundUpdateContent);
 
         const root = this.shadowRoot;
         root.addEventListener('click', (e) => {
