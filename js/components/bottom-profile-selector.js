@@ -240,7 +240,7 @@ class BottomProfileSelector extends HTMLElement {
                     display: none;
                 }
                 .left { display: flex; align-items: center; gap: 0.75rem; }
-                .avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; padding: 12px; box-sizing: border-box;}
+                .avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
                 .info-stack { display: flex; flex-direction: column; }
                 .label { font-size: 0.8rem; color: #FFF; }
                 .selector-container { position: relative; display: flex; align-items: center; gap: 0.25rem; border-radius: 6px; }
