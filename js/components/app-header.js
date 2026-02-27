@@ -161,7 +161,7 @@ class AppHeader extends HTMLElement {
                     flex: 0 0 calc(50% - 0.5rem);
                     scroll-snap-align: start;
                     box-sizing: border-box;
-                    background: #1f2937;
+                    background: var(--color-text-dark);
                     color: #ffffff;
                     border-radius: 12px;
                     height: 120px; /* Reset height */

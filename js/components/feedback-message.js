@@ -81,7 +81,7 @@ class FeedbackMessage extends HTMLElement {
                     padding: 2em 1.5em 1.5em 1.5em;
                     box-sizing: border-box;
 
-                    // font-family: 'Comic Sans MS', 'Chalkduster', 'cursive';
+                    /* font-family: 'Comic Sans MS', 'Chalkduster', 'cursive'; */
                     line-height: 1.5;
                     color: #333;
                     background: #fff9b1; /* Classic post-it yellow */
