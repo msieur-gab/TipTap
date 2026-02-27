@@ -156,7 +156,7 @@ class ProfilesTab extends HTMLElement {
             const nicknameId = this.editingNickname.nicknameId;
             const display = form.querySelector('input[name="nickname_display"]').value;
             const translation = form.querySelector('input[name="nickname_translation"]').value;
-            await ProfileService.updateNickname(profileId, nicknameId, { display, parentLang_value: display, kidLang_value: translation });
+            await ProfileService.updateNickname(profileId, nicknameId, { display, baseLang_value: display, targetLang_value: translation });
             this.editingNickname = { profileId: null, nicknameId: null };
             this.renderProfiles();
         }
@@ -297,7 +297,7 @@ class ProfilesTab extends HTMLElement {
             <div class="nickname-item" data-nickname-id="${nickname.id}">
                 <div class="nickname-info">
                     <p>${nickname.display}</p>
-                    <p class="translation">${nickname.kidLang_value}</p>
+                    <p class="translation">${nickname.targetLang_value}</p>
                 </div>
                 <div class="nickname-actions">
                     <button class="action-btn edit-nickname-btn">
@@ -319,7 +319,7 @@ class ProfilesTab extends HTMLElement {
                         <input type="text" name="nickname_display" class="styled-input" value="${nickname.display}" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="nickname_translation" class="styled-input" value="${nickname.kidLang_value}" required>
+                        <input type="text" name="nickname_translation" class="styled-input" value="${nickname.targetLang_value}" required>
                     </div>
                     <div class="form-actions">
                         <button type="button" class="secondary-button cancel-nickname-edit-btn" data-i18n="common.cancel">Cancel</button>

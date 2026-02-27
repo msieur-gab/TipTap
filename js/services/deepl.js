@@ -67,7 +67,7 @@ class DeepLService {
         }
     }
 
-    async translate(text, kidLanguage, parentLanguage = 'auto', apiKey = null) {
+    async translate(text, targetLanguage, sourceLanguage = 'auto', apiKey = null) {
         const keyToUse = apiKey || this.apiKey;
         
         if (!keyToUse) {
@@ -83,8 +83,8 @@ class DeepLService {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     text: protectedText,
-                    target_lang: kidLanguage,
-                    source_lang: parentLanguage,
+                    target_lang: targetLanguage,
+                    source_lang: sourceLanguage,
                     apiKey: keyToUse,
                     tag_handling: 'xml',
                     ignore_tags: 'notranslate'

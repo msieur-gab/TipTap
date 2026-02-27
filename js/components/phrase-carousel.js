@@ -7,7 +7,7 @@ class PhraseCarousel extends HTMLElement {
     constructor() {
         super();
         this.categories = [];
-        this.currentSelection = { parentLang_value: '', kidLang_value: '' };
+        this.currentSelection = { baseLang_value: '', targetLang_value: '' };
         this.currentCategoryIndex = 0;
         this.observer = null;
     }
@@ -64,17 +64,17 @@ class PhraseCarousel extends HTMLElement {
             if (nickname) {
                 // If a nickname is selected, use its values
                 this.currentSelection = {
-                    parentLang_value: nickname.parentLang_value || nickname.display,
-                    kidLang_value: nickname.kidLang_value || nickname.display
+                    baseLang_value: nickname.baseLang_value || nickname.display,
+                    targetLang_value: nickname.targetLang_value || nickname.display
                 };
             } else if (profile) {
                 // Otherwise, use the main profile's values
                 if (profile.id === 'general') {
-                    this.currentSelection = { parentLang_value: '', kidLang_value: '' };
+                    this.currentSelection = { baseLang_value: '', targetLang_value: '' };
                 } else {
                     this.currentSelection = {
-                        parentLang_value: profile.originalName,
-                        kidLang_value: profile.translatedName
+                        baseLang_value: profile.originalName,
+                        targetLang_value: profile.translatedName
                     };
                 }
             }
@@ -162,19 +162,19 @@ class PhraseCarousel extends HTMLElement {
     updatePhraseDisplay() {
         const phrases = document.querySelectorAll('.phrase-card');
         phrases.forEach(phraseEl => {
-            const parentLangTemplate = phraseEl.dataset.parentLangTemplate;
-            const kidLangTemplate = phraseEl.dataset.kidLangTemplate;
+            const baseLangTemplate = phraseEl.dataset.baseLangTemplate;
+            const targetLangTemplate = phraseEl.dataset.targetLangTemplate;
             
             const baseDisplayEl = phraseEl.querySelector('.card__text--base');
             const targetDisplayEl = phraseEl.querySelector('.card__text--target');
 
-            if (baseDisplayEl && parentLangTemplate) {
-                const replacements = { name: this.currentSelection.parentLang_value };
-                baseDisplayEl.textContent = replaceNameTemplate(parentLangTemplate, replacements);
+            if (baseDisplayEl && baseLangTemplate) {
+                const replacements = { name: this.currentSelection.baseLang_value };
+                baseDisplayEl.textContent = replaceNameTemplate(baseLangTemplate, replacements);
             }
-            if (targetDisplayEl && kidLangTemplate) {
-                const replacements = { name: this.currentSelection.kidLang_value };
-                targetDisplayEl.textContent = replaceNameTemplate(kidLangTemplate, replacements);
+            if (targetDisplayEl && targetLangTemplate) {
+                const replacements = { name: this.currentSelection.targetLang_value };
+                targetDisplayEl.textContent = replaceNameTemplate(targetLangTemplate, replacements);
             }
         });
     }
@@ -239,11 +239,11 @@ class PhraseCarousel extends HTMLElement {
         const phraseCard = copyBtn.closest('.phrase-card');
         if (!phraseCard) return;
 
-        const kidLangTemplate = phraseCard.dataset.kidLangTemplate;
+        const targetLangTemplate = phraseCard.dataset.targetLangTemplate;
         const originalText = phraseCard.querySelector('.card__text--base').textContent;
         
-        const finalMessage = replaceNameTemplate(kidLangTemplate, { 
-            name: this.currentSelection.kidLang_value 
+        const finalMessage = replaceNameTemplate(targetLangTemplate, { 
+            name: this.currentSelection.targetLang_value 
         });
 
         const success = await copyToClipboard(finalMessage);
@@ -332,8 +332,8 @@ class PhraseCarousel extends HTMLElement {
     createPhraseCard(phrase) {
         const card = document.createElement('div');
         card.className = 'phrase-card';
-        card.dataset.parentLangTemplate = phrase.parentLang;
-        card.dataset.kidLangTemplate = phrase.kidLang;
+        card.dataset.baseLangTemplate = phrase.baseLang;
+        card.dataset.targetLangTemplate = phrase.targetLang;
         card.style.cssText = `
             background-color: var(--color-surface);
             border-radius: var(--border-radius);
@@ -348,8 +348,8 @@ class PhraseCarousel extends HTMLElement {
         
         card.innerHTML = `
             <div class="card__text-wrapper" style="min-width: 0;">
-                <p class="card__text--base" style="font-size: 1rem; color: var(--color-text-dark); margin: 0 0 0.25rem 0; overflow-wrap: break-word;">${phrase.parentLang}</p>
-                <p class="card__text--target" style="font-size: 0.9rem; color: var(--color-text-light); margin: 0; overflow-wrap: break-word;">${phrase.kidLang}</p>
+                <p class="card__text--base" style="font-size: 1rem; color: var(--color-text-dark); margin: 0 0 0.25rem 0; overflow-wrap: break-word;">${phrase.baseLang}</p>
+                <p class="card__text--target" style="font-size: 0.9rem; color: var(--color-text-light); margin: 0; overflow-wrap: break-word;">${phrase.targetLang}</p>
             </div>
             <button class="card__copy-button" title="Copy" style="flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--color-border); background-color: #f9fafb; color: var(--color-text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background-color 0.2s ease;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
