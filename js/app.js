@@ -190,7 +190,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // PWA lifecycle — service worker, install overlay, telemetry
     const pwa = new PWALifecycle({ swPath: './sw.js' });
-    document.querySelector('pwa-install-overlay').lifecycle = pwa;
+    const overlay = document.querySelector('pwa-install-overlay');
+    if (overlay) overlay.lifecycle = pwa;
 
     const pulse = new PWAPulse({
         app: 'tiptap',
