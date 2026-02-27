@@ -1,4 +1,3 @@
-import { eventBus, EVENTS } from '../utils/events.js';
 import { ProfileService } from '../services/profiles.js';
 import { TimezoneService } from '../services/timezoneService.js';
 import { ImageProcessor } from '../utils/image-processor.js';

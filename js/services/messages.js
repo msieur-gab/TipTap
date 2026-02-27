@@ -1,5 +1,4 @@
 import { DatabaseService } from './database.js';
-import { DEFAULT_CATEGORIES } from '../config/defaults.js';
 import { eventBus, EVENTS } from '../utils/events.js';
 import { generateId } from '../utils/helpers.js';
 

@@ -1,7 +1,6 @@
 // js/app.js
 import { eventBus, EVENTS } from './utils/events.js';
 import { ProfileService } from './services/profiles.js';
-import { MessageService } from './services/messages.js';
 import { DatabaseService } from './services/database.js';
 import { InitialDataService } from './services/initial-data.js';
 import { deepL } from './services/deepl.js'; 

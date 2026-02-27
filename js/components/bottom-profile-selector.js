@@ -184,10 +184,6 @@ class BottomProfileSelector extends HTMLElement {
         this.updateDisplay();
         this.closeDropdown();
         
-        const selection = this.activeProfile.id === 'general' 
-            ? { sourceLang_value: '', targetLang_value: '' }
-            : { sourceLang_value: this.activeProfile.originalName, targetLang_value: this.activeProfile.translatedName };
-        
         eventBus.emit(EVENTS.PROFILE_SELECTED, { profile: this.activeProfile, nickname: null });
     }
 
@@ -197,13 +193,6 @@ class BottomProfileSelector extends HTMLElement {
         this.updateDisplay();
         this.closeDropdown();
         
-        const selection = {
-            sourceLang_value: nickname.sourceLang_value || nickname.display,
-            targetLang_value: nickname.targetLang_value || nickname.display
-        };
-        
-        // eventBus.emit(EVENTS.PROFILE_SELECTED, selection);
-        // eventBus.emit(EVENTS.NICKNAME_SELECTED, selection);
         eventBus.emit(EVENTS.PROFILE_SELECTED, { profile: this.activeProfile, nickname: this.activeNickname });
 
     }

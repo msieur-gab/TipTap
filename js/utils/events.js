@@ -30,12 +30,10 @@ export const eventBus = new EventBus();
 // Event constants
 export const EVENTS = {
     PROFILE_SELECTED: 'profile:selected',
-    NICKNAME_SELECTED: 'nickname:selected',
     PROFILES_UPDATED: 'profiles:updated',
     CATEGORIES_UPDATED: 'categories:updated',
     MESSAGE_COPIED: 'message:copied',
     SETTINGS_TOGGLE: 'settings:toggle',
     TOAST: 'toast:show',
-    // VIEW_CHANGED: 'view:changed',
     APP_READY: 'app:ready'
 };

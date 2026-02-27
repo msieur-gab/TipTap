@@ -114,11 +114,6 @@ export const DatabaseService = {
         };
     },
 
-    // Utility functions
-    generateId() {
-        return Date.now().toString() + Math.random().toString(36).substr(2, 9);
-    },
-
     // Backup and restore
     async exportData() {
         const data = {
