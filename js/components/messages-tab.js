@@ -75,7 +75,7 @@ class MessagesTab extends HTMLElement {
         } else if (button.classList.contains('edit-phrase-btn')) {
             this.showEditPhraseModal(categoryId, phraseId);
         } else if (button.classList.contains('delete-phrase-btn')) {
-             if (confirm(i18n.t('settings.confirmDelete', { item: 'this phrase' }))) {
+             if (confirm(i18n.t('settings.confirmDelete', { item: i18n.t('settings.thisPhrase') }))) {
                 await MessageService.deletePhrase(categoryId, phraseId);
             }
         }
@@ -331,11 +331,11 @@ class MessagesTab extends HTMLElement {
                 </form>
             </dialog>
 
-            <app-modal id="add-phrase-modal" title="Add New Message">
+            <app-modal id="add-phrase-modal" title="${i18n.t('messageManager.addMessage')}">
                 <message-manager mode="create"></message-manager>
             </app-modal>
 
-            <app-modal id="edit-phrase-modal" title="Edit Message">
+            <app-modal id="edit-phrase-modal" title="${i18n.t('messageManager.editMessage')}">
                 <message-manager mode="edit"></message-manager>
             </app-modal>
         `;

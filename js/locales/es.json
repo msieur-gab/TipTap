@@ -18,7 +18,9 @@
     "no": "No",
     "saved": "Guardado",
     "translating": "Traduciendo...",
-    "translate": "Traducir"
+    "translate": "Traducir",
+    "copy": "Copiar",
+    "expand": "Expandir"
   },
   "onboarding": {
     "step1": {
@@ -68,7 +70,8 @@
     "placeholders": {
       "chooseLanguage": "Elige un idioma...",
       "childBirthdate": "Fecha de nacimiento del niño"
-    }
+    },
+    "noTimezones": "No hay zonas horarias disponibles."
   },
   "app": {
     "title": "Mensajes Rápidos",
@@ -117,7 +120,15 @@
     "deleteProfile": "Eliminar Perfil",
     "selectTimezone": "Seleccionar zona horaria",
     "newNickname": "Nuevo apodo",
-    "updateMessage": "Actualizar Mensaje"
+    "updateMessage": "Actualizar Mensaje",
+    "addNickname": "Añadir Apodo",
+    "nicknames": "Apodos",
+    "profileCreated": "Perfil creado",
+    "profileUpdated": "Perfil actualizado",
+    "profileDeleted": "Perfil eliminado",
+    "editProfile": "Editar Perfil",
+    "thisPhrase": "esta frase",
+    "thisNickname": "este apodo"
   },
   "time": {
     "profileTime": "Hora de {name}",
@@ -147,6 +158,7 @@
     "newCategoryName": "Nombre de la Nueva Categoría",
     "selectKidFirst": "Por favor, selecciona primero un niño",
     "messageAdded": "¡Mensaje añadido con éxito!",
-    "nameHelp": "Usa {name} para insertar el nombre del niño"
+    "nameHelp": "Usa {name} para insertar el nombre del niño",
+    "editMessage": "Editar Mensaje"
   }
 }

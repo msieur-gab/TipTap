@@ -44,6 +44,7 @@ class ProfilesTab extends HTMLElement {
                 if (modal && profileManager) {
                     profileManager.setAttribute('mode', 'edit');
                     profileManager.setAttribute('profile-id', profileId);
+                    modal.setAttribute('title', i18n.t('settings.editProfile'));
                     modal.open();
                 }
             } else if (addButton) {
@@ -53,6 +54,7 @@ class ProfilesTab extends HTMLElement {
                 if (modal && profileManager) {
                     profileManager.setAttribute('mode', 'create');
                     profileManager.removeAttribute('profile-id');
+                    modal.setAttribute('title', i18n.t('settings.createProfile'));
                     modal.open();
                 }
             }

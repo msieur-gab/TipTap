@@ -199,7 +199,7 @@ class OnboardingFlow extends HTMLElement {
         const countryData = this.timezoneData.find(d => d.country === countryName);
 
         if (!timezoneList || !countryData || countryData.timezones.length === 0) {
-            timezoneList.innerHTML = `<li class="panel-option-text" style="padding: 1rem; text-align: center; color: #666;">No timezones available.</li>`;
+            timezoneList.innerHTML = `<li class="panel-option-text" style="padding: 1rem; text-align: center; color: #666;">${i18n.t('onboarding.noTimezones')}</li>`;
             if (timezoneGroup) timezoneGroup.classList.add('hidden');
             if (illustration) illustration.classList.remove('compact');
             return;

@@ -40,7 +40,7 @@ class AppHeader extends HTMLElement {
         const timeEl = this.shadowRoot.getElementById('time-card-content');
         if (timeEl) {
             const now = new Date();
-            const timeString = now.toLocaleTimeString('en-US', {
+            const timeString = now.toLocaleTimeString(i18n.getCurrentLocale(), {
                 hour: '2-digit',
                 minute: '2-digit',
                 hour12: false

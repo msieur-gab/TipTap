@@ -18,7 +18,9 @@
     "no": "否",
     "saved": "已保存",
     "translating": "翻译中...",
-    "translate": "翻译"
+    "translate": "翻译",
+    "copy": "复制",
+    "expand": "展开"
   },
   "onboarding": {
     "step1": {
@@ -68,7 +70,8 @@
     "placeholders": {
       "chooseLanguage": "选择语言...",
       "childBirthdate": "孩子的生日"
-    }
+    },
+    "noTimezones": "没有可用的时区。"
   },
   "app": {
     "title": "快捷消息",
@@ -117,7 +120,15 @@
     "deleteProfile": "删除个人资料",
     "selectTimezone": "选择时区",
     "newNickname": "新昵称",
-    "updateMessage": "更新消息"
+    "updateMessage": "更新消息",
+    "addNickname": "添加昵称",
+    "nicknames": "昵称",
+    "profileCreated": "个人资料已创建",
+    "profileUpdated": "个人资料已更新",
+    "profileDeleted": "个人资料已删除",
+    "editProfile": "编辑个人资料",
+    "thisPhrase": "此消息",
+    "thisNickname": "此昵称"
   },
   "time": {
     "profileTime": "{name}的时间",
@@ -147,6 +158,7 @@
     "newCategoryName": "新类别名称",
     "selectKidFirst": "请先选择一个孩子",
     "messageAdded": "消息添加成功！",
-    "nameHelp": "使用 {name} 插入孩子的名字"
+    "nameHelp": "使用 {name} 插入孩子的名字",
+    "editMessage": "编辑消息"
   }
 }

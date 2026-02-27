@@ -352,7 +352,7 @@ class PhraseCarousel extends HTMLElement {
                 <p class="card__text--base" style="font-size: 1rem; color: var(--color-text-dark); margin: 0 0 0.25rem 0; overflow-wrap: break-word;">${phrase.sourceLang}</p>
                 <p class="card__text--target" style="font-size: 0.9rem; color: var(--color-text-light); margin: 0; overflow-wrap: break-word;">${phrase.targetLang}</p>
             </div>
-            <button class="card__copy-button" title="Copy" style="flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--color-border); background-color: #f9fafb; color: var(--color-text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background-color 0.2s ease;">
+            <button class="card__copy-button" title="${i18n.t('common.copy')}" style="flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--color-border); background-color: #f9fafb; color: var(--color-text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background-color 0.2s ease;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>

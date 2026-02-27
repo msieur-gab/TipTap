@@ -95,7 +95,7 @@ class ProfileManager extends HTMLElement {
                 this.render(); // Re-render to go back to display view
                 break;
             case 'delete-nickname':
-                if (confirm(i18n.t('settings.confirmDelete', { item: 'this nickname' }))) {
+                if (confirm(i18n.t('settings.confirmDelete', { item: i18n.t('settings.thisNickname') }))) {
                     await ProfileService.deleteNickname(this.profileId, nicknameId);
                     await this.loadData();
                 }
@@ -251,8 +251,8 @@ class ProfileManager extends HTMLElement {
                                 <input type="text" name="translation" value="${nickname.targetLang_value}" class="styled-input" data-i18n-placeholder="settings.profileTranslation" placeholder="${i18n.t('settings.profileTranslation')}">
                             </div>
                             <div class="nickname-actions">
-                                <button type="submit" class="save-button" title="Save"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
-                                <button type="button" class="cancel-button" data-action="cancel-nickname" title="Cancel"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+                                <button type="submit" class="save-button" title="${i18n.t('common.save')}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+                                <button type="button" class="cancel-button" data-action="cancel-nickname" title="${i18n.t('common.cancel')}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
                             </div>
                         </form>
                     </div>
@@ -265,8 +265,8 @@ class ProfileManager extends HTMLElement {
                             <span class="nickname-translation">${nickname.targetLang_value}</span>
                         </div>
                         <div class="nickname-actions">
-                            <button type="button" class="edit-button" data-action="edit-nickname" title="Edit"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>
-                            <button type="button" class="delete-button" data-action="delete-nickname" title="Delete"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+                            <button type="button" class="edit-button" data-action="edit-nickname" title="${i18n.t('common.edit')}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>
+                            <button type="button" class="delete-button" data-action="delete-nickname" title="${i18n.t('common.delete')}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
                         </div>
                     </div>
                 `;
@@ -292,7 +292,7 @@ class ProfileManager extends HTMLElement {
     renderMinimizedProfile() {
         if (!this.profile) return '';
         return `
-        <div class="minimized-profile" data-action="expand-profile" title="Edit Profile Details">
+        <div class="minimized-profile" data-action="expand-profile" title="${i18n.t('settings.editProfile')}">
             <img src="${this.profile.image || 'https://placehold.co/50x50/ccc/333?text=?'}" 
                  alt="Avatar" class="mini-avatar">
             <div class="mini-info">

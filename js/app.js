@@ -82,6 +82,8 @@ class QuickMessagesApp {
         await this.initializeServices();
         this.setupGlobalEventListeners();
         this.setupProfileModalListeners();
+        this.updateLightDOMTranslations();
+        i18n.addListener(() => this.updateLightDOMTranslations());
 
         this.isInitialized = true;
         eventBus.emit(EVENTS.APP_READY);
@@ -111,6 +113,7 @@ class QuickMessagesApp {
 
         profileManager.setAttribute('mode', 'create');
         profileManager.removeAttribute('profile-id');
+        modal.setAttribute('title', i18n.t('settings.createProfile'));
         modal.open();
     }
 
@@ -121,18 +124,18 @@ class QuickMessagesApp {
 
         profileManager.addEventListener('profile-created', (e) => {
             modal.close();
-            eventBus.emit(EVENTS.TOAST, { message: 'Profile created' });
+            eventBus.emit(EVENTS.TOAST, { message: i18n.t('settings.profileCreated') });
             eventBus.emit(EVENTS.PROFILE_SELECTED, { profile: e.detail.profile, nickname: null });
         });
 
         profileManager.addEventListener('profile-updated', () => {
             modal.close();
-            eventBus.emit(EVENTS.TOAST, { message: 'Profile updated' });
+            eventBus.emit(EVENTS.TOAST, { message: i18n.t('settings.profileUpdated') });
         });
 
         profileManager.addEventListener('profile-deleted', (e) => {
             modal.close();
-            eventBus.emit(EVENTS.TOAST, { message: 'Profile deleted' });
+            eventBus.emit(EVENTS.TOAST, { message: i18n.t('settings.profileDeleted') });
         });
     }
 
@@ -147,12 +150,18 @@ class QuickMessagesApp {
 
     handleGlobalError(event) {
         console.error('Global error:', event.error);
-        this.showError('An unexpected error occurred.');
+        this.showError(i18n.t('errors.unexpectedError'));
     }
 
     handleUnhandledRejection(event) {
         console.error('Unhandled promise rejection:', event.reason);
-        this.showError('An unexpected error occurred.');
+        this.showError(i18n.t('errors.unexpectedError'));
+    }
+
+    updateLightDOMTranslations() {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            el.textContent = i18n.t(el.dataset.i18n);
+        });
     }
 
     showError(message) {

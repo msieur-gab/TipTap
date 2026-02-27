@@ -18,7 +18,9 @@
     "no": "いいえ",
     "saved": "保存しました",
     "translating": "翻訳中...",
-    "translate": "翻訳"
+    "translate": "翻訳",
+    "copy": "コピー",
+    "expand": "展開"
   },
   "onboarding": {
     "step1": {
@@ -68,7 +70,8 @@
     "placeholders": {
       "chooseLanguage": "言語を選択...",
       "childBirthdate": "お子様の生年月日"
-    }
+    },
+    "noTimezones": "利用可能なタイムゾーンがありません。"
   },
   "app": {
     "title": "クイックメッセージ",
@@ -117,7 +120,15 @@
     "deleteProfile": "プロフィールを削除",
     "selectTimezone": "タイムゾーンを選択",
     "newNickname": "新しいニックネーム",
-    "updateMessage": "メッセージを更新"
+    "updateMessage": "メッセージを更新",
+    "addNickname": "ニックネームを追加",
+    "nicknames": "ニックネーム",
+    "profileCreated": "プロフィールを作成しました",
+    "profileUpdated": "プロフィールを更新しました",
+    "profileDeleted": "プロフィールを削除しました",
+    "editProfile": "プロフィールを編集",
+    "thisPhrase": "このメッセージ",
+    "thisNickname": "このニックネーム"
   },
   "time": {
     "profileTime": "{name}の時間",
@@ -147,6 +158,7 @@
     "newCategoryName": "新しいカテゴリー名",
     "selectKidFirst": "まずお子様を選択してください",
     "messageAdded": "メッセージが追加されました！",
-    "nameHelp": "{name}を使ってお子様の名前を挿入"
+    "nameHelp": "{name}を使ってお子様の名前を挿入",
+    "editMessage": "メッセージを編集"
   }
 }

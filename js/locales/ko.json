@@ -18,7 +18,9 @@
     "no": "아니요",
     "saved": "저장됨",
     "translating": "번역 중...",
-    "translate": "번역"
+    "translate": "번역",
+    "copy": "복사",
+    "expand": "펼치기"
   },
   "onboarding": {
     "step1": {
@@ -68,7 +70,8 @@
     "placeholders": {
       "chooseLanguage": "언어 선택...",
       "childBirthdate": "자녀 생년월일"
-    }
+    },
+    "noTimezones": "사용 가능한 시간대가 없습니다."
   },
   "app": {
     "title": "빠른 메시지",
@@ -117,7 +120,15 @@
     "deleteProfile": "프로필 삭제",
     "selectTimezone": "시간대 선택",
     "newNickname": "새 닉네임",
-    "updateMessage": "메시지 수정"
+    "updateMessage": "메시지 수정",
+    "addNickname": "닉네임 추가",
+    "nicknames": "닉네임",
+    "profileCreated": "프로필이 생성되었습니다",
+    "profileUpdated": "프로필이 업데이트되었습니다",
+    "profileDeleted": "프로필이 삭제되었습니다",
+    "editProfile": "프로필 편집",
+    "thisPhrase": "이 메시지",
+    "thisNickname": "이 닉네임"
   },
   "time": {
     "profileTime": "{name}의 시간",
@@ -147,6 +158,7 @@
     "newCategoryName": "새 카테고리 이름",
     "selectKidFirst": "먼저 자녀를 선택하세요",
     "messageAdded": "메시지가 추가되었습니다!",
-    "nameHelp": "{name}을 사용하여 자녀 이름 삽입"
+    "nameHelp": "{name}을 사용하여 자녀 이름 삽입",
+    "editMessage": "메시지 편집"
   }
 }

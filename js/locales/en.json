@@ -18,7 +18,9 @@
     "no": "No",
     "saved": "Saved",
     "translating": "Translating...",
-    "translate": "Translate"
+    "translate": "Translate",
+    "copy": "Copy",
+    "expand": "Expand"
   },
   "onboarding": {
     "step1": {
@@ -68,7 +70,8 @@
     "placeholders": {
       "chooseLanguage": "Choose language...",
       "childBirthdate": "Child's birthdate"
-    }
+    },
+    "noTimezones": "No timezones available."
   },
   "app": {
     "title": "Quick Messages",
@@ -119,7 +122,13 @@
     "deleteProfile": "Delete Profile",
     "selectTimezone": "Select timezone",
     "newNickname": "New nickname",
-    "updateMessage": "Update Message"
+    "updateMessage": "Update Message",
+    "profileCreated": "Profile created",
+    "profileUpdated": "Profile updated",
+    "profileDeleted": "Profile deleted",
+    "editProfile": "Edit Profile",
+    "thisPhrase": "this phrase",
+    "thisNickname": "this nickname"
   },
   "time": {
     "profileTime": "{name}'s Time",
@@ -149,6 +158,7 @@
     "newCategoryName": "New Category Name",
     "selectKidFirst": "Please select a kid first",
     "messageAdded": "Message added successfully!",
-    "nameHelp": "Use {name} to insert the kid's name"
+    "nameHelp": "Use {name} to insert the kid's name",
+    "editMessage": "Edit Message"
   }
 }
