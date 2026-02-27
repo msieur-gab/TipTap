@@ -5,6 +5,8 @@ import { DatabaseService } from './services/database.js';
 import { InitialDataService } from './services/initial-data.js';
 import { deepL } from './services/deepl.js'; 
 import { i18n } from './services/i18n.js';
+import { PWALifecycle } from './lib/pwa-lifecycle.js';
+import { PWAPulse } from './lib/pwa-pulse.js';
 import './components/OnboardingFlow.js';
 
 class QuickMessagesApp {
@@ -185,6 +187,20 @@ class QuickMessagesApp {
 document.addEventListener('DOMContentLoaded', async () => {
     const app = new QuickMessagesApp();
     await app.init();
+
+    // PWA lifecycle — service worker, install overlay, telemetry
+    const pwa = new PWALifecycle({ swPath: './sw.js' });
+    document.querySelector('pwa-install-overlay').lifecycle = pwa;
+
+    const pulse = new PWAPulse({
+        app: 'tiptap',
+        version: '1.0.0',
+        endpoint: 'https://pwa-pulse.netlify.app/.netlify/functions/pulse',
+    });
+    pwa.on('installed', () => pulse.ping('install'));
+    pwa.on('updateApplied', () => pulse.ping('update'));
+    if (pwa.isInstalled) pulse.ping('launch');
+    else pulse.ping('visit');
 });
 
 window.QuickMessagesApp = QuickMessagesApp;
