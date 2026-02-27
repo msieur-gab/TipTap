@@ -20,7 +20,8 @@
     "onboarding": {
       "step1": {
         "title": "いつでもつながる",
-        "description": "離れていても、お子様の言語で愛情のこもったメッセージを送りましょう。距離は愛を減らしません。"
+        "description": "離れていても、お子様の言語で愛情のこもったメッセージを送りましょう。距離は愛を減らしません。",
+        "languageHint": "メッセージを作成する際に使用する言語です。"
       },
       "step2": {
         "title": "心に響くメッセージ",
@@ -31,10 +32,6 @@
         "description": "デフォルトでは追跡や外部サービスはありません。ご家族のメッセージはあなたのデバイスに保存され、あなただけが見ることができます。"
       },
       "step4": {
-        "title": "あなたの言語",
-        "description": "メッセージを作成する際に使用する言語です。"
-      },
-      "step5": {
         "title": "最初のお子様を追加",
         "description": "お子様のプロフィールを作成しましょう。後で他のを追加することもできます。",
         "placeholders": {
@@ -43,17 +40,21 @@
         },
         "kidsSummary": "これまでに追加されたお子様："
       },
-      "step6": {
+      "step5": {
         "title": "お子様の言語",
         "description": "お子様が話し、理解する言語です。"
       },
-      "step7": {
+      "step6": {
         "title": "翻訳サービス",
         "description": "オプション：ご自身のDeepL APIキーを使用して、言語間の自動翻訳を有効にします。",
         "toggleTitle": "翻訳を有効にする",
         "toggleDescription": "DeepLで自動翻訳を取得",
         "apiKeyPlaceholder": "DeepL APIキー",
         "apiKeyHelp": "DeepLから無料のAPIキーを取得（月50万文字まで無料）"
+      },
+      "step7": {
+        "title": "あなたのプロフィール",
+        "description": "アプリをあなた向けにカスタマイズするのに役立ちます。"
       },
       "step8": {
         "title": "準備完了！",

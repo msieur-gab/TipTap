@@ -10,7 +10,7 @@ class OnboardingFlow extends HTMLElement {
         
         this.state = {
             currentStep: 1,
-            totalSteps: 9,
+            totalSteps: 8,
             sourceLanguage: '',
             targetLanguage: '',
             userName: '',
@@ -143,7 +143,7 @@ class OnboardingFlow extends HTMLElement {
 
     setupBottomSheets() {
         // Add country and timezone panels to the setup
-        const panels = ['app-language', 'parent-language', 'child-language', 'country', 'timezone'];
+        const panels = ['app-language', 'child-language', 'country', 'timezone'];
         
         panels.forEach(panelType => {
             const panel = this.shadowRoot.getElementById(`${panelType}-panel`);
@@ -184,7 +184,7 @@ class OnboardingFlow extends HTMLElement {
 
         if (panelType === 'app-language') {
             options = i18n.getSupportedAppLocales();
-        } else if (panelType === 'parent-language' || panelType === 'child-language') {
+        } else if (panelType === 'child-language') {
             options = i18n.getSupportedTranslationLanguages();
         } else if (panelType === 'country') {
             // Populate countries from timezone data
@@ -238,10 +238,6 @@ class OnboardingFlow extends HTMLElement {
             i18n.setLocale(value); // Change app language immediately
             this.state.sourceLanguage = value; // Set the source language for later
             this.updateDisplayText('app-language-display', text);
-        } else if (panelType === 'parent-language') {
-            this.state.sourceLanguage = value;
-            // this.state.sourceLanguageName = text;
-            this.updateDisplayText('parent-language-display', text);
         } else if (panelType === 'child-language') {
             this.state.targetLanguage = value;
             this.state.currentKid.language = value;
@@ -318,7 +314,7 @@ class OnboardingFlow extends HTMLElement {
         //     alert(i18n.t('onboarding.step5.placeholders.childName'));
         //     return;
         // }
-        if (this.state.currentStep === 6 && !this.state.currentKid.language) {
+        if (this.state.currentStep === 5 && !this.state.currentKid.language) {
             alert(i18n.t('onboarding.panelTitles.childLanguage'));
             return;
         }
@@ -395,7 +391,7 @@ class OnboardingFlow extends HTMLElement {
         }
         
         // Show skip button for optional steps
-        const isOptionalStep = [5, 7].includes(this.state.currentStep);
+        const isOptionalStep = [4, 6].includes(this.state.currentStep);
         if (skipContainer) {
             skipContainer.style.visibility = isOptionalStep ? 'visible' : 'hidden';
         }
@@ -694,6 +690,7 @@ class OnboardingFlow extends HTMLElement {
                         <h2 data-i18n="onboarding.step1.title">Stay Connected, Always</h2>
                         <p data-i18n="onboarding.step1.description">Send loving messages to your children in their language, even when you're apart. Distance doesn't diminish love.</p>
                     </div>
+                    <p style="font-size: 0.875rem; color: var(--color-text-light); margin-bottom: 0.5rem;" data-i18n="onboarding.step1.languageHint">The language you'll use to write messages.</p>
                     <div class="form-group">
                         <div class="select-input-trigger" data-panel-target="app-language-panel">
                             <span id="app-language-display" class="placeholder" data-i18n="onboarding.placeholders.chooseLanguage">Choose language...</span>
@@ -739,73 +736,21 @@ class OnboardingFlow extends HTMLElement {
                 </div>
             </div>
 
-            <!-- Step 4: App Language -->
-            <!-- <div id="step-4" class="onboarding-step hidden">
-                <div class="illustration-container">
-                    <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                    </svg>
-                </div>
-                <div class="bottom-content-container">
-                    <div class="step-header">
-                        <h2 data-i18n="onboarding.step4.title">Choose App Language</h2>
-                        <p data-i18n="onboarding.step4.description">Select the language for menus and buttons.</p>
-                    </div>
-                    <div class="form-group">
-                        <div class="select-input-trigger" data-panel-target="app-language-panel">
-                            <span id="app-language-display" class="placeholder" data-i18n="onboarding.placeholders.chooseLanguage">Choose language...</span>
-                            <div class="arrow">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6 9 12 15 18 9"></polyline>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
-            <!-- Step 4: Your Language -->
+            <!-- Step 4: First child setup -->
             <div id="step-4" class="onboarding-step hidden">
-                <div class="illustration-container">
-                    <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <line x1="2" y1="12" x2="22" y2="12"></line>
-                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10 15.3 15.3 0 0 1-4 10z"></path>
-                    </svg>
-                </div>
-                <div class="bottom-content-container">
-                    <div class="step-header">
-                        <h2 data-i18n="onboarding.step4.title">Your Language</h2>
-                        <p data-i18n="onboarding.step4.description">The language you'll use to write messages.</p>
-                    </div>
-                    <div class="form-group">
-                        <div class="select-input-trigger" data-panel-target="parent-language-panel">
-                            <span id="parent-language-display" class="placeholder" data-i18n="onboarding.placeholders.chooseLanguage">Choose language...</span>
-                            <div class="arrow">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6 9 12 15 18 9"></polyline>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Step 5: First child setup -->
-            <div id="step-5" class="onboarding-step hidden">
                 <label for="avatar-upload" class="illustration-container clickable">
                     </label>
                 <input type="file" id="avatar-upload" class="hidden-input" accept="image/*">
                 <div class="bottom-content-container">
                     <div class="step-header">
-                        <h2 data-i18n="onboarding.step5.title">Add Your First Child</h2>
-                        <p data-i18n="onboarding.step5.description">Let's create a profile for them. You can add more children later.</p>
+                        <h2 data-i18n="onboarding.step4.title">Add Your First Child</h2>
+                        <p data-i18n="onboarding.step4.description">Let's create a profile for them. You can add more children later.</p>
                     </div>
                     
                     <div id="kids-summary" class="kids-summary hidden">...</div>
                     
                     <div class="form-group">
-                        <input type="text" id="child-name" class="styled-input" data-i18n-placeholder="onboarding.step5.placeholders.childName">
+                        <input type="text" id="child-name" class="styled-input" data-i18n-placeholder="onboarding.step4.placeholders.childName">
                     </div>
                     <div class="form-group">
                         <input type="date" id="child-birthdate" class="styled-input" data-i18n-placeholder="onboarding.placeholders.childBirthdate">
@@ -834,8 +779,8 @@ class OnboardingFlow extends HTMLElement {
                 </div>
             </div>
 
-            <!-- Step 6: Child's language -->
-            <div id="step-6" class="onboarding-step hidden">
+            <!-- Step 5: Child's language -->
+            <div id="step-5" class="onboarding-step hidden">
                 <div class="illustration-container">
                     <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
                         <circle cx="12" cy="12" r="10"></circle>
@@ -845,8 +790,8 @@ class OnboardingFlow extends HTMLElement {
                 </div>
                 <div class="bottom-content-container">
                     <div class="step-header">
-                        <h2 data-i18n="onboarding.step6.title">Their Language</h2>
-                        <p data-i18n="onboarding.step6.description">The language your child speaks and understands.</p>
+                        <h2 data-i18n="onboarding.step5.title">Their Language</h2>
+                        <p data-i18n="onboarding.step5.description">The language your child speaks and understands.</p>
                     </div>
                     <div class="form-group">
                         <div class="select-input-trigger" data-panel-target="child-language-panel">
@@ -863,8 +808,8 @@ class OnboardingFlow extends HTMLElement {
 
             
 
-            <!-- Step 7: Translation setup -->
-            <div id="step-7" class="onboarding-step hidden">
+            <!-- Step 6: Translation setup -->
+            <div id="step-6" class="onboarding-step hidden">
                 <div class="illustration-container">
                     <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
                         <path d="M20 12V8H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v4"></path>
@@ -875,14 +820,14 @@ class OnboardingFlow extends HTMLElement {
                 </div>
                 <div class="bottom-content-container">
                     <div class="step-header">
-                        <h2 data-i18n="onboarding.step7.title">Translation Service</h2>
-                        <p data-i18n="onboarding.step7.description">Optional: Enable automatic translation between your languages with your own DeepL API key.</p>
+                        <h2 data-i18n="onboarding.step6.title">Translation Service</h2>
+                        <p data-i18n="onboarding.step6.description">Optional: Enable automatic translation between your languages with your own DeepL API key.</p>
                     </div>
                     
                     <div class="toggle-container">
                         <div class="toggle-info">
-                            <h4 data-i18n="onboarding.step7.toggleTitle">Enable Translation</h4>
-                            <p data-i18n="onboarding.step7.toggleDescription">Get automatic translations with DeepL</p>
+                            <h4 data-i18n="onboarding.step6.toggleTitle">Enable Translation</h4>
+                            <p data-i18n="onboarding.step6.toggleDescription">Get automatic translations with DeepL</p>
                         </div>
                         <div class="toggle-switch" id="translation-toggle">
                             <div class="toggle-knob"></div>
@@ -890,17 +835,18 @@ class OnboardingFlow extends HTMLElement {
                     </div>
                     
                     <div class="form-group" id="api-key-group" style="display: none;">
-                        <input type="password" id="api-key" class="styled-input" data-i18n-placeholder="onboarding.step7.apiKeyPlaceholder">
+                        <input type="password" id="api-key" class="styled-input" data-i18n-placeholder="onboarding.step6.apiKeyPlaceholder">
 
-                        <p style="font-size: 0.875rem; color: var(--color-text-light); margin-top: 0.5rem;" data-i18n-html="onboarding.step7.apiKeyHelp"></p>
+                        <p style="font-size: 0.875rem; color: var(--color-text-light); margin-top: 0.5rem;" data-i18n-html="onboarding.step6.apiKeyHelp"></p>
                     </div>
                 </div>
             </div>
 
-            <div id="step-8" class="onboarding-step hidden">
+            <!-- Step 7: Your Profile -->
+            <div id="step-7" class="onboarding-step hidden">
                 <div class="step-header">
-                    <h2 data-i18n="onboarding.step8.title">Your Profile</h2>
-                    <p data-i18n="onboarding.step8.description">This helps personalize the app for you.</p>
+                    <h2 data-i18n="onboarding.step7.title">Your Profile</h2>
+                    <p data-i18n="onboarding.step7.description">This helps personalize the app for you.</p>
                 </div>
                 <div class="form-group">
                     <input type="text" id="user-name" class="styled-input" placeholder="Your Name (e.g., John)">
@@ -911,7 +857,7 @@ class OnboardingFlow extends HTMLElement {
             </div>
 
             <!-- Step 8: Summary & finish -->
-            <div id="step-9" class="onboarding-step hidden">
+            <div id="step-8" class="onboarding-step hidden">
                 <div class="illustration-container">
                     <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
                         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
@@ -920,8 +866,8 @@ class OnboardingFlow extends HTMLElement {
                 </div>
                 <div class="bottom-content-container">
                     <div class="step-header">
-                        <h2 data-i18n="onboarding.step9.title">You're All Set!</h2>
-                        <p data-i18n="onboarding.step9.description">Your family messaging app is ready. You can add more children and customize messages anytime.</p>
+                        <h2 data-i18n="onboarding.step8.title">You're All Set!</h2>
+                        <p data-i18n="onboarding.step8.description">Your family messaging app is ready. You can add more children and customize messages anytime.</p>
                     </div>
                 </div>
             </div>
@@ -967,17 +913,6 @@ class OnboardingFlow extends HTMLElement {
                         <button class="panel-close-btn">&times;</button>
                     </div>
                     <ul class="panel-options-list" id="app-language-options"></ul>
-                </div>
-            </div>
-
-            <!-- Parent Language Panel -->
-            <div class="options-panel-overlay" id="parent-language-panel">
-                <div class="options-panel">
-                    <div class="panel-header">
-                        <h3 class="panel-title" data-i18n="onboarding.panelTitles.yourLanguage">Your Language</h3>
-                        <button class="panel-close-btn">&times;</button>
-                    </div>
-                    <ul class="panel-options-list" id="parent-language-options"></ul>
                 </div>
             </div>
 

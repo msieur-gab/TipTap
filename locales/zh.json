@@ -20,7 +20,8 @@
     "onboarding": {
       "step1": {
         "title": "保持联系，永远",
-        "description": "即使身处异地，也能用孩子的语言给他们发送充满爱意的消息。距离不会减少爱。"
+        "description": "即使身处异地，也能用孩子的语言给他们发送充满爱意的消息。距离不会减少爱。",
+        "languageHint": "您用来编写消息的语言。"
       },
       "step2": {
         "title": "有意义的消息",
@@ -31,10 +32,6 @@
         "description": "默认无跟踪，无外部服务。您家人的消息保留在您的设备上，仅供您阅览。"
       },
       "step4": {
-        "title": "您的语言",
-        "description": "您用来编写消息的语言。"
-      },
-      "step5": {
         "title": "添加您的第一个孩子",
         "description": "让我们为他们创建一个个人资料。您以后可以添加更多的孩子。",
         "placeholders": {
@@ -43,17 +40,21 @@
         },
         "kidsSummary": "目前已添加的孩子："
       },
-      "step6": {
+      "step5": {
         "title": "他们的语言",
         "description": "您的孩子说和理解的语言。"
       },
-      "step7": {
+      "step6": {
         "title": "翻译服务",
         "description": "可选：使用您自己的 DeepL API 密钥启用您的语言之间的自动翻译。",
         "toggleTitle": "启用翻译",
         "toggleDescription": "使用 DeepL 获取自动翻译",
         "apiKeyPlaceholder": "DeepL API 密钥",
         "apiKeyHelp": "从 DeepL 获取您的免费 API 密钥（每月 500,000 个字符免费）"
+      },
+      "step7": {
+        "title": "您的个人资料",
+        "description": "这有助于为您个性化应用。"
       },
       "step8": {
         "title": "一切就绪！",

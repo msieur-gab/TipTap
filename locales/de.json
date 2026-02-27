@@ -20,7 +20,8 @@
     "onboarding": {
       "step1": {
         "title": "Immer verbunden bleiben",
-        "description": "Senden Sie liebevolle Nachrichten an Ihre Kinder in ihrer Sprache, auch wenn Sie getrennt sind. Entfernung verringert nicht die Liebe."
+        "description": "Senden Sie liebevolle Nachrichten an Ihre Kinder in ihrer Sprache, auch wenn Sie getrennt sind. Entfernung verringert nicht die Liebe.",
+        "languageHint": "Die Sprache, die Sie zum Schreiben von Nachrichten verwenden werden."
       },
       "step2": {
         "title": "Nachrichten, die zählen",
@@ -31,10 +32,6 @@
         "description": "Kein Tracking, standardmäßig keine externen Dienste. Die Nachrichten Ihrer Familie bleiben auf Ihrem Gerät, nur für Ihre Augen bestimmt."
       },
       "step4": {
-        "title": "Ihre Sprache",
-        "description": "Die Sprache, die Sie zum Schreiben von Nachrichten verwenden werden."
-      },
-      "step5": {
         "title": "Fügen Sie Ihr erstes Kind hinzu",
         "description": "Lassen Sie uns ein Profil für es erstellen. Sie können später weitere Kinder hinzufügen.",
         "placeholders": {
@@ -43,17 +40,21 @@
         },
         "kidsSummary": "Bisher hinzugefügte Kinder:"
       },
-      "step6": {
+      "step5": {
         "title": "Ihre Sprache",
         "description": "Die Sprache, die Ihr Kind spricht und versteht."
       },
-      "step7": {
+      "step6": {
         "title": "Übersetzungsdienst",
         "description": "Optional: Aktivieren Sie die automatische Übersetzung zwischen Ihren Sprachen mit Ihrem eigenen DeepL API-Schlüssel.",
         "toggleTitle": "Übersetzung aktivieren",
         "toggleDescription": "Erhalten Sie automatische Übersetzungen mit DeepL",
         "apiKeyPlaceholder": "DeepL API-Schlüssel",
         "apiKeyHelp": "Holen Sie sich Ihren kostenlosen API-Schlüssel von DeepL (500.000 Zeichen/Monat kostenlos)"
+      },
+      "step7": {
+        "title": "Ihr Profil",
+        "description": "Dies hilft, die App für Sie zu personalisieren."
       },
       "step8": {
         "title": "Alles bereit!",

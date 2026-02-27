@@ -20,7 +20,8 @@
     "onboarding": {
       "step1": {
         "title": "Mantente Conectado, Siempre",
-        "description": "Envía mensajes cariñosos a tus hijos en su idioma, incluso cuando estéis separados. La distancia no disminuye el amor."
+        "description": "Envía mensajes cariñosos a tus hijos en su idioma, incluso cuando estéis separados. La distancia no disminuye el amor.",
+        "languageHint": "El idioma que usarás para escribir los mensajes."
       },
       "step2": {
         "title": "Mensajes que Importan",
@@ -31,10 +32,6 @@
         "description": "Sin rastreo, sin servicios externos por defecto. Los mensajes de tu familia permanecen en tu dispositivo, solo para tus ojos."
       },
       "step4": {
-        "title": "Tu Idioma",
-        "description": "El idioma que usarás para escribir los mensajes."
-      },
-      "step5": {
         "title": "Añade a tu Primer Hijo",
         "description": "Vamos a crear un perfil para él/ella. Podrás añadir más hijos más tarde.",
         "placeholders": {
@@ -43,17 +40,21 @@
         },
         "kidsSummary": "Niños añadidos hasta ahora:"
       },
-      "step6": {
+      "step5": {
         "title": "Su Idioma",
         "description": "El idioma que tu hijo habla y entiende."
       },
-      "step7": {
+      "step6": {
         "title": "Servicio de Traducción",
         "description": "Opcional: Activa la traducción automática entre tus idiomas con tu propia clave de API de DeepL.",
         "toggleTitle": "Activar Traducción",
         "toggleDescription": "Obtén traducciones automáticas con DeepL",
         "apiKeyPlaceholder": "Clave de API de DeepL",
         "apiKeyHelp": "Obtén tu clave de API gratuita de DeepL (500,000 caracteres/mes gratis)"
+      },
+      "step7": {
+        "title": "Tu Perfil",
+        "description": "Esto ayuda a personalizar la aplicación para ti."
       },
       "step8": {
         "title": "¡Todo Listo!",

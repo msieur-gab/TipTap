@@ -20,7 +20,8 @@
     "onboarding": {
       "step1": {
         "title": "언제나 연결되어 있으세요",
-        "description": "멀리 떨어져 있어도 자녀의 언어로 사랑이 담긴 메시지를 보내세요. 거리는 사랑을 줄이지 않습니다."
+        "description": "멀리 떨어져 있어도 자녀의 언어로 사랑이 담긴 메시지를 보내세요. 거리는 사랑을 줄이지 않습니다.",
+        "languageHint": "메시지를 작성할 때 사용할 언어입니다."
       },
       "step2": {
         "title": "중요한 메시지",
@@ -31,10 +32,6 @@
         "description": "기본적으로 추적이나 외부 서비스가 없습니다. 가족의 메시지는 기기에만 저장되며 본인만 볼 수 있습니다."
       },
       "step4": {
-        "title": "사용자 언어",
-        "description": "메시지를 작성할 때 사용할 언어입니다."
-      },
-      "step5": {
         "title": "첫 자녀 추가",
         "description": "자녀의 프로필을 만들어 보겠습니다. 나중에 더 많은 자녀를 추가할 수 있습니다.",
         "placeholders": {
@@ -43,17 +40,21 @@
         },
         "kidsSummary": "지금까지 추가된 자녀:"
       },
-      "step6": {
+      "step5": {
         "title": "자녀 언어",
         "description": "자녀가 사용하고 이해하는 언어입니다."
       },
-      "step7": {
+      "step6": {
         "title": "번역 서비스",
         "description": "선택 사항: 자체 DeepL API 키로 언어 간 자동 번역을 활성화하세요.",
         "toggleTitle": "번역 활성화",
         "toggleDescription": "DeepL로 자동 번역 받기",
         "apiKeyPlaceholder": "DeepL API 키",
         "apiKeyHelp": "DeepL에서 무료 API 키를 받으세요 (월 500,000자 무료)"
+      },
+      "step7": {
+        "title": "내 프로필",
+        "description": "앱을 사용자에게 맞게 개인화하는 데 도움이 됩니다."
       },
       "step8": {
         "title": "모든 준비가 끝났습니다!",
