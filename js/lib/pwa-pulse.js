@@ -19,20 +19,20 @@ export class PWAPulse {
   #endpoint;
   #context;
   #meta = null;
-  #registrationPending = false;
+  #ready;
 
   constructor({ app, version = '0.0.0', endpoint }) {
     this.#app = app;
     this.#version = version;
     this.#endpoint = endpoint;
     this.#context = this.#detectContext();
-    this.#readManifest();
+    this.#ready = this.#readManifest();
   }
 
   /**
    * Send a pulse event. Fire-and-forget.
    * Deduplicates within a page session via sessionStorage.
-   * On first ping after manifest read, sends a register event.
+   * Waits for manifest read so registration can piggyback the first ping.
    * @param {'visit' | 'install' | 'update' | 'launch'} event
    */
   ping(event) {
@@ -40,21 +40,20 @@ export class PWAPulse {
     if (sessionStorage.getItem(dedupKey)) return;
     sessionStorage.setItem(dedupKey, '1');
 
-    // Send registration if pending
-    if (this.#registrationPending) {
-      this.#registrationPending = false;
-      this.#sendRegister();
-    }
+    // Wait for manifest read, then send
+    this.#ready.then(() => {
+      this.#maybeSendRegister();
 
-    const payload = JSON.stringify({
-      app: this.#app,
-      version: this.#version,
-      event,
-      ...this.#context,
-      date: new Date().toISOString().slice(0, 10),
+      const payload = JSON.stringify({
+        app: this.#app,
+        version: this.#version,
+        event,
+        ...this.#context,
+        date: new Date().toISOString().slice(0, 10),
+      });
+
+      this.#send(payload);
     });
-
-    this.#send(payload);
   }
 
   #send(payload) {
@@ -113,19 +112,16 @@ export class PWAPulse {
         categories: manifest.categories || [],
         start_url: manifest.start_url || './',
       };
-
-      // Check if registration is needed for this version
-      const regKey = `pulse_registered_${this.#version}`;
-      if (!localStorage.getItem(regKey)) {
-        this.#registrationPending = true;
-      }
     } catch {
       // Manifest fetch failed — graceful degradation, pings still work
     }
   }
 
-  #sendRegister() {
+  #maybeSendRegister() {
     if (!this.#meta) return;
+
+    const regKey = `pulse_registered_${this.#version}`;
+    if (localStorage.getItem(regKey)) return;
 
     const payload = JSON.stringify({
       app: this.#app,
@@ -137,9 +133,6 @@ export class PWAPulse {
     });
 
     this.#send(payload);
-
-    // Mark as registered only after sending
-    const regKey = `pulse_registered_${this.#version}`;
     localStorage.setItem(regKey, '1');
   }
 
