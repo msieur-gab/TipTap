@@ -200,8 +200,8 @@ class MessagesTab extends HTMLElement {
         return `
             <div class="phrase-item" data-phrase-id="${phrase.id}">
                 <div class="phrase-content">
-                    <p class="base-lang">${phrase.baseLang}</p>
-                    <p class="target-lang">${phrase.targetLang}</p>
+                    <p class="base-lang">${phrase.parentLang}</p>
+                    <p class="target-lang">${phrase.kidLang}</p>
                 </div>
                 <div class="phrase-actions">
                     <button class="action-btn edit-phrase-btn" data-i18n-title="common.edit">

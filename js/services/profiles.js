@@ -47,8 +47,8 @@ export const ProfileService = {
             const nickname = {
                 id: generateId(),
                 display,
-                baseLang_value: display,
-                targetLang_value: targetLangValue
+                parentLang_value: display,
+                kidLang_value: targetLangValue
             };
             if (!profile.nicknames) profile.nicknames = [];
             profile.nicknames.push(nickname);

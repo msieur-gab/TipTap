@@ -21,7 +21,7 @@ class QuickMessagesApp {
             const settings = await DatabaseService.getUserSettings();
             
             // 2. Explicitly initialize the i18n service with the saved language.
-            await i18n.init(settings?.sourceLanguage);
+            await i18n.init(settings?.parentLanguage);
 
              // --> initialize DeepL if API Key exists <--
              if (settings?.deeplApiKey) {
@@ -56,8 +56,8 @@ class QuickMessagesApp {
             await DatabaseService.updateUserSettings({
                 userName: settings.userName,
                 userSignature: settings.userSignature,
-                sourceLanguage: settings.sourceLanguage,
-                targetLanguage: settings.targetLanguage,
+                parentLanguage: settings.parentLanguage,
+                kidLanguage: settings.kidLanguage,
                 deeplApiKey: settings.apiKey,
                 onboardingCompleted: true
             });

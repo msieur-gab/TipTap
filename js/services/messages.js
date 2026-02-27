@@ -33,13 +33,13 @@ export const MessageService = {
         eventBus.emit(EVENTS.CATEGORIES_UPDATED);
     },
 
-    async addPhrase(categoryId, baseLangText, targetLangText) {
+    async addPhrase(categoryId, parentLangText, kidLangText) {
         const category = await DatabaseService.get('categories', categoryId);
         if (category) {
             const phrase = {
                 id: generateId(),
-                baseLang: baseLangText,
-                targetLang: targetLangText
+                parentLang: parentLangText,
+                kidLang: kidLangText
             };
             category.phrases.push(phrase);
             await DatabaseService.put('categories', category);

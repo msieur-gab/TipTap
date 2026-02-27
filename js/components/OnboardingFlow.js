@@ -11,8 +11,8 @@ class OnboardingFlow extends HTMLElement {
         this.state = {
             currentStep: 1,
             totalSteps: 8,
-            sourceLanguage: '',
-            targetLanguage: '',
+            parentLanguage: '',
+            kidLanguage: '',
             userName: '',
             userSignature: '',
             kids: [],
@@ -236,10 +236,10 @@ class OnboardingFlow extends HTMLElement {
         if (panelType === 'app-language') {
             // this.state.appLanguage = value;
             i18n.setLocale(value); // Change app language immediately
-            this.state.sourceLanguage = value; // Set the source language for later
+            this.state.parentLanguage = value; // Set the source language for later
             this.updateDisplayText('app-language-display', text);
         } else if (panelType === 'child-language') {
-            this.state.targetLanguage = value;
+            this.state.kidLanguage = value;
             this.state.currentKid.language = value;
             // this.state.currentKid.languageName = text;
             this.updateDisplayText('child-language-display', text);
@@ -301,12 +301,12 @@ class OnboardingFlow extends HTMLElement {
 
     handleNext() {
 
-        if (this.state.currentStep === 1 && !this.state.sourceLanguage) {
+        if (this.state.currentStep === 1 && !this.state.parentLanguage) {
             alert(i18n.t('onboarding.placeholders.chooseLanguage'));
             return;
        }
         // Correct validation for the current step order
-        // if (this.state.currentStep === 4 && !this.state.sourceLanguage) {
+        // if (this.state.currentStep === 4 && !this.state.parentLanguage) {
         //     alert(i18n.t('onboarding.placeholders.chooseLanguage'));
         //     return;
         // }
@@ -328,17 +328,17 @@ class OnboardingFlow extends HTMLElement {
     }
 
     saveCurrentKid() {
-        if (this.state.currentKid.originalName && this.state.targetLanguage) {
+        if (this.state.currentKid.originalName && this.state.kidLanguage) {
             this.state.kids.push({ 
                 ...this.state.currentKid,
-                language: this.state.targetLanguage
+                language: this.state.kidLanguage
             });
             this.state.currentKid = {
                 originalName: '',
                 translatedName: '',
                 birthdate: '',
                 timezone: '',
-                language: this.state.targetLanguage,
+                language: this.state.kidLanguage,
                 languageName: '',
                 avatar: null
             };
@@ -479,7 +479,7 @@ class OnboardingFlow extends HTMLElement {
         //     this.saveCurrentKid();
         // }
 
-        if (this.state.currentKid.originalName.trim() && this.state.currentKid.targetLanguage) {
+        if (this.state.currentKid.originalName.trim() && this.state.currentKid.kidLanguage) {
             this.state.kids.push({ ...this.state.currentKid });
         }
 
@@ -488,8 +488,8 @@ class OnboardingFlow extends HTMLElement {
             detail: {
                 userName: this.state.userName,
                 userSignature: this.state.userSignature,
-                sourceLanguage: this.state.sourceLanguage,
-                targetLanguage: this.state.targetLanguage, // This should be collected in a previous step
+                parentLanguage: this.state.parentLanguage,
+                kidLanguage: this.state.kidLanguage, // This should be collected in a previous step
                 kids: this.state.kids,
                 useTranslation: this.state.useTranslation,
                 apiKey: this.state.apiKey

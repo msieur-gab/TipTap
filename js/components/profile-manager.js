@@ -1,3 +1,4 @@
+import { formStyles } from '../css/form-styles.js';
 import { eventBus, EVENTS } from '../utils/events.js';
 import { ProfileService } from '../services/profiles.js';
 import { TimezoneService } from '../services/timezoneService.js';
@@ -174,8 +175,8 @@ class ProfileManager extends HTMLElement {
             if (this.editingNickname) {
                 await ProfileService.updateNickname(this.profileId, this.editingNickname, {
                     display: nickname,
-                    baseLang_value: nickname,
-                    targetLang_value: translation
+                    parentLang_value: nickname,
+                    kidLang_value: translation
                 });
                 this.editingNickname = null;
             } else {
@@ -243,7 +244,7 @@ class ProfileManager extends HTMLElement {
                         <form class="nickname-form">
                             <div class="nickname-inputs">
                                 <input type="text" name="nickname" value="${nickname.display}" class="styled-input" placeholder="Nickname" required>
-                                <input type="text" name="translation" value="${nickname.targetLang_value}" class="styled-input" placeholder="Translation">
+                                <input type="text" name="translation" value="${nickname.kidLang_value}" class="styled-input" placeholder="Translation">
                             </div>
                             <div class="nickname-actions">
                                 <button type="submit" class="save-button" title="Save"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
@@ -257,7 +258,7 @@ class ProfileManager extends HTMLElement {
                     <div class="nickname-item" data-nickname-id="${nickname.id}">
                         <div class="nickname-info">
                             <span class="nickname-name">${nickname.display}</span>
-                            <span class="nickname-translation">${nickname.targetLang_value}</span>
+                            <span class="nickname-translation">${nickname.kidLang_value}</span>
                         </div>
                         <div class="nickname-actions">
                             <button type="button" class="edit-button" data-action="edit-nickname" title="Edit"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>

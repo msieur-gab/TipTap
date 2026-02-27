@@ -1,4 +1,5 @@
 // js/components/message-manager.js
+
 import { eventBus, EVENTS } from '../utils/events.js';
 import { MessageService } from '../services/messages.js';
 import { DatabaseService } from '../services/database.js';
@@ -14,7 +15,7 @@ class MessageManager extends HTMLElement {
         this.phraseId = null;
         this.phrase = null;
         this.categories = [];
-        this.currentSelection = { baseLang_value: '', targetLang_value: '' };
+        this.currentSelection = { parentLang_value: '', kidLang_value: '' };
         this.boundUpdateContent = this.updateContent.bind(this);
     }
 
@@ -71,16 +72,16 @@ class MessageManager extends HTMLElement {
             const { profile, nickname } = data;
             if (nickname) {
                 this.currentSelection = {
-                    baseLang_value: nickname.baseLang_value || nickname.display,
-                    targetLang_value: nickname.targetLang_value || nickname.display
+                    parentLang_value: nickname.parentLang_value || nickname.display,
+                    kidLang_value: nickname.kidLang_value || nickname.display
                 };
             } else if (profile) {
                 if (profile.id === 'general') {
-                    this.currentSelection = { baseLang_value: '', targetLang_value: '' };
+                    this.currentSelection = { parentLang_value: '', kidLang_value: '' };
                 } else {
                     this.currentSelection = {
-                        baseLang_value: profile.originalName,
-                        targetLang_value: profile.translatedName
+                        parentLang_value: profile.originalName,
+                        kidLang_value: profile.translatedName
                     };
                 }
             }
@@ -129,8 +130,8 @@ class MessageManager extends HTMLElement {
         const formData = new FormData(form);
         
         let categoryId = formData.get('category');
-        const baseLang = formData.get('baseLang');
-        const targetLang = formData.get('targetLang');
+        const parentLang = formData.get('parentLang');
+        const kidLang = formData.get('kidLang');
         const newCategoryName = formData.get('newCategory');
         
         // Create new category if needed
@@ -145,24 +146,24 @@ class MessageManager extends HTMLElement {
             }
         }
         
-        if (!categoryId || !baseLang || !targetLang) {
+        if (!categoryId || !parentLang || !kidLang) {
             alert('Please fill in all required fields');
             return;
         }
 
         try {
             if (this.mode === 'create') {
-                await MessageService.addPhrase(categoryId, baseLang, targetLang);
+                await MessageService.addPhrase(categoryId, parentLang, kidLang);
                 this.dispatchEvent(new CustomEvent('message-created', {
-                    detail: { categoryId, baseLang, targetLang }
+                    detail: { categoryId, parentLang, kidLang }
                 }));
             } else if (this.mode === 'edit') {
-                await MessageService.updatePhrase(this.categoryId, this.phraseId, { 
-                    baseLang, 
-                    targetLang 
+                await MessageService.updatePhrase(this.categoryId, this.phraseId, {
+                    parentLang,
+                    kidLang
                 });
                 this.dispatchEvent(new CustomEvent('message-updated', {
-                    detail: { categoryId: this.categoryId, phraseId: this.phraseId, baseLang, targetLang }
+                    detail: { categoryId: this.categoryId, phraseId: this.phraseId, parentLang, kidLang }
                 }));
             }
             
@@ -180,9 +181,9 @@ class MessageManager extends HTMLElement {
     }
 
     async handleTranslation() {
-        const baseLangTextarea = this.shadowRoot.getElementById('message-base-lang');
-        const targetLangTextarea = this.shadowRoot.getElementById('message-target-lang');
-        const textToTranslate = baseLangTextarea.value;
+        const parentLangTextarea = this.shadowRoot.getElementById('message-base-lang');
+        const kidLangTextarea = this.shadowRoot.getElementById('message-target-lang');
+        const textToTranslate = parentLangTextarea.value;
 
         if (!textToTranslate.trim()) {
             alert(i18n.t('fab.nameHelp')); // Reuse existing translation
@@ -196,33 +197,33 @@ class MessageManager extends HTMLElement {
 
         try {
             const settings = await DatabaseService.getUserSettings();
-            const sourceLang = settings.sourceLanguage;
-            const targetLang = settings.targetLanguage;
+            const parentLang = settings.parentLanguage;
+            const kidLang = settings.kidLanguage;
 
-            if (!sourceLang || !targetLang) {
-                alert('Source or target language is not configured. Please complete the onboarding process.');
+            if (!parentLang || !kidLang) {
+                alert('Parent or kid language is not configured. Please complete the onboarding process.');
                 return;
             }
 
             // Show loading state
-            targetLangTextarea.value = 'Translating...';
-            targetLangTextarea.disabled = true;
+            kidLangTextarea.value = 'Translating...';
+            kidLangTextarea.disabled = true;
 
-            const result = await deepL.translate(textToTranslate, targetLang, sourceLang);
+            const result = await deepL.translate(textToTranslate, kidLang, parentLang);
 
             if (result.text) {
-                targetLangTextarea.value = result.text;
+                kidLangTextarea.value = result.text;
             } else {
-                targetLangTextarea.value = '';
+                kidLangTextarea.value = '';
                 alert('Translation failed: ' + (result.error || 'Unknown error'));
             }
 
         } catch (error) {
-            targetLangTextarea.value = '';
+            kidLangTextarea.value = '';
             console.error("Translation process failed:", error);
             alert("An error occurred during translation.");
         } finally {
-            targetLangTextarea.disabled = false;
+            kidLangTextarea.disabled = false;
         }
     }
 
@@ -279,7 +280,7 @@ class MessageManager extends HTMLElement {
 
     render() {
         const isEditing = this.mode === 'edit';
-        const phrase = this.phrase || { baseLang: '', targetLang: '' };
+        const phrase = this.phrase || { parentLang: '', kidLang: '' };
         
         this.shadowRoot.innerHTML = `
             <style>
@@ -424,7 +425,7 @@ class MessageManager extends HTMLElement {
                 <div class="form-group">
                     <label for="message-base-lang" data-i18n="settings.messageInYourLanguage">Message in your language</label>
                     <div class="input-with-button">
-                        <textarea id="message-base-lang" name="baseLang" class="styled-textarea" required>${phrase.baseLang}</textarea>
+                        <textarea id="message-base-lang" name="parentLang" class="styled-textarea" required>${phrase.parentLang}</textarea>
                         <button type="button" class="insert-name-btn" data-action="insert-name-base">{name}</button>
                     </div>
                     <div class="helper-text" data-i18n="fab.nameHelp">Use {name} to insert the name</div>
@@ -433,7 +434,7 @@ class MessageManager extends HTMLElement {
                 <div class="form-group">
                     <label for="message-target-lang" data-i18n="settings.messageInTargetLanguage">Message in target language</label>
                     <div class="input-with-button">
-                        <textarea id="message-target-lang" name="targetLang" class="styled-textarea" required>${phrase.targetLang}</textarea>
+                        <textarea id="message-target-lang" name="kidLang" class="styled-textarea" required>${phrase.kidLang}</textarea>
                         <button type="button" class="insert-name-btn" data-action="insert-name-target">{name}</button>
                     </div>
                     <div class="helper-text" data-i18n="fab.nameHelp">Use {name} to insert the name</div>

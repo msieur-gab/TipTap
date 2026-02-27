@@ -3,13 +3,81 @@
 class TipTapApp extends Dexie {
     constructor() {
         super('TipTapApp');
-        
-        // Version 1 - The new, clean schema
+
+        // Version 1 - Original schema (kept for Dexie upgrade path)
         this.version(1).stores({
             userSettings: 'id, userName, userSignature, sourceLanguage, targetLanguage, deeplApiKey, deeplUsage, onboardingCompleted',
             profiles: 'id, originalName, translatedName, timezone, birthdate, nicknames',
             categories: 'id, title, order, phrases',
             translations: 'hash, sourceText, sourceLang, targetLang, translatedText, timestamp'
+        });
+
+        // Version 2 - Rename to domain vocabulary
+        this.version(2).stores({
+            userSettings: 'id, userName, userSignature, parentLanguage, kidLanguage, deeplApiKey, deeplUsage, onboardingCompleted',
+            profiles: 'id, originalName, translatedName, timezone, birthdate, nicknames',
+            categories: 'id, title, order, phrases',
+            translations: 'hash, sourceText, parentLang, kidLang, translatedText, timestamp'
+        }).upgrade(tx => {
+            // Migrate userSettings fields
+            tx.table('userSettings').toCollection().modify(record => {
+                if ('sourceLanguage' in record) {
+                    record.parentLanguage = record.sourceLanguage;
+                    delete record.sourceLanguage;
+                }
+                if ('targetLanguage' in record) {
+                    record.kidLanguage = record.targetLanguage;
+                    delete record.targetLanguage;
+                }
+            });
+
+            // Migrate category phrase fields
+            tx.table('categories').toCollection().modify(record => {
+                if (record.phrases) {
+                    record.phrases = record.phrases.map(phrase => {
+                        const updated = { ...phrase };
+                        if ('baseLang' in updated) {
+                            updated.parentLang = updated.baseLang;
+                            delete updated.baseLang;
+                        }
+                        if ('targetLang' in updated) {
+                            updated.kidLang = updated.targetLang;
+                            delete updated.targetLang;
+                        }
+                        return updated;
+                    });
+                }
+            });
+
+            // Migrate profile nickname fields
+            tx.table('profiles').toCollection().modify(record => {
+                if (record.nicknames) {
+                    record.nicknames = record.nicknames.map(nick => {
+                        const updated = { ...nick };
+                        if ('baseLang_value' in updated) {
+                            updated.parentLang_value = updated.baseLang_value;
+                            delete updated.baseLang_value;
+                        }
+                        if ('targetLang_value' in updated) {
+                            updated.kidLang_value = updated.targetLang_value;
+                            delete updated.targetLang_value;
+                        }
+                        return updated;
+                    });
+                }
+            });
+
+            // Migrate translations table fields
+            tx.table('translations').toCollection().modify(record => {
+                if ('sourceLang' in record) {
+                    record.parentLang = record.sourceLang;
+                    delete record.sourceLang;
+                }
+                if ('targetLang' in record) {
+                    record.kidLang = record.targetLang;
+                    delete record.targetLang;
+                }
+            });
         });
     }
 }
@@ -47,8 +115,8 @@ export const DatabaseService = {
                 id: 'global',
                 userName: '',
                 userSignature: '',
-                sourceLanguage: 'en',
-                targetLanguage: 'zh',
+                parentLanguage: 'en',
+                kidLanguage: 'zh',
                 deeplApiKey: null,
                 deeplUsage: { 
                     characterCount: 0, 

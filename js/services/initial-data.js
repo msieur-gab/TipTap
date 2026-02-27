@@ -30,16 +30,16 @@ export const InitialDataService = {
      * @param {object} settings - The settings object from the onboarding flow.
      */
     async setupInitialData(settings) {
-        // Use parentLanguage and the now-guaranteed targetLanguage
-        const { sourceLanguage, targetLanguage } = settings;
+        // Use parentLanguage and the now-guaranteed kidLanguage
+        const { parentLanguage, kidLanguage } = settings;
 
-        if (!sourceLanguage || !targetLanguage) {
-            console.error("Cannot set up initial data: Missing parent or target language information.");
+        if (!parentLanguage || !kidLanguage) {
+            console.error("Cannot set up initial data: Missing parent or kid language information.");
             return;
         }
 
-        const parentData = await fetchLocaleData(sourceLanguage);
-        const childData = await fetchLocaleData(targetLanguage);
+        const parentData = await fetchLocaleData(parentLanguage);
+        const childData = await fetchLocaleData(kidLanguage);
 
         const categoryKeys = Object.keys(parentData.categories);
 
@@ -51,8 +51,8 @@ export const InitialDataService = {
                 const childPhrase = childPhrases[i];
                 return {
                     id: parentPhrase.id,
-                    baseLang: parentPhrase.text,
-                    targetLang: childPhrase ? childPhrase.text : parentPhrase.text
+                    parentLang: parentPhrase.text,
+                    kidLang: childPhrase ? childPhrase.text : parentPhrase.text
                 };
             });
 
@@ -61,7 +61,7 @@ export const InitialDataService = {
                 title: parentData.categories[key],
                 order: index,
                 phrases: combinedPhrases,
-                language: sourceLanguage
+                language: parentLanguage
             };
 
             await DatabaseService.put('categories', newCategory);
