@@ -107,13 +107,13 @@ class MessagesTab extends HTMLElement {
     showEditPhraseModal(categoryId, phraseId) {
         const modal = this.shadowRoot.getElementById('edit-phrase-modal');
         const messageManager = modal.querySelector('message-manager');
-        
+
         // Configure MessageManager for editing
         messageManager.setAttribute('mode', 'edit');
         messageManager.setAttribute('category-id', categoryId);
         messageManager.setAttribute('phrase-id', phraseId);
-        
-        modal.showModal();
+
+        modal.open();
     }
 
     async handleSubmit(event) {
@@ -130,13 +130,13 @@ class MessagesTab extends HTMLElement {
         } else if (form.classList.contains('add-phrase-form')) {
             const modal = this.shadowRoot.getElementById('add-phrase-modal');
             const messageManager = modal.querySelector('message-manager');
-            
+
             // Configure MessageManager for creating in specific category
             const categoryId = form.closest('.card').dataset.categoryId;
             messageManager.setAttribute('mode', 'create');
             messageManager.setAttribute('category-id', categoryId);
-            
-            modal.showModal();
+
+            modal.open();
         }
     }
     
@@ -216,29 +216,18 @@ class MessagesTab extends HTMLElement {
     }
 
     setupModalListeners() {
-        // Add phrase modal
         const addPhraseModal = this.shadowRoot.getElementById('add-phrase-modal');
         const addMessageManager = addPhraseModal.querySelector('message-manager');
-        
+
         addMessageManager.addEventListener('message-created', () => {
             addPhraseModal.close();
         });
 
-        // Edit phrase modal
         const editPhraseModal = this.shadowRoot.getElementById('edit-phrase-modal');
         const editMessageManager = editPhraseModal.querySelector('message-manager');
-        
+
         editMessageManager.addEventListener('message-updated', () => {
             editPhraseModal.close();
-        });
-
-        // Close modals on backdrop click
-        [addPhraseModal, editPhraseModal].forEach(modal => {
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.close();
-                }
-            });
         });
     }
 
@@ -309,7 +298,7 @@ class MessagesTab extends HTMLElement {
                     backdrop-filter: blur(10px);
                 }
 
-                /* Dialog Styles */
+                /* Dialog Styles (add-category only) */
                 dialog { border: none; border-radius: 16px; padding: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 90%; max-width: 400px; }
                 dialog::backdrop { background-color: rgba(0,0,0,0.4); }
                 dialog h3 { margin-top: 0; }
@@ -318,11 +307,6 @@ class MessagesTab extends HTMLElement {
                 .form-group label { display: block; font-size: 0.875rem; font-weight: 500; color: var(--color-text-light); margin-bottom: 0.5rem; }
                 .form-actions { display: flex; gap: 1rem; margin-top: 1.5rem; }
                 .secondary-button { width: 100%; padding: 1rem; border: 1px solid var(--color-border); background-color: transparent; color: var(--color-text-dark); border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 1rem; }
-                
-                .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border); }
-                .modal-header h3 { margin: 0; font-size: 1.25rem; font-weight: 600; color: var(--color-text-dark); }
-                .close-button { background: none; border: none; cursor: pointer; padding: 0.5rem; color: var(--color-text-light); border-radius: 6px; }
-                .close-button:hover { background-color: var(--color-border); }
             </style>
 
             <div class="messages-tab-container">
@@ -346,31 +330,13 @@ class MessagesTab extends HTMLElement {
                 </form>
             </dialog>
 
-            <dialog id="add-phrase-modal">
-                <div class="modal-header">
-                    <h3>Add New Message</h3>
-                    <button type="button" class="close-button" onclick="this.closest('dialog').close()">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                        </svg>
-                    </button>
-                </div>
+            <app-modal id="add-phrase-modal" title="Add New Message">
                 <message-manager mode="create"></message-manager>
-            </dialog>
+            </app-modal>
 
-            <dialog id="edit-phrase-modal">
-                <div class="modal-header">
-                    <h3>Edit Message</h3>
-                    <button type="button" class="close-button" onclick="this.closest('dialog').close()">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                        </svg>
-                    </button>
-                </div>
+            <app-modal id="edit-phrase-modal" title="Edit Message">
                 <message-manager mode="edit"></message-manager>
-            </dialog>
+            </app-modal>
         `;
         
         // Set up modal listeners after render

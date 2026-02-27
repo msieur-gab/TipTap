@@ -133,8 +133,11 @@
         <settings-panel></settings-panel>
 
         <bottom-profile-selector></bottom-profile-selector>
-        <floating-action-button></floating-action-button>
-        <!-- <bottom-nav></bottom-nav> -->
+        <app-toast></app-toast>
+
+        <app-modal id="profile-modal" title="Profile" large>
+            <profile-manager></profile-manager>
+        </app-modal>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dexie/3.2.4/dexie.min.js"></script>
@@ -149,20 +152,16 @@
     <script type="module" src="./js/services/database.js"></script>
     <script type="module" src="./js/services/profiles.js"></script>
     <script type="module" src="./js/services/messages.js"></script>
-    <script type="module" src="./js/components/messages-tab.js"></script>
-    <!-- <script type="module" src="./js/components/profiles-tab.js"></script> -->
+    <script type="module" src="./js/components/app-modal.js"></script>
+    <script type="module" src="./js/components/app-toast.js"></script>
     <script type="module" src="./js/components/app-header.js"></script>
     <script type="module" src="./js/components/phrase-carousel.js"></script>
     <script type="module" src="./js/components/feedback-message.js"></script>
     <script type="module" src="./js/components/bottom-profile-selector.js"></script>
-    <script type="module" src="./js/components/floating-action-button.js"></script>
     <script type="module" src="./js/components/profile-manager.js"></script>
     <script type="module" src="./js/components/message-manager.js"></script>
-
-
-
+    <script type="module" src="./js/components/messages-tab.js"></script>
     <script type="module" src="./js/components/settings-panel.js"></script>
-    <!-- <script type="module" src="./js/components/bottom-nav.js"></script> -->
     <script type="module" src="./js/app.js"></script>
 </body>
 </html>

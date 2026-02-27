@@ -208,10 +208,14 @@ class OnboardingFlow extends HTMLElement {
     
     populateTimezonePanel(countryName) {
         const timezoneList = this.shadowRoot.getElementById('timezone-options');
+        const timezoneGroup = this.shadowRoot.getElementById('timezone-group');
+        const illustration = this.shadowRoot.querySelector('#step-4 .illustration-container');
         const countryData = this.timezoneData.find(d => d.country === countryName);
-        
+
         if (!timezoneList || !countryData || countryData.timezones.length === 0) {
             timezoneList.innerHTML = `<li class="panel-option-text" style="padding: 1rem; text-align: center; color: #666;">No timezones available.</li>`;
+            if (timezoneGroup) timezoneGroup.classList.add('hidden');
+            if (illustration) illustration.classList.remove('compact');
             return;
         }
 
@@ -221,11 +225,17 @@ class OnboardingFlow extends HTMLElement {
             </li>
         `).join('');
 
-        // If there's only one timezone, select it automatically
+        // If there's only one timezone, select it automatically and keep hidden
         if (countryData.timezones.length === 1) {
             const singleTimezone = countryData.timezones[0];
             this.state.currentKid.timezone = singleTimezone;
             this.updateDisplayText('timezone-display', singleTimezone.replace(/_/g, ' '));
+            if (timezoneGroup) timezoneGroup.classList.add('hidden');
+            if (illustration) illustration.classList.remove('compact');
+        } else {
+            // Multiple timezones — show the picker, shrink illustration
+            if (timezoneGroup) timezoneGroup.classList.remove('hidden');
+            if (illustration) illustration.classList.add('compact');
         }
     }
 
@@ -300,30 +310,6 @@ class OnboardingFlow extends HTMLElement {
     }
 
     handleNext() {
-
-        if (this.state.currentStep === 1 && !this.state.sourceLanguage) {
-            alert(i18n.t('onboarding.placeholders.chooseLanguage'));
-            return;
-       }
-        // Correct validation for the current step order
-        // if (this.state.currentStep === 4 && !this.state.sourceLanguage) {
-        //     alert(i18n.t('onboarding.placeholders.chooseLanguage'));
-        //     return;
-        // }
-        // if (this.state.currentStep === 5 && !this.state.currentKid.name.trim()) {
-        //     alert(i18n.t('onboarding.step5.placeholders.childName'));
-        //     return;
-        // }
-        if (this.state.currentStep === 5 && !this.state.currentKid.language) {
-            alert(i18n.t('onboarding.panelTitles.childLanguage'));
-            return;
-        }
-
-        // Correct step to save the kid's data is after completing step 6
-        // if (this.state.currentStep === 6 && this.state.currentKid.name) {
-        //     this.saveCurrentKid();
-        // }
-
         this.goToStep(this.state.currentStep + 1);
     }
 
@@ -350,22 +336,41 @@ class OnboardingFlow extends HTMLElement {
         const childName = this.shadowRoot.getElementById('child-name');
         const childBirthdate = this.shadowRoot.getElementById('child-birthdate');
         const childLanguageDisplay = this.shadowRoot.getElementById('child-language-display');
-        
+        const timezoneGroup = this.shadowRoot.getElementById('timezone-group');
+        const illustration = this.shadowRoot.querySelector('#step-4 .illustration-container');
+
         if (childName) childName.value = '';
         if (childBirthdate) childBirthdate.value = '';
         if (childLanguageDisplay) {
             childLanguageDisplay.textContent = i18n.t('onboarding.placeholders.chooseLanguage');
             childLanguageDisplay.className = 'placeholder';
         }
+        if (timezoneGroup) timezoneGroup.classList.add('hidden');
+        if (illustration) illustration.classList.remove('compact');
+        this.updateDisplayText('country-display', i18n.t('settings.selectCountry'), true);
+        this.updateDisplayText('timezone-display', i18n.t('settings.profileTimezone'), true);
     }
 
     goToStep(stepNumber) {
+        if (stepNumber < 1) return;
+
+        // Block forward navigation past mandatory steps
+        if (stepNumber > this.state.currentStep) {
+            if (this.state.currentStep === 1 && !this.state.sourceLanguage) {
+                alert(i18n.t('onboarding.placeholders.chooseLanguage'));
+                return;
+            }
+            if (this.state.currentStep === 5 && !this.state.currentKid.language) {
+                alert(i18n.t('onboarding.panelTitles.childLanguage'));
+                return;
+            }
+        }
+
         if (stepNumber > this.state.totalSteps) {
             this.finishOnboarding();
             return;
         }
-        if (stepNumber < 1) return;
-        
+
         this.state.currentStep = stepNumber;
         this.updateView();
     }
@@ -479,8 +484,11 @@ class OnboardingFlow extends HTMLElement {
         //     this.saveCurrentKid();
         // }
 
-        if (this.state.currentKid.originalName.trim() && this.state.currentKid.targetLanguage) {
-            this.state.kids.push({ ...this.state.currentKid });
+        if (this.state.currentKid.originalName.trim() && this.state.targetLanguage) {
+            this.state.kids.push({
+                ...this.state.currentKid,
+                language: this.state.targetLanguage
+            });
         }
 
         // Emit completion event with collected data
@@ -531,6 +539,7 @@ class OnboardingFlow extends HTMLElement {
                     max-width: 400px;
                     margin: auto;
                     height: 100vh;
+                    height: 100dvh;
                     background-color: var(--container-color);
                     display: flex;
                     flex-direction: column;
@@ -556,12 +565,13 @@ class OnboardingFlow extends HTMLElement {
                 .hidden { display: none !important; }
                 
                 .illustration-container {
-                    width: 100%; height: 45vh; background-color: #f3f4f6;
+                    width: 100%; height: 35vh; min-height: 120px; background-color: #f3f4f6;
                     border-radius: 24px; display: flex; align-items: center; justify-content: center;
-                    color: var(--color-text-light); flex-shrink: 0; margin-bottom: 1rem;
+                    color: var(--color-text-light); flex-shrink: 1; margin-bottom: 1rem;
                 }
                 
                 .illustration-container.clickable { cursor: pointer; }
+                .illustration-container.compact { height: 25vh; min-height: 80px; }
 
                 .bottom-content-container {
                     flex-grow: 1; display: flex; flex-direction: column; overflow-y: auto;
@@ -672,6 +682,19 @@ class OnboardingFlow extends HTMLElement {
                 .nav-button:hover { background-color: #f3f4f6; }
                 .nav-button.primary { background-color: var(--color-text-dark); color: var(--primary-text-color); border-color: var(--color-text-dark); }
                 .nav-button.primary:hover { background-color: #000; }
+                @media (max-height: 700px) {
+                    .illustration-container {
+                        height: 25vh;
+                        min-height: 100px;
+                    }
+                    .illustration-container.compact {
+                        height: 15vh;
+                        min-height: 60px;
+                    }
+                    .step-header h2 { font-size: 1.4rem; }
+                    .step-header p { font-size: 0.9rem; }
+                    .onboarding-main { padding: 0.75rem 1.25rem 1rem; }
+                }
             </style>
         `;
     }
@@ -766,7 +789,7 @@ class OnboardingFlow extends HTMLElement {
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group hidden" id="timezone-group">
                         <div class="select-input-trigger" data-panel-target="timezone-panel">
                             <span id="timezone-display" class="placeholder" data-i18n="settings.profileTimezone">Timezone</span>
                             <div class="arrow">
@@ -844,15 +867,17 @@ class OnboardingFlow extends HTMLElement {
 
             <!-- Step 7: Your Profile -->
             <div id="step-7" class="onboarding-step hidden">
-                <div class="step-header">
-                    <h2 data-i18n="onboarding.step7.title">Your Profile</h2>
-                    <p data-i18n="onboarding.step7.description">This helps personalize the app for you.</p>
-                </div>
-                <div class="form-group">
-                    <input type="text" id="user-name" class="styled-input" placeholder="Your Name (e.g., John)">
-                </div>
-                <div class="form-group">
-                    <input type="text" id="user-signature" class="styled-input" placeholder="How you sign messages (e.g., Dad)">
+                <div class="bottom-content-container">
+                    <div class="step-header">
+                        <h2 data-i18n="onboarding.step7.title">Your Profile</h2>
+                        <p data-i18n="onboarding.step7.description">This helps personalize the app for you.</p>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="user-name" class="styled-input" placeholder="Your Name (e.g., John)">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="user-signature" class="styled-input" placeholder="How you sign messages (e.g., Dad)">
+                    </div>
                 </div>
             </div>
 

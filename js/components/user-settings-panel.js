@@ -61,19 +61,29 @@ class UserSettingsPanel extends HTMLElement {
             }
         });
 
-        // Use event delegation for profile edit buttons
+        // Use event delegation for profile buttons
         this.shadowRoot.addEventListener('click', (e) => {
             const editButton = e.target.closest('.edit-profile-btn');
+            const addButton = e.target.closest('#add-profile-btn');
+
             if (editButton) {
                 const profileId = editButton.closest('.profile-list-item').dataset.profileId;
-                const profileManager = document.querySelector('floating-action-button')?.shadowRoot.querySelector('profile-manager');
-                const profileModal = document.querySelector('floating-action-button')?.shadowRoot.querySelector('#profile-management-modal');
+                const modal = document.querySelector('#profile-modal');
+                const profileManager = document.querySelector('#profile-modal profile-manager');
 
-                if (profileManager && profileModal) {
-                    this.closest('settings-panel').close();
+                if (modal && profileManager) {
                     profileManager.setAttribute('mode', 'edit');
                     profileManager.setAttribute('profile-id', profileId);
-                    profileModal.showModal();
+                    modal.open();
+                }
+            } else if (addButton) {
+                const modal = document.querySelector('#profile-modal');
+                const profileManager = document.querySelector('#profile-modal profile-manager');
+
+                if (modal && profileManager) {
+                    profileManager.setAttribute('mode', 'create');
+                    profileManager.removeAttribute('profile-id');
+                    modal.open();
                 }
             }
         });
@@ -184,6 +194,8 @@ class UserSettingsPanel extends HTMLElement {
                 .profile-info .name { font-weight: 600; color: var(--color-text-dark, #1f2937); }
                 .profile-info .translation { font-size: 0.9rem; color: var(--color-text-light, #6b7280); }
                 .edit-profile-btn { background: none; border: 1px solid var(--color-border, #e5e7eb); color: var(--color-text-dark, #1f2937); border-radius: 8px; padding: 0.5rem 1rem; font-weight: 500; cursor: pointer; }
+                .add-profile-btn { width: 100%; padding: 0.875rem; border: 2px dashed var(--color-border, #e5e7eb); background: none; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 0.95rem; color: var(--color-text-light, #6b7280); margin-top: 0.5rem; transition: all 0.2s; }
+                .add-profile-btn:hover { border-color: var(--color-text-dark, #1f2937); color: var(--color-text-dark, #1f2937); }
                 .error-message { background-color: #fff1f2; color: #be123c; padding: 0.75rem 1rem; border-radius: 8px; font-size: 0.875rem; text-align: center; }
             </style>
             <div class="settings-content">
@@ -237,6 +249,7 @@ class UserSettingsPanel extends HTMLElement {
                 <div class="card">
                     <h3 data-i18n="settings.manageProfiles">Manage Profiles</h3>
                     <div class="profile-list"></div>
+                    <button type="button" class="add-profile-btn" id="add-profile-btn" data-i18n="settings.addProfile">+ Add Profile</button>
                 </div>
             </div>
         `;

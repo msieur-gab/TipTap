@@ -84,7 +84,8 @@ class QuickMessagesApp {
         
         await this.initializeServices();
         this.setupGlobalEventListeners();
-        
+        this.setupProfileModalListeners();
+
         this.isInitialized = true;
         eventBus.emit(EVENTS.APP_READY);
         console.log('Quick Messages App initialized successfully!');
@@ -99,6 +100,43 @@ class QuickMessagesApp {
         eventBus.on(EVENTS.APP_READY, () => console.log('App is ready!'));
         window.addEventListener('error', this.handleGlobalError.bind(this));
         window.addEventListener('unhandledrejection', this.handleUnhandledRejection.bind(this));
+
+        // Profile modal — responds to request-profile-modal from bottom-profile-selector
+        document.addEventListener('request-profile-modal', (e) => {
+            this.openProfileModal(e.detail?.forceCreate);
+        });
+    }
+
+    openProfileModal(forceCreate = false) {
+        const modal = document.querySelector('#profile-modal');
+        const profileManager = document.querySelector('#profile-modal profile-manager');
+        if (!modal || !profileManager) return;
+
+        profileManager.setAttribute('mode', 'create');
+        profileManager.removeAttribute('profile-id');
+        modal.open();
+    }
+
+    setupProfileModalListeners() {
+        const modal = document.querySelector('#profile-modal');
+        const profileManager = document.querySelector('#profile-modal profile-manager');
+        if (!modal || !profileManager) return;
+
+        profileManager.addEventListener('profile-created', (e) => {
+            modal.close();
+            eventBus.emit(EVENTS.TOAST, { message: 'Profile created' });
+            eventBus.emit(EVENTS.PROFILE_SELECTED, { profile: e.detail.profile, nickname: null });
+        });
+
+        profileManager.addEventListener('profile-updated', () => {
+            modal.close();
+            eventBus.emit(EVENTS.TOAST, { message: 'Profile updated' });
+        });
+
+        profileManager.addEventListener('profile-deleted', (e) => {
+            modal.close();
+            eventBus.emit(EVENTS.TOAST, { message: 'Profile deleted' });
+        });
     }
 
     handleKeyboard(event) {
