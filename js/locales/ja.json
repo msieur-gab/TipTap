@@ -1,0 +1,152 @@
+{
+  "common": {
+    "loading": "読み込み中...",
+    "error": "エラー",
+    "ok": "OK",
+    "cancel": "キャンセル",
+    "next": "次へ",
+    "back": "戻る",
+    "skip": "今はスキップ",
+    "finish": "完了",
+    "save": "保存",
+    "edit": "編集",
+    "delete": "削除",
+    "add": "追加",
+    "close": "閉じる",
+    "confirm": "確認",
+    "yes": "はい",
+    "no": "いいえ",
+    "saved": "保存しました",
+    "translating": "翻訳中...",
+    "translate": "翻訳"
+  },
+  "onboarding": {
+    "step1": {
+      "title": "いつでもつながる",
+      "description": "離れていても、お子様の言語で愛情のこもったメッセージを送りましょう。距離は愛を減らしません。",
+      "languageHint": "メッセージを作成する際に使用する言語です。"
+    },
+    "step2": {
+      "title": "心に響くメッセージ",
+      "description": "名前を入れてパーソナライズされ、丁寧に自動翻訳された愛情のこもった定型文。すぐに共有できます。"
+    },
+    "step3": {
+      "title": "プライベートで安全",
+      "description": "デフォルトでは追跡や外部サービスはありません。ご家族のメッセージはあなたのデバイスに保存され、あなただけが見ることができます。"
+    },
+    "step4": {
+      "title": "最初のお子様を追加",
+      "description": "お子様のプロフィールを作成しましょう。後で他のを追加することもできます。",
+      "placeholders": {
+        "childName": "お子様の名前（例：エマ）",
+        "whereTheyLive": "居住地（任意）"
+      },
+      "kidsSummary": "これまでに追加されたお子様：",
+      "yearsOld": "{age}歳"
+    },
+    "step5": {
+      "title": "お子様の言語",
+      "description": "お子様が話し、理解する言語です。"
+    },
+    "step6": {
+      "title": "翻訳サービス",
+      "description": "オプション：ご自身のDeepL APIキーを使用して、言語間の自動翻訳を有効にします。",
+      "toggleTitle": "翻訳を有効にする",
+      "toggleDescription": "DeepLで自動翻訳を取得",
+      "apiKeyPlaceholder": "DeepL APIキー",
+      "apiKeyHelp": "DeepLから無料のAPIキーを取得（月50万文字まで無料）"
+    },
+    "step7": {
+      "title": "準備完了！",
+      "description": "あなたの家族のメッセージアプリの準備ができました。いつでもお子様を追加したり、メッセージをカスタマイズしたりできます。"
+    },
+    "panelTitles": {
+      "appLanguage": "アプリの言語",
+      "yourLanguage": "あなたの言語",
+      "childLanguage": "お子様の言語"
+    },
+    "placeholders": {
+      "chooseLanguage": "言語を選択...",
+      "childBirthdate": "お子様の生年月日"
+    }
+  },
+  "app": {
+    "title": "クイックメッセージ",
+    "messagesFor": "メッセージの宛先",
+    "noProfile": "プロフィールなし",
+    "general": "一般",
+    "categories": "カテゴリー",
+    "copySuccess": "メッセージをコピーしました！",
+    "copyFailed": "コピーに失敗しました。"
+  },
+  "settings": {
+    "title": "設定",
+    "profiles": "プロフィール",
+    "messages": "メッセージ",
+    "more": "その他",
+    "addProfile": "プロフィールを追加",
+    "addCategory": "カテゴリーを追加",
+    "addMessage": "メッセージを追加",
+    "profileName": "名前",
+    "profileTranslation": "翻訳",
+    "profileCountry": "国",
+    "profileTimezone": "タイムゾーン",
+    "profileBirthday": "誕生日",
+    "nickname": "ニックネーム",
+    "categoryName": "カテゴリー名",
+    "messageInYourLanguage": "あなたの言語でのメッセージ（{name}を名前に使用）...",
+    "messageInTargetLanguage": "ターゲット言語でのメッセージ（{name}を名前に使用）...",
+    "confirmDelete": "これを削除してもよろしいですか？",
+    "selectCountry": "-- 国を選択 --",
+    "dataManagement": "データ管理",
+    "exportData": "データをエクスポート",
+    "exportDescription": "すべてのプロフィール、メッセージ、設定をバックアップファイルとしてダウンロードします。",
+    "importData": "データをインポート",
+    "importDescription": "バックアップファイルから復元します。現在のすべてのデータが置き換えられます。",
+    "importConfirm": "現在のすべてのデータが置き換えられます。よろしいですか？",
+    "translationService": "翻訳サービス",
+    "enableTranslation": "翻訳を有効にする",
+    "enableTranslationDesc": "DeepLで自動翻訳を使用する",
+    "apiKey": "DeepL APIキー",
+    "monthlyUsage": "月間使用量",
+    "usageError": "使用データを取得できませんでした。",
+    "usageCounter": "{count} / {limit} 文字",
+    "manageProfiles": "プロフィール管理",
+    "saveChanges": "変更を保存",
+    "createProfile": "プロフィールを作成",
+    "deleteProfile": "プロフィールを削除",
+    "selectTimezone": "タイムゾーンを選択",
+    "newNickname": "新しいニックネーム",
+    "updateMessage": "メッセージを更新"
+  },
+  "time": {
+    "profileTime": "{name}の時間",
+    "birthday": "{name}の誕生日は",
+    "today": "今日です！🎉",
+    "tomorrow": "明日",
+    "inXDays": "あと{days}日"
+  },
+  "errors": {
+    "failedToInitialize": "アプリケーションの初期化に失敗しました。ページを再読み込みしてください。",
+    "unexpectedError": "予期せぬエラーが発生しました。",
+    "profileNotFound": "プロフィールが見つかりません",
+    "categoryNotFound": "カテゴリーが見つかりません",
+    "translationFailed": "翻訳に失敗しました",
+    "networkError": "ネットワークエラーです。接続を確認してください。",
+    "fillRequired": "すべての必須項目を入力してください。",
+    "translationNotConfigured": "翻訳サービスが設定されていません。設定でAPIキーを追加してください。",
+    "languageNotConfigured": "ソース言語またはターゲット言語が設定されていません。初期設定を完了してください。",
+    "imageError": "画像の処理に失敗しました。もう一度お試しください。",
+    "loadingFailed": "読み込みエラー"
+  },
+  "messageManager": {
+    "addMessage": "メッセージを追加",
+    "editKid": "子供を編集",
+    "selectCategory": "カテゴリーを選択",
+    "createNewCategory": "➕ 新しいカテゴリーを作成",
+    "newCategoryName": "新しいカテゴリー名",
+    "selectKidFirst": "まずお子様を選択してください",
+    "messageAdded": "メッセージが追加されました！",
+    "nameHelp": "{name}を使ってお子様の名前を挿入"
+  }
+}

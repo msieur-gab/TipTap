@@ -1,0 +1,152 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "ok": "Aceptar",
+    "cancel": "Cancelar",
+    "next": "Siguiente",
+    "back": "Atrás",
+    "skip": "Omitir por ahora",
+    "finish": "Finalizar",
+    "save": "Guardar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "add": "Añadir",
+    "close": "Cerrar",
+    "confirm": "Confirmar",
+    "yes": "Sí",
+    "no": "No",
+    "saved": "Guardado",
+    "translating": "Traduciendo...",
+    "translate": "Traducir"
+  },
+  "onboarding": {
+    "step1": {
+      "title": "Mantente Conectado, Siempre",
+      "description": "Envía mensajes cariñosos a tus hijos en su idioma, incluso cuando estéis separados. La distancia no disminuye el amor.",
+      "languageHint": "El idioma que usarás para escribir los mensajes."
+    },
+    "step2": {
+      "title": "Mensajes que Importan",
+      "description": "Mensajes cariñosos preescritos, personalizados con nombres y traducidos automáticamente con esmero. Listos para compartir al instante."
+    },
+    "step3": {
+      "title": "Privado y Seguro",
+      "description": "Sin rastreo, sin servicios externos por defecto. Los mensajes de tu familia permanecen en tu dispositivo, solo para tus ojos."
+    },
+    "step4": {
+      "title": "Añade a tu Primer Hijo",
+      "description": "Vamos a crear un perfil para él/ella. Podrás añadir más hijos más tarde.",
+      "placeholders": {
+        "childName": "Nombre del niño (ej: Emma)",
+        "whereTheyLive": "Dónde viven (opcional)"
+      },
+      "kidsSummary": "Niños añadidos hasta ahora:",
+      "yearsOld": "{age} años"
+    },
+    "step5": {
+      "title": "Su Idioma",
+      "description": "El idioma que tu hijo habla y entiende."
+    },
+    "step6": {
+      "title": "Servicio de Traducción",
+      "description": "Opcional: Activa la traducción automática entre tus idiomas con tu propia clave de API de DeepL.",
+      "toggleTitle": "Activar Traducción",
+      "toggleDescription": "Obtén traducciones automáticas con DeepL",
+      "apiKeyPlaceholder": "Clave de API de DeepL",
+      "apiKeyHelp": "Obtén tu clave de API gratuita de DeepL (500,000 caracteres/mes gratis)"
+    },
+    "step7": {
+      "title": "¡Todo Listo!",
+      "description": "Tu aplicación de mensajería familiar está lista. Puedes añadir más hijos y personalizar los mensajes en cualquier momento."
+    },
+    "panelTitles": {
+      "appLanguage": "Idioma de la App",
+      "yourLanguage": "Tu Idioma",
+      "childLanguage": "Idioma del Niño"
+    },
+    "placeholders": {
+      "chooseLanguage": "Elige un idioma...",
+      "childBirthdate": "Fecha de nacimiento del niño"
+    }
+  },
+  "app": {
+    "title": "Mensajes Rápidos",
+    "messagesFor": "Mensajes para",
+    "noProfile": "Sin Perfil",
+    "general": "General",
+    "categories": "CATEGORÍAS",
+    "copySuccess": "¡Mensaje copiado!",
+    "copyFailed": "Fallo al copiar."
+  },
+  "settings": {
+    "title": "Ajustes",
+    "profiles": "Perfiles",
+    "messages": "Mensajes",
+    "more": "Más",
+    "addProfile": "Añadir Perfil",
+    "addCategory": "Añadir Categoría",
+    "addMessage": "Añadir Mensaje",
+    "profileName": "Nombre",
+    "profileTranslation": "Traducción",
+    "profileCountry": "País",
+    "profileTimezone": "Zona Horaria",
+    "profileBirthday": "Cumpleaños",
+    "nickname": "Apodo",
+    "categoryName": "Nombre de la categoría",
+    "messageInYourLanguage": "Mensaje en tu idioma (usa {name} para el nombre)...",
+    "messageInTargetLanguage": "Mensaje en el idioma de destino (usa {name} para el nombre)...",
+    "confirmDelete": "¿Estás seguro/a de que quieres eliminar esto?",
+    "selectCountry": "-- Selecciona un País --",
+    "dataManagement": "Gestión de Datos",
+    "exportData": "Exportar Datos",
+    "exportDescription": "Descarga todos tus perfiles, mensajes y ajustes como archivo de copia de seguridad.",
+    "importData": "Importar Datos",
+    "importDescription": "Restaurar desde un archivo de copia de seguridad. Esto reemplazará todos los datos actuales.",
+    "importConfirm": "Esto reemplazará todos tus datos actuales. ¿Estás seguro/a?",
+    "translationService": "Servicio de Traducción",
+    "enableTranslation": "Activar Traducción",
+    "enableTranslationDesc": "Usar DeepL para traducciones automáticas",
+    "apiKey": "Clave API de DeepL",
+    "monthlyUsage": "Uso Mensual",
+    "usageError": "No se pudieron obtener los datos de uso.",
+    "usageCounter": "{count} / {limit} caracteres",
+    "manageProfiles": "Gestionar Perfiles",
+    "saveChanges": "Guardar Cambios",
+    "createProfile": "Crear Perfil",
+    "deleteProfile": "Eliminar Perfil",
+    "selectTimezone": "Seleccionar zona horaria",
+    "newNickname": "Nuevo apodo",
+    "updateMessage": "Actualizar Mensaje"
+  },
+  "time": {
+    "profileTime": "Hora de {name}",
+    "birthday": "El cumpleaños de {name} es",
+    "today": "¡Hoy! 🎉",
+    "tomorrow": "Mañana",
+    "inXDays": "en {days} días"
+  },
+  "errors": {
+    "failedToInitialize": "Fallo al inicializar la aplicación. Por favor, actualiza la página.",
+    "unexpectedError": "Ha ocurrido un error inesperado.",
+    "profileNotFound": "Perfil no encontrado",
+    "categoryNotFound": "Categoría no encontrada",
+    "translationFailed": "Fallo en la traducción",
+    "networkError": "Error de red. Por favor, comprueba tu conexión.",
+    "fillRequired": "Por favor, complete todos los campos obligatorios.",
+    "translationNotConfigured": "El servicio de traducción no está configurado. Por favor, añade tu clave API en los ajustes.",
+    "languageNotConfigured": "El idioma de origen o destino no está configurado. Por favor, completa la configuración inicial.",
+    "imageError": "Error al procesar la imagen. Por favor, inténtalo de nuevo.",
+    "loadingFailed": "Error al cargar"
+  },
+  "messageManager": {
+    "addMessage": "Añadir Mensaje",
+    "editKid": "Editar Niño",
+    "selectCategory": "Seleccionar Categoría",
+    "createNewCategory": "➕ Crear Nueva Categoría",
+    "newCategoryName": "Nombre de la Nueva Categoría",
+    "selectKidFirst": "Por favor, selecciona primero un niño",
+    "messageAdded": "¡Mensaje añadido con éxito!",
+    "nameHelp": "Usa {name} para insertar el nombre del niño"
+  }
+}

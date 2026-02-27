@@ -1,0 +1,152 @@
+{
+  "common": {
+    "loading": "로딩 중...",
+    "error": "오류",
+    "ok": "확인",
+    "cancel": "취소",
+    "next": "다음",
+    "back": "뒤로",
+    "skip": "지금은 건너뛰기",
+    "finish": "완료",
+    "save": "저장",
+    "edit": "편집",
+    "delete": "삭제",
+    "add": "추가",
+    "close": "닫기",
+    "confirm": "확인",
+    "yes": "예",
+    "no": "아니요",
+    "saved": "저장됨",
+    "translating": "번역 중...",
+    "translate": "번역"
+  },
+  "onboarding": {
+    "step1": {
+      "title": "언제나 연결되어 있으세요",
+      "description": "멀리 떨어져 있어도 자녀의 언어로 사랑이 담긴 메시지를 보내세요. 거리는 사랑을 줄이지 않습니다.",
+      "languageHint": "메시지를 작성할 때 사용할 언어입니다."
+    },
+    "step2": {
+      "title": "중요한 메시지",
+      "description": "미리 작성된 사랑스러운 메시지를 이름으로 개인화하고 정성스럽게 자동 번역합니다. 즉시 공유할 준비가 되어 있습니다."
+    },
+    "step3": {
+      "title": "개인 정보 보호 및 보안",
+      "description": "기본적으로 추적이나 외부 서비스가 없습니다. 가족의 메시지는 기기에만 저장되며 본인만 볼 수 있습니다."
+    },
+    "step4": {
+      "title": "첫 자녀 추가",
+      "description": "자녀의 프로필을 만들어 보겠습니다. 나중에 더 많은 자녀를 추가할 수 있습니다.",
+      "placeholders": {
+        "childName": "자녀 이름 (예: 엠마)",
+        "whereTheyLive": "거주지 (선택 사항)"
+      },
+      "kidsSummary": "지금까지 추가된 자녀:",
+      "yearsOld": "{age}세"
+    },
+    "step5": {
+      "title": "자녀 언어",
+      "description": "자녀가 사용하고 이해하는 언어입니다."
+    },
+    "step6": {
+      "title": "번역 서비스",
+      "description": "선택 사항: 자체 DeepL API 키로 언어 간 자동 번역을 활성화하세요.",
+      "toggleTitle": "번역 활성화",
+      "toggleDescription": "DeepL로 자동 번역 받기",
+      "apiKeyPlaceholder": "DeepL API 키",
+      "apiKeyHelp": "DeepL에서 무료 API 키를 받으세요 (월 500,000자 무료)"
+    },
+    "step7": {
+      "title": "모든 준비가 끝났습니다!",
+      "description": "가족 메시지 앱이 준비되었습니다. 언제든지 자녀를 추가하고 메시지를 사용자 지정할 수 있습니다."
+    },
+    "panelTitles": {
+      "appLanguage": "앱 언어",
+      "yourLanguage": "사용자 언어",
+      "childLanguage": "자녀 언어"
+    },
+    "placeholders": {
+      "chooseLanguage": "언어 선택...",
+      "childBirthdate": "자녀 생년월일"
+    }
+  },
+  "app": {
+    "title": "빠른 메시지",
+    "messagesFor": "메시지 대상",
+    "noProfile": "프로필 없음",
+    "general": "일반",
+    "categories": "카테고리",
+    "copySuccess": "메시지가 복사되었습니다!",
+    "copyFailed": "복사에 실패했습니다."
+  },
+  "settings": {
+    "title": "설정",
+    "profiles": "프로필",
+    "messages": "메시지",
+    "more": "더보기",
+    "addProfile": "프로필 추가",
+    "addCategory": "카테고리 추가",
+    "addMessage": "메시지 추가",
+    "profileName": "이름",
+    "profileTranslation": "번역",
+    "profileCountry": "국가",
+    "profileTimezone": "시간대",
+    "profileBirthday": "생일",
+    "nickname": "닉네임",
+    "categoryName": "카테고리 이름",
+    "messageInYourLanguage": "당신의 언어로 메시지 (이름에 {name} 사용)...",
+    "messageInTargetLanguage": "대상 언어로 메시지 (이름에 {name} 사용)...",
+    "confirmDelete": "이것을 삭제하시겠습니까?",
+    "selectCountry": "-- 국가 선택 --",
+    "dataManagement": "데이터 관리",
+    "exportData": "데이터 내보내기",
+    "exportDescription": "모든 프로필, 메시지 및 설정을 백업 파일로 다운로드합니다.",
+    "importData": "데이터 가져오기",
+    "importDescription": "백업 파일에서 복원합니다. 현재 모든 데이터가 대체됩니다.",
+    "importConfirm": "현재 모든 데이터가 대체됩니다. 계속하시겠습니까?",
+    "translationService": "번역 서비스",
+    "enableTranslation": "번역 활성화",
+    "enableTranslationDesc": "DeepL로 자동 번역 사용",
+    "apiKey": "DeepL API 키",
+    "monthlyUsage": "월간 사용량",
+    "usageError": "사용 데이터를 가져올 수 없습니다.",
+    "usageCounter": "{count} / {limit} 자",
+    "manageProfiles": "프로필 관리",
+    "saveChanges": "변경 사항 저장",
+    "createProfile": "프로필 만들기",
+    "deleteProfile": "프로필 삭제",
+    "selectTimezone": "시간대 선택",
+    "newNickname": "새 닉네임",
+    "updateMessage": "메시지 수정"
+  },
+  "time": {
+    "profileTime": "{name}의 시간",
+    "birthday": "{name}의 생일은",
+    "today": "오늘! 🎉",
+    "tomorrow": "내일",
+    "inXDays": "{days}일 후"
+  },
+  "errors": {
+    "failedToInitialize": "애플리케이션을 초기화하지 못했습니다. 페이지를 새로고침하세요.",
+    "unexpectedError": "예상치 못한 오류가 발생했습니다.",
+    "profileNotFound": "프로필을 찾을 수 없습니다",
+    "categoryNotFound": "카테고리를 찾을 수 없습니다",
+    "translationFailed": "번역에 실패했습니다",
+    "networkError": "네트워크 오류. 연결을 확인하세요.",
+    "fillRequired": "모든 필수 항목을 입력하세요.",
+    "translationNotConfigured": "번역 서비스가 설정되지 않았습니다. 설정에서 API 키를 추가하세요.",
+    "languageNotConfigured": "소스 언어 또는 대상 언어가 설정되지 않았습니다. 초기 설정을 완료하세요.",
+    "imageError": "이미지 처리에 실패했습니다. 다시 시도하세요.",
+    "loadingFailed": "로딩 오류"
+  },
+  "messageManager": {
+    "addMessage": "메시지 추가",
+    "editKid": "자녀 편집",
+    "selectCategory": "카테고리 선택",
+    "createNewCategory": "➕ 새 카테고리 만들기",
+    "newCategoryName": "새 카테고리 이름",
+    "selectKidFirst": "먼저 자녀를 선택하세요",
+    "messageAdded": "메시지가 추가되었습니다!",
+    "nameHelp": "{name}을 사용하여 자녀 이름 삽입"
+  }
+}

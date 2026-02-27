@@ -1,0 +1,152 @@
+{
+  "common": {
+    "loading": "加载中...",
+    "error": "错误",
+    "ok": "确定",
+    "cancel": "取消",
+    "next": "下一步",
+    "back": "上一步",
+    "skip": "暂时跳过",
+    "finish": "完成",
+    "save": "保存",
+    "edit": "编辑",
+    "delete": "删除",
+    "add": "添加",
+    "close": "关闭",
+    "confirm": "确认",
+    "yes": "是",
+    "no": "否",
+    "saved": "已保存",
+    "translating": "翻译中...",
+    "translate": "翻译"
+  },
+  "onboarding": {
+    "step1": {
+      "title": "保持联系，永远",
+      "description": "即使身处异地，也能用孩子的语言给他们发送充满爱意的消息。距离不会减少爱。",
+      "languageHint": "您用来编写消息的语言。"
+    },
+    "step2": {
+      "title": "有意义的消息",
+      "description": "预先写好的充满爱意的消息，用名字进行个性化设置，并经过精心自动翻译。即时分享。"
+    },
+    "step3": {
+      "title": "私密与安全",
+      "description": "默认无跟踪，无外部服务。您家人的消息保留在您的设备上，仅供您阅览。"
+    },
+    "step4": {
+      "title": "添加您的第一个孩子",
+      "description": "让我们为他们创建一个个人资料。您以后可以添加更多的孩子。",
+      "placeholders": {
+        "childName": "孩子的名字（例如：艾玛）",
+        "whereTheyLive": "他们住在哪里（可选）"
+      },
+      "kidsSummary": "目前已添加的孩子：",
+      "yearsOld": "{age}岁"
+    },
+    "step5": {
+      "title": "他们的语言",
+      "description": "您的孩子说和理解的语言。"
+    },
+    "step6": {
+      "title": "翻译服务",
+      "description": "可选：使用您自己的 DeepL API 密钥启用您的语言之间的自动翻译。",
+      "toggleTitle": "启用翻译",
+      "toggleDescription": "使用 DeepL 获取自动翻译",
+      "apiKeyPlaceholder": "DeepL API 密钥",
+      "apiKeyHelp": "从 DeepL 获取您的免费 API 密钥（每月 500,000 个字符免费）"
+    },
+    "step7": {
+      "title": "一切就绪！",
+      "description": "您的家庭消息应用已准备就绪。您可以随时添加更多的孩子和自定义消息。"
+    },
+    "panelTitles": {
+      "appLanguage": "应用语言",
+      "yourLanguage": "您的语言",
+      "childLanguage": "孩子的语言"
+    },
+    "placeholders": {
+      "chooseLanguage": "选择语言...",
+      "childBirthdate": "孩子的生日"
+    }
+  },
+  "app": {
+    "title": "快捷消息",
+    "messagesFor": "给",
+    "noProfile": "无个人资料",
+    "general": "通用",
+    "categories": "类别",
+    "copySuccess": "消息已复制！",
+    "copyFailed": "复制失败。"
+  },
+  "settings": {
+    "title": "设置",
+    "profiles": "个人资料",
+    "messages": "消息",
+    "more": "更多",
+    "addProfile": "添加个人资料",
+    "addCategory": "添加类别",
+    "addMessage": "添加消息",
+    "profileName": "姓名",
+    "profileTranslation": "翻译",
+    "profileCountry": "国家",
+    "profileTimezone": "时区",
+    "profileBirthday": "生日",
+    "nickname": "昵称",
+    "categoryName": "类别名称",
+    "messageInYourLanguage": "用您的语言发送消息（使用 {name} 代表名字）...",
+    "messageInTargetLanguage": "用目标语言发送消息（使用 {name} 代表名字）...",
+    "confirmDelete": "您确定要删除吗？",
+    "selectCountry": "-- 选择国家 --",
+    "dataManagement": "数据管理",
+    "exportData": "导出数据",
+    "exportDescription": "将所有个人资料、消息和设置下载为备份文件。",
+    "importData": "导入数据",
+    "importDescription": "从备份文件恢复。这将替换所有当前数据。",
+    "importConfirm": "这将替换您的所有当前数据。您确定吗？",
+    "translationService": "翻译服务",
+    "enableTranslation": "启用翻译",
+    "enableTranslationDesc": "使用 DeepL 进行自动翻译",
+    "apiKey": "DeepL API 密钥",
+    "monthlyUsage": "月度使用量",
+    "usageError": "无法获取使用数据。",
+    "usageCounter": "{count} / {limit} 字符",
+    "manageProfiles": "管理个人资料",
+    "saveChanges": "保存更改",
+    "createProfile": "创建个人资料",
+    "deleteProfile": "删除个人资料",
+    "selectTimezone": "选择时区",
+    "newNickname": "新昵称",
+    "updateMessage": "更新消息"
+  },
+  "time": {
+    "profileTime": "{name}的时间",
+    "birthday": "{name}的生日是",
+    "today": "今天！🎉",
+    "tomorrow": "明天",
+    "inXDays": "还有{days}天"
+  },
+  "errors": {
+    "failedToInitialize": "应用初始化失败。请刷新页面。",
+    "unexpectedError": "发生意外错误。",
+    "profileNotFound": "未找到个人资料",
+    "categoryNotFound": "未找到类别",
+    "translationFailed": "翻译失败",
+    "networkError": "网络错误。请检查您的连接。",
+    "fillRequired": "请填写所有必填项。",
+    "translationNotConfigured": "翻译服务未配置。请在设置中添加您的 API 密钥。",
+    "languageNotConfigured": "源语言或目标语言未配置。请完成初始设置。",
+    "imageError": "图片处理失败。请重试。",
+    "loadingFailed": "加载失败"
+  },
+  "messageManager": {
+    "addMessage": "添加消息",
+    "editKid": "编辑孩子",
+    "selectCategory": "选择类别",
+    "createNewCategory": "➕ 创建新类别",
+    "newCategoryName": "新类别名称",
+    "selectKidFirst": "请先选择一个孩子",
+    "messageAdded": "消息添加成功！",
+    "nameHelp": "使用 {name} 插入孩子的名字"
+  }
+}

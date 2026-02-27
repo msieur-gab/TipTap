@@ -1,0 +1,75 @@
+{
+  "categories": {
+    "greetings": "问候",
+    "questions": "问题",
+    "affection": "关爱",
+    "school": "学校",
+    "sports": "运动",
+    "holidays": "假期",
+    "birthday": "生日",
+    "christmas": "圣诞节",
+    "special-events": "特殊事件"
+  },
+  "phrases": {
+    "greetings": [
+      { "id": "greet1", "text": "早上好 {name}，你今天好吗？" },
+      { "id": "greet2", "text": "晚安 {name}，做个好梦。" },
+      { "id": "greet3", "text": "祝你今天过得愉快，{name}！" }
+    ],
+    "questions": [
+      { "id": "quest1", "text": "{name}，你吃得好吗？" },
+      { "id": "quest2", "text": "你什么时候回家，{name}？" },
+      { "id": "quest3", "text": "{name}，你今天过得怎么样？" },
+      { "id": "quest4", "text": "{name}，你感觉还好吗？" }
+    ],
+    "affection": [
+      { "id": "aff1", "text": "我在想你，{name}。" },
+      { "id": "aff2", "text": "我爱你，{name}。" },
+      { "id": "aff3", "text": "我很想你，{name}。" },
+      { "id": "aff4", "text": "你让我很骄傲，{name}。" }
+    ],
+    "school": [
+      { "id": "school1", "text": "{name}，你做完作业了吗？" },
+      { "id": "school2", "text": "{name}，祝你今天考试顺利！" },
+      { "id": "school3", "text": "{name}，今天上学怎么样？" },
+      { "id": "school4", "text": "{name}，别忘了收拾书包。" },
+      { "id": "school5", "text": "好好学习，{name}。我相信你！" }
+    ],
+    "sports": [
+      { "id": "sport1", "text": "{name}，祝你今天训练顺利！" },
+      { "id": "sport2", "text": "{name}，你的比赛怎么样？" },
+      { "id": "sport3", "text": "{name}，你表现得太棒了！" },
+      { "id": "sport4", "text": "{name}，别忘了带运动装备。" },
+      { "id": "sport5", "text": "继续保持，{name}！" }
+    ],
+    "holidays": [
+      { "id": "holiday1", "text": "{name}，享受你的假期！" },
+      { "id": "holiday2", "text": "{name}，你旅行玩得开心吗？" },
+      { "id": "holiday3", "text": "{name}，多拍点照片！" },
+      { "id": "holiday4", "text": "{name}，假期要好好休息。" },
+      { "id": "holiday5", "text": "{name}，节日快乐！" }
+    ],
+    "birthday": [
+      { "id": "birthday1", "text": "生日快乐，{name}！希望你所有的愿望都能实现！" },
+      { "id": "birthday2", "text": "祝你生日最快乐，{name}！" },
+      { "id": "birthday3", "text": "又长大了一岁，{name}！" },
+      { "id": "birthday4", "text": "迫不及待要和你一起庆祝，{name}！" },
+      { "id": "birthday5", "text": "{name}，你长得太快了！" }
+    ],
+    "christmas": [
+      { "id": "christmas1", "text": "圣诞快乐，{name}！" },
+      { "id": "christmas2", "text": "{name}，圣诞老人就要来了！" },
+      { "id": "christmas3", "text": "{name}，你今年表现好吗？" },
+      { "id": "christmas4", "text": "迫不及待要和你一起拆礼物，{name}！" },
+      { "id": "christmas5", "text": "{name}，圣诞树真漂亮。" }
+    ],
+    "special-events": [
+      { "id": "special1", "text": "新年快乐，{name}！这将是美好的一年！" },
+      { "id": "special2", "text": "恭喜你取得成就，{name}！" },
+      { "id": "special3", "text": "今天是特别的日子，{name}！" },
+      { "id": "special4", "text": "{name}，你今天做了了不起的事！" },
+      { "id": "special5", "text": "我们一起庆祝吧，{name}！" },
+      { "id": "special6", "text": "这个时刻很珍贵，{name}。" }
+    ]
+  }
+}

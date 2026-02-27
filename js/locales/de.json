@@ -1,0 +1,152 @@
+{
+  "common": {
+    "loading": "Wird geladen...",
+    "error": "Fehler",
+    "ok": "OK",
+    "cancel": "Abbrechen",
+    "next": "Weiter",
+    "back": "Zurück",
+    "skip": "Jetzt überspringen",
+    "finish": "Abschließen",
+    "save": "Speichern",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "add": "Hinzufügen",
+    "close": "Schließen",
+    "confirm": "Bestätigen",
+    "yes": "Ja",
+    "no": "Nein",
+    "saved": "Gespeichert",
+    "translating": "Übersetzung läuft...",
+    "translate": "Übersetzen"
+  },
+  "onboarding": {
+    "step1": {
+      "title": "Immer verbunden bleiben",
+      "description": "Senden Sie liebevolle Nachrichten an Ihre Kinder in ihrer Sprache, auch wenn Sie getrennt sind. Entfernung verringert nicht die Liebe.",
+      "languageHint": "Die Sprache, die Sie zum Schreiben von Nachrichten verwenden werden."
+    },
+    "step2": {
+      "title": "Nachrichten, die zählen",
+      "description": "Vorgeschriebene liebevolle Nachrichten, personalisiert mit Namen und sorgfältig automatisch übersetzt. Sofort zum Teilen bereit."
+    },
+    "step3": {
+      "title": "Privat und Sicher",
+      "description": "Kein Tracking, standardmäßig keine externen Dienste. Die Nachrichten Ihrer Familie bleiben auf Ihrem Gerät, nur für Ihre Augen bestimmt."
+    },
+    "step4": {
+      "title": "Fügen Sie Ihr erstes Kind hinzu",
+      "description": "Lassen Sie uns ein Profil für es erstellen. Sie können später weitere Kinder hinzufügen.",
+      "placeholders": {
+        "childName": "Name des Kindes (z.B. Emma)",
+        "whereTheyLive": "Wo sie leben (optional)"
+      },
+      "kidsSummary": "Bisher hinzugefügte Kinder:",
+      "yearsOld": "{age} Jahre alt"
+    },
+    "step5": {
+      "title": "Ihre Sprache",
+      "description": "Die Sprache, die Ihr Kind spricht und versteht."
+    },
+    "step6": {
+      "title": "Übersetzungsdienst",
+      "description": "Optional: Aktivieren Sie die automatische Übersetzung zwischen Ihren Sprachen mit Ihrem eigenen DeepL API-Schlüssel.",
+      "toggleTitle": "Übersetzung aktivieren",
+      "toggleDescription": "Erhalten Sie automatische Übersetzungen mit DeepL",
+      "apiKeyPlaceholder": "DeepL API-Schlüssel",
+      "apiKeyHelp": "Holen Sie sich Ihren kostenlosen API-Schlüssel von DeepL (500.000 Zeichen/Monat kostenlos)"
+    },
+    "step7": {
+      "title": "Alles bereit!",
+      "description": "Ihre Familien-Nachrichten-App ist bereit. Sie können jederzeit weitere Kinder hinzufügen und Nachrichten anpassen."
+    },
+    "panelTitles": {
+      "appLanguage": "App-Sprache",
+      "yourLanguage": "Ihre Sprache",
+      "childLanguage": "Sprache des Kindes"
+    },
+    "placeholders": {
+      "chooseLanguage": "Sprache wählen...",
+      "childBirthdate": "Geburtsdatum des Kindes"
+    }
+  },
+  "app": {
+    "title": "Schnelle Nachrichten",
+    "messagesFor": "Nachrichten für",
+    "noProfile": "Kein Profil",
+    "general": "Allgemein",
+    "categories": "KATEGORIEN",
+    "copySuccess": "Nachricht kopiert!",
+    "copyFailed": "Kopieren fehlgeschlagen."
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "profiles": "Profile",
+    "messages": "Nachrichten",
+    "more": "Mehr",
+    "addProfile": "Profil hinzufügen",
+    "addCategory": "Kategorie hinzufügen",
+    "addMessage": "Nachricht hinzufügen",
+    "profileName": "Name",
+    "profileTranslation": "Übersetzung",
+    "profileCountry": "Land",
+    "profileTimezone": "Zeitzone",
+    "profileBirthday": "Geburtstag",
+    "nickname": "Spitzname",
+    "categoryName": "Name der Kategorie",
+    "messageInYourLanguage": "Nachricht in deiner Sprache (benutze {name} für den Namen)...",
+    "messageInTargetLanguage": "Nachricht in der Zielsprache (benutze {name} für den Namen)...",
+    "confirmDelete": "Bist du sicher, dass du das löschen möchtest?",
+    "selectCountry": "-- Land auswählen --",
+    "dataManagement": "Datenverwaltung",
+    "exportData": "Daten exportieren",
+    "exportDescription": "Laden Sie alle Ihre Profile, Nachrichten und Einstellungen als Sicherungsdatei herunter.",
+    "importData": "Daten importieren",
+    "importDescription": "Aus einer Sicherungsdatei wiederherstellen. Dies ersetzt alle aktuellen Daten.",
+    "importConfirm": "Dies wird alle Ihre aktuellen Daten ersetzen. Sind Sie sicher?",
+    "translationService": "Übersetzungsdienst",
+    "enableTranslation": "Übersetzung aktivieren",
+    "enableTranslationDesc": "DeepL für automatische Übersetzungen verwenden",
+    "apiKey": "DeepL API-Schlüssel",
+    "monthlyUsage": "Monatliche Nutzung",
+    "usageError": "Nutzungsdaten konnten nicht abgerufen werden.",
+    "usageCounter": "{count} / {limit} Zeichen",
+    "manageProfiles": "Profile verwalten",
+    "saveChanges": "Änderungen speichern",
+    "createProfile": "Profil erstellen",
+    "deleteProfile": "Profil löschen",
+    "selectTimezone": "Zeitzone auswählen",
+    "newNickname": "Neuer Spitzname",
+    "updateMessage": "Nachricht aktualisieren"
+  },
+  "time": {
+    "profileTime": "Uhrzeit bei {name}",
+    "birthday": "{name}s Geburtstag ist",
+    "today": "Heute! 🎉",
+    "tomorrow": "Morgen",
+    "inXDays": "in {days} Tagen"
+  },
+  "errors": {
+    "failedToInitialize": "Die Anwendung konnte nicht initialisiert werden. Bitte lade die Seite neu.",
+    "unexpectedError": "Ein unerwarteter Fehler ist aufgetreten.",
+    "profileNotFound": "Profil nicht gefunden",
+    "categoryNotFound": "Kategorie nicht gefunden",
+    "translationFailed": "Übersetzung fehlgeschlagen",
+    "networkError": "Netzwerkfehler. Bitte überprüfe deine Verbindung.",
+    "fillRequired": "Bitte füllen Sie alle Pflichtfelder aus.",
+    "translationNotConfigured": "Der Übersetzungsdienst ist nicht konfiguriert. Bitte fügen Sie Ihren API-Schlüssel in den Einstellungen hinzu.",
+    "languageNotConfigured": "Quell- oder Zielsprache ist nicht konfiguriert. Bitte schließen Sie die Einrichtung ab.",
+    "imageError": "Bildverarbeitung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "loadingFailed": "Fehler beim Laden"
+  },
+  "messageManager": {
+    "addMessage": "Nachricht hinzufügen",
+    "editKid": "Kind bearbeiten",
+    "selectCategory": "Kategorie auswählen",
+    "createNewCategory": "➕ Neue Kategorie erstellen",
+    "newCategoryName": "Name der neuen Kategorie",
+    "selectKidFirst": "Bitte wählen Sie zuerst ein Kind aus",
+    "messageAdded": "Nachricht erfolgreich hinzugefügt!",
+    "nameHelp": "Verwenden Sie {name} um den Namen des Kindes einzufügen"
+  }
+}

@@ -443,7 +443,7 @@ class OnboardingFlow extends HTMLElement {
                     <div class="kid-avatar">${kid.originalName.charAt(0)}</div>
                     <div class="kid-info">
                         <div class="kid-name">${kid.originalName}</div>
-                        <div class="kid-details">${kid.languageName}${kid.birthdate ? ` • ${this.getAge(kid.birthdate)} years old` : ''}</div>
+                        <div class="kid-details">${kid.languageName}${kid.birthdate ? ` • ${i18n.t('onboarding.step4.yearsOld', { age: this.getAge(kid.birthdate) })}` : ''}</div>
                     </div>
                 </div>
             `).join('');

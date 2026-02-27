@@ -1,0 +1,75 @@
+{
+  "categories": {
+    "greetings": "인사",
+    "questions": "질문",
+    "affection": "애정",
+    "school": "학교",
+    "sports": "스포츠",
+    "holidays": "휴일",
+    "birthday": "생일",
+    "christmas": "크리스마스",
+    "special-events": "특별한 이벤트"
+  },
+  "phrases": {
+    "greetings": [
+      { "id": "greet1", "text": "좋은 아침, {name}. 오늘 기분 어때?" },
+      { "id": "greet2", "text": "잘 자, {name}. 좋은 꿈 꿔." },
+      { "id": "greet3", "text": "멋진 하루 보내, {name}!" }
+    ],
+    "questions": [
+      { "id": "quest1", "text": "밥은 잘 먹었어, {name}?" },
+      { "id": "quest2", "text": "언제 집에 와, {name}?" },
+      { "id": "quest3", "text": "오늘 하루 어땠어, {name}?" },
+      { "id": "quest4", "text": "몸은 괜찮아, {name}?" }
+    ],
+    "affection": [
+      { "id": "aff1", "text": "{name}, 네 생각 하고 있었어." },
+      { "id": "aff2", "text": "사랑해, {name}." },
+      { "id": "aff3", "text": "정말 보고 싶어, {name}." },
+      { "id": "aff4", "text": "네가 정말 자랑스러워, {name}." }
+    ],
+    "school": [
+      { "id": "school1", "text": "숙제 다 했어, {name}?" },
+      { "id": "school2", "text": "오늘 시험 잘 봐, {name}!" },
+      { "id": "school3", "text": "오늘 학교는 어땠어, {name}?" },
+      { "id": "school4", "text": "가방 챙기는 거 잊지 마, {name}." },
+      { "id": "school5", "text": "열심히 공부해, {name}. 널 믿어!" }
+    ],
+    "sports": [
+      { "id": "sport1", "text": "오늘 연습 잘 해, {name}!" },
+      { "id": "sport2", "text": "경기 어땠어, {name}?" },
+      { "id": "sport3", "text": "정말 멋지게 경기했어, {name}!" },
+      { "id": "sport4", "text": "운동 장비 잊지 마, {name}." },
+      { "id": "sport5", "text": "계속 그렇게만 해, {name}!" }
+    ],
+    "holidays": [
+      { "id": "holiday1", "text": "휴가 잘 보내, {name}!" },
+      { "id": "holiday2", "text": "여행은 재미있어, {name}?" },
+      { "id": "holiday3", "text": "사진 많이 찍어, {name}!" },
+      { "id": "holiday4", "text": "휴일 동안 푹 쉬어, {name}." },
+      { "id": "holiday5", "text": "즐거운 휴일 보내, {name}!" }
+    ],
+    "birthday": [
+      { "id": "birthday1", "text": "생일 축하해, {name}! 모든 소원이 이루어지길 바라!" },
+      { "id": "birthday2", "text": "가장 행복한 생일이 되길 바라, {name}!" },
+      { "id": "birthday3", "text": "한 살 더 먹고 더 현명해졌네, {name}!" },
+      { "id": "birthday4", "text": "너랑 같이 축하하고 싶어, {name}!" },
+      { "id": "birthday5", "text": "정말 빨리 크는구나, {name}!" }
+    ],
+    "christmas": [
+      { "id": "christmas1", "text": "메리 크리스마스, {name}!" },
+      { "id": "christmas2", "text": "산타 할아버지가 곧 오실 거야, {name}!" },
+      { "id": "christmas3", "text": "올해 착한 아이였니, {name}?" },
+      { "id": "christmas4", "text": "너랑 같이 선물 열어보고 싶어, {name}!" },
+      { "id": "christmas5", "text": "크리스마스 트리가 정말 예쁘다, {name}." }
+    ],
+    "special-events": [
+      { "id": "special1", "text": "새해 복 많이 받아, {name}! 멋진 한 해가 될 거야!" },
+      { "id": "special2", "text": "너의 성취를 축하해, {name}!" },
+      { "id": "special3", "text": "오늘은 특별한 날이야, {name}!" },
+      { "id": "special4", "text": "오늘 정말 멋진 일을 해냈구나, {name}!" },
+      { "id": "special5", "text": "함께 축하하자, {name}!" },
+      { "id": "special6", "text": "이 순간은 정말 소중해, {name}." }
+    ]
+  }
+}

@@ -41,7 +41,8 @@
         "childName": "Child's name (e.g., Emma)",
         "whereTheyLive": "Where they live (optional)"
       },
-      "kidsSummary": "Kids added so far:"
+      "kidsSummary": "Kids added so far:",
+      "yearsOld": "{age} years old"
     },
     "step5": {
       "title": "Their Language",
@@ -78,79 +79,6 @@
     "copySuccess": "Message copied!",
     "copyFailed": "Copy failed."
   },
-  "categories": {
-    "greetings": "Greetings",
-    "questions": "Questions", 
-    "affection": "Affection",
-    "school": "School",
-    "sports": "Sports",
-    "holidays": "Holidays",
-    "birthday": "Birthday",
-    "christmas": "Christmas",
-    "special-events": "Special Events"
-  },
-  "phrases": {
-    "greetings": [
-      { "id": "greet1", "text": "Good morning {name}, how are you today?" },
-      { "id": "greet2", "text": "Good night {name}, sweet dreams." },
-      { "id": "greet3", "text": "Have a wonderful day, {name}!" }
-    ],
-    "questions": [
-      { "id": "quest1", "text": "Did you eat well, {name}?" },
-      { "id": "quest2", "text": "When are you coming home, {name}?" },
-      { "id": "quest3", "text": "How was your day, {name}?" },
-      { "id": "quest4", "text": "Are you feeling okay, {name}?" }
-    ],
-    "affection": [
-      { "id": "aff1", "text": "I'm thinking of you, {name}." },
-      { "id": "aff2", "text": "I love you, {name}." },
-      { "id": "aff3", "text": "I miss you so much, {name}." },
-      { "id": "aff4", "text": "You make me so proud, {name}." }
-    ],
-    "school": [
-      { "id": "school1", "text": "Did you finish your homework, {name}?" },
-      { "id": "school2", "text": "Good luck with your test today, {name}!" },
-      { "id": "school3", "text": "How was school today, {name}?" },
-      { "id": "school4", "text": "Don't forget to pack your backpack, {name}." },
-      { "id": "school5", "text": "Study hard, {name}. I believe in you!" }
-    ],
-    "sports": [
-      { "id": "sport1", "text": "Good luck at practice today, {name}!" },
-      { "id": "sport2", "text": "How was your game, {name}?" },
-      { "id": "sport3", "text": "You played amazingly, {name}!" },
-      { "id": "sport4", "text": "Don't forget your sports gear, {name}." },
-      { "id": "sport5", "text": "Keep up the great work, {name}!" }
-    ],
-    "holidays": [
-      { "id": "holiday1", "text": "Enjoy your vacation, {name}!" },
-      { "id": "holiday2", "text": "Are you having fun on your trip, {name}?" },
-      { "id": "holiday3", "text": "Take lots of photos, {name}!" },
-      { "id": "holiday4", "text": "Rest well during the holidays, {name}." },
-      { "id": "holiday5", "text": "Happy holidays, {name}!" }
-    ],
-    "birthday": [
-      { "id": "birthday1", "text": "Happy birthday, {name}! Hope all your wishes come true!" },
-      { "id": "birthday2", "text": "Wishing you the happiest birthday, {name}!" },
-      { "id": "birthday3", "text": "Another year older and wiser, {name}!" },
-      { "id": "birthday4", "text": "Can't wait to celebrate with you, {name}!" },
-      { "id": "birthday5", "text": "You're growing up so fast, {name}!" }
-    ],
-    "christmas": [
-      { "id": "christmas1", "text": "Merry Christmas, {name}!" },
-      { "id": "christmas2", "text": "Santa is coming soon, {name}!" },
-      { "id": "christmas3", "text": "Have you been good this year, {name}?" },
-      { "id": "christmas4", "text": "Can't wait to open presents with you, {name}!" },
-      { "id": "christmas5", "text": "The Christmas tree looks beautiful, {name}." }
-    ],
-    "special-events": [
-      { "id": "special1", "text": "Happy New Year, {name}! This will be an amazing year!" },
-      { "id": "special2", "text": "Congratulations on your achievement, {name}!" },
-      { "id": "special3", "text": "Today is a special day, {name}!" },
-      { "id": "special4", "text": "You did something amazing today, {name}!" },
-      { "id": "special5", "text": "Let's celebrate together, {name}!" },
-      { "id": "special6", "text": "This moment is so precious, {name}." }
-    ]
-  },
   "settings": {
     "title": "Settings",
     "profiles": "Profiles",
@@ -164,7 +92,7 @@
     "profileName": "Name",
     "profileTranslation": "Translation",
     "profileCountry": "Country",
-    "profileTimezone": "Timezone", 
+    "profileTimezone": "Timezone",
     "profileBirthday": "Birthday",
     "nickname": "Nickname",
     "categoryName": "Category name",
@@ -213,9 +141,9 @@
     "imageError": "Failed to process image. Please try again.",
     "loadingFailed": "Error loading"
   },
-  "fab": {
+  "messageManager": {
     "addMessage": "Add Message",
-    "editKid": "Edit Kid", 
+    "editKid": "Edit Kid",
     "selectCategory": "Select Category",
     "createNewCategory": "➕ Create New Category",
     "newCategoryName": "New Category Name",

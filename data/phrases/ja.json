@@ -1,0 +1,75 @@
+{
+  "categories": {
+    "greetings": "挨拶",
+    "questions": "質問",
+    "affection": "愛情",
+    "school": "学校",
+    "sports": "スポーツ",
+    "holidays": "休日",
+    "birthday": "誕生日",
+    "christmas": "クリスマス",
+    "special-events": "特別なイベント"
+  },
+  "phrases": {
+    "greetings": [
+      { "id": "greet1", "text": "おはよう、{name}。元気？" },
+      { "id": "greet2", "text": "おやすみ、{name}。いい夢見てね。" },
+      { "id": "greet3", "text": "素敵な一日を、{name}！" }
+    ],
+    "questions": [
+      { "id": "quest1", "text": "ちゃんとご飯食べた、{name}？" },
+      { "id": "quest2", "text": "いつ帰ってくるの、{name}？" },
+      { "id": "quest3", "text": "今日はどうだった、{name}？" },
+      { "id": "quest4", "text": "元気、{name}？" }
+    ],
+    "affection": [
+      { "id": "aff1", "text": "{name}のこと考えてるよ。" },
+      { "id": "aff2", "text": "大好きだよ、{name}。" },
+      { "id": "aff3", "text": "会えなくて寂しいよ、{name}。" },
+      { "id": "aff4", "text": "あなたは私の誇りだよ、{name}。" }
+    ],
+    "school": [
+      { "id": "school1", "text": "宿題終わった、{name}？" },
+      { "id": "school2", "text": "今日のテスト頑張ってね、{name}！" },
+      { "id": "school3", "text": "今日の学校はどうだった、{name}？" },
+      { "id": "school4", "text": "ランドセルの準備忘れないでね、{name}。" },
+      { "id": "school5", "text": "勉強頑張ってね、{name}。応援してるよ！" }
+    ],
+    "sports": [
+      { "id": "sport1", "text": "今日の練習頑張ってね、{name}！" },
+      { "id": "sport2", "text": "試合どうだった、{name}？" },
+      { "id": "sport3", "text": "素晴らしいプレーだったよ、{name}！" },
+      { "id": "sport4", "text": "スポーツ用品忘れないでね、{name}。" },
+      { "id": "sport5", "text": "その調子で頑張って、{name}！" }
+    ],
+    "holidays": [
+      { "id": "holiday1", "text": "休暇楽しんでね、{name}！" },
+      { "id": "holiday2", "text": "旅行は楽しい、{name}？" },
+      { "id": "holiday3", "text": "写真たくさん撮ってね、{name}！" },
+      { "id": "holiday4", "text": "休日はゆっくり休んでね、{name}。" },
+      { "id": "holiday5", "text": "良い休日を、{name}！" }
+    ],
+    "birthday": [
+      { "id": "birthday1", "text": "お誕生日おめでとう、{name}！全ての願いが叶いますように！" },
+      { "id": "birthday2", "text": "最高に幸せな誕生日になりますように、{name}！" },
+      { "id": "birthday3", "text": "また一つ賢くなったね、{name}！" },
+      { "id": "birthday4", "text": "一緒にお祝いするのが待ちきれないよ、{name}！" },
+      { "id": "birthday5", "text": "大きくなるのが早いね、{name}！" }
+    ],
+    "christmas": [
+      { "id": "christmas1", "text": "メリークリスマス、{name}！" },
+      { "id": "christmas2", "text": "もうすぐサンタさんが来るね、{name}！" },
+      { "id": "christmas3", "text": "今年はいい子にしてたかな、{name}？" },
+      { "id": "christmas4", "text": "一緒にプレゼントを開けるのが楽しみだよ、{name}！" },
+      { "id": "christmas5", "text": "クリスマスツリーが綺麗だね、{name}。" }
+    ],
+    "special-events": [
+      { "id": "special1", "text": "あけましておめでとう、{name}！素晴らしい一年になりますように！" },
+      { "id": "special2", "text": "達成おめでとう、{name}！" },
+      { "id": "special3", "text": "今日は特別な日だね、{name}！" },
+      { "id": "special4", "text": "今日はすごいことをしたね、{name}！" },
+      { "id": "special5", "text": "一緒にお祝いしよう、{name}！" },
+      { "id": "special6", "text": "この瞬間はとても大切だね、{name}。" }
+    ]
+  }
+}

@@ -48,7 +48,7 @@ class I18nService {
     async discoverLocales() {
         const localePromises = this.potentialLocales.map(async (localeInfo) => {
             try {
-                const response = await fetch(`./locales/${localeInfo.code}.json`);
+                const response = await fetch(`./js/locales/${localeInfo.code}.json`);
                 if (response.ok) {
                     this.translations[localeInfo.code] = await response.json();
                     return localeInfo;
@@ -65,7 +65,7 @@ class I18nService {
         // Ensure the fallback locale is always available
         if (!this.supportedLocales.some(l => l.code === this.fallbackLocale)) {
             try {
-                const response = await fetch(`./locales/${this.fallbackLocale}.json`);
+                const response = await fetch(`./js/locales/${this.fallbackLocale}.json`);
                 if (response.ok) {
                     this.translations[this.fallbackLocale] = await response.json();
                     this.supportedLocales.push(

@@ -185,7 +185,7 @@ class MessageManager extends HTMLElement {
         const textToTranslate = sourceLangTextarea.value;
 
         if (!textToTranslate.trim()) {
-            alert(i18n.t('fab.nameHelp')); // Reuse existing translation
+            alert(i18n.t('messageManager.nameHelp')); // Reuse existing translation
             return;
         }
 
@@ -262,7 +262,7 @@ class MessageManager extends HTMLElement {
         let options = '';
         
         if (!isEditing) {
-            options += '<option value="" data-i18n="fab.selectCategory">Select Category</option>';
+            options += '<option value="" data-i18n="messageManager.selectCategory">Select Category</option>';
         }
         
         options += this.categories.map(cat => {
@@ -271,7 +271,7 @@ class MessageManager extends HTMLElement {
         }).join('');
         
         if (!isEditing) {
-            options += `<option value="new">${i18n.t('fab.createNewCategory')}</option>`;
+            options += `<option value="new">${i18n.t('messageManager.createNewCategory')}</option>`;
         }
         
         return options;
@@ -416,7 +416,7 @@ class MessageManager extends HTMLElement {
                         </select>
                     </div>
                     <div class="form-group" id="new-category-input">
-                        <label for="new-category-name" data-i18n="fab.newCategoryName">New Category Name</label>
+                        <label for="new-category-name" data-i18n="messageManager.newCategoryName">New Category Name</label>
                         <input type="text" id="new-category-name" name="newCategory" class="styled-input">
                     </div>
                 ` : ''}
@@ -427,7 +427,7 @@ class MessageManager extends HTMLElement {
                         <textarea id="message-base-lang" name="sourceLang" class="styled-textarea" required>${phrase.sourceLang}</textarea>
                         <button type="button" class="insert-name-btn" data-action="insert-name-base">{name}</button>
                     </div>
-                    <div class="helper-text" data-i18n="fab.nameHelp">Use {name} to insert the name</div>
+                    <div class="helper-text" data-i18n="messageManager.nameHelp">Use {name} to insert the name</div>
                 </div>
                 
                 <div class="form-group">
@@ -436,7 +436,7 @@ class MessageManager extends HTMLElement {
                         <textarea id="message-target-lang" name="targetLang" class="styled-textarea" required>${phrase.targetLang}</textarea>
                         <button type="button" class="insert-name-btn" data-action="insert-name-target">{name}</button>
                     </div>
-                    <div class="helper-text" data-i18n="fab.nameHelp">Use {name} to insert the name</div>
+                    <div class="helper-text" data-i18n="messageManager.nameHelp">Use {name} to insert the name</div>
                 </div>
                 
                 <button type="button" class="secondary-button" data-action="translate" data-i18n="common.translate">

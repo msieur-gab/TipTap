@@ -245,6 +245,7 @@ class MessagesTab extends HTMLElement {
                 .messages-content {
                     flex: 1;
                     overflow-y: auto;
+                    padding: 1.5rem;
                     padding-bottom: 80px; /* Space for fixed button */
                 }
 
