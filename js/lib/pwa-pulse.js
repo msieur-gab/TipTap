@@ -120,8 +120,8 @@ export class PWAPulse {
   #maybeSendRegister() {
     if (!this.#meta) return;
 
-    const regKey = `pulse_registered_${this.#version}`;
-    if (localStorage.getItem(regKey)) return;
+    const regKey = `pulse_registered`;
+    if (sessionStorage.getItem(regKey)) return;
 
     const payload = JSON.stringify({
       app: this.#app,
@@ -133,7 +133,7 @@ export class PWAPulse {
     });
 
     this.#send(payload);
-    localStorage.setItem(regKey, '1');
+    sessionStorage.setItem(regKey, '1');
   }
 
   #detectContext() {
